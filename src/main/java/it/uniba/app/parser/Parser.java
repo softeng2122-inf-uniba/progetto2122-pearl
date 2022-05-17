@@ -5,6 +5,7 @@ package it.uniba.app.parser;
  * Offre strumenti di controllo dei comandi e delle parole ricevute in input dall'applicazione.
  *
  * @author Vito Verna - 746463
+ * @author Sergio Mari - 741336
  */
 public class Parser {
     /**
@@ -20,7 +21,7 @@ public class Parser {
      * ABBANDONA: 5 - /abbandona
      * ESCI: 6 - /esci
      * 
-     * @author Sergio Mari - 741336
+     * Sergio Mari - 741336
      * 
      */
     public enum IDsComandi{
@@ -43,7 +44,7 @@ public class Parser {
      * CORTA: 2 - L'input è troppo corto
      * ACCETTABILE: 3 - L'input segue i criteri di accettazione
      * 
-     * @author Sergio Mari - 741336
+     * Sergio Mari - 741336
      * 
      */
     public enum IDsParole{
@@ -63,6 +64,8 @@ public class Parser {
      * @param input String input inserita dall'utente in cui cercare il comando
      * 
      * @return L'identificatore del comando ricevuto. 
+     * 
+     * Sergio Mari - 741336
      */
     public int parseComando(String input){
         int risultato = 0;
@@ -94,6 +97,8 @@ public class Parser {
      * @param input String input inserita dall'utente su cui controllare la correttezza
      * 
      * @return L'identificatore dello stato della correttezza della parola
+     * 
+     * Sergio Mari - 741336
      */
     public int parseParola(String input){
         int risultato = IDsParole.ACCETTABILE.id; //Si presuppone sia accettabile per poi contraddire
