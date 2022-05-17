@@ -56,5 +56,62 @@ public class Parser {
         }
     }
 
-    
+    /**
+     * parseComando è un metodo di Parser per identificare un comando richiesto dall'utente. Il metodo ritorna un numero intero (int) che ne indentifica il comando.
+     * @see #Parser.IDsComandi
+     * 
+     * @param input String input inserita dall'utente in cui cercare il comando
+     * 
+     * @return L'identificatore del comando ricevuto. 
+     */
+    public int parseComando(String input){
+        int risultato = 0;
+        switch(input){
+            case "/nuova":{
+                risultato = IDsComandi.NUOVA.id;
+                break;
+            }
+            case "/mostra":{
+                risultato = IDsComandi.MOSTRA.id;
+                break;
+            }
+
+            default:{
+                risultato = IDsComandi.NONVALIDO.id;
+            }
+        }
+        return risultato;
+    }
+
+    /**
+     * parseParola è un metodo di Parser per controllare la correttezza della parola secondo dei criteri preimpostati e ritorna l'identificatore dello stato della parola.
+     * I criteri sono:
+     * Input di esattamente 5 lettere.
+     * Input con solo caratteri latini.
+     * 
+     * @see #Parser.IDsParole
+     * 
+     * @param input String input inserita dall'utente su cui controllare la correttezza
+     * 
+     * @return L'identificatore dello stato della correttezza della parola
+     */
+    public int parseParola(String input){
+        int risultato = IDsParole.ACCETTABILE.id; //Si presuppone sia accettabile per poi contraddire
+
+        if(input.length() < 5){
+            risultato = IDsParole.CORTA.id;
+        }else if(input.length() > 5){
+            risultato = IDsParole.LUNGA.id;
+        }
+
+        if(risultato == IDsParole.ACCETTABILE.id){
+            for(int i = 0; i < input.length(); i++){
+                if(!Character.isLetter(input.charAt(i))){
+                    risultato = IDsParole.NONVALIDO.id;
+                }
+            }
+        }
+
+        return risultato;
+    }
 }
