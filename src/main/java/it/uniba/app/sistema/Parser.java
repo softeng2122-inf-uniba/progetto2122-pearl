@@ -3,7 +3,7 @@ package it.uniba.app.sistema;
 import java.util.StringTokenizer;
 
 /**
- * Parser è una classe Control.
+ * Parser è una classe <<Control>>.
  * Offre strumenti di controllo dei comandi e delle parole ricevute in input dall'applicazione.
  *
  * @author Vito Verna - 746463
@@ -55,10 +55,10 @@ public class Parser {
     }
 
     /**
-     * parseComando è un metodo di Parser per identificare un comando richiesto dall'utente. Il metodo ritorna un numero intero (int) che ne indentifica il comando.
+     * parseComando è un metodo di Parser per identificare un comando richiesto dall'utente. Il metodo ritorna un numero intero (int) che ne identifica il comando.
      * @see Parser.IDsComandi
      * 
-     * @param input String input inserita dall'utente in cui cercare il comando
+     * @param input - String input inserita dall'utente in cui cercare il comando
      * 
      * @return L'identificatore del comando ricevuto. 
      */
@@ -91,7 +91,7 @@ public class Parser {
      * 
      * @see Parser.IDsParole
      * 
-     * @param input String input inserita dall'utente su cui controllare la correttezza
+     * @param input - String input inserita dall'utente su cui controllare la correttezza
      * 
      * @return L'identificatore dello stato della correttezza della parola
      */
@@ -121,8 +121,8 @@ public class Parser {
      * @see #parseParola(String)
      * @see #parseComando(String)
      * 
-     * @param input String input inserita dall'utente su cui effettuare la selezione.
-     * @return L'identificatore del risulato della operazione selezionata in base all'input. 
+     * @param input - String input inserita dall'utente su cui effettuare la selezione.
+     * @return L'identificatore del risultato della operazione selezionata in base all'input. 
      */
     public int parseInput(String input){
         int risultato = 0;
