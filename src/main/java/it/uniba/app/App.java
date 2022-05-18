@@ -27,5 +27,43 @@ public final class App {
         String inputSTR;
         int input;
         int statoSegreta;
+
+        do {
+            if (!gioco.getEsecuzione()) {
+                System.out.println("Scrivi /help per vedere la lista dei "
+                        + "comandi o /gioca per iniziare a giocare");
+            } else {
+                System.out.println("Inserisci un comando o fai un tentativo!");
+            }
+            inputSTR = scanner.next();
+            input = parser.parseInput(inputSTR, gioco);
+
+            if (input == Parser.IDsComandi.NONVALIDO.getId()) {
+                System.out.println("Comando inesistente!");
+
+            } else if (input == Parser.IDsComandi.NUOVA.getId()) {
+                if (!gioco.getEsecuzione()) {
+                    inputSTR = scanner.next();
+                    statoSegreta = comando.nuova(inputSTR, gioco);
+
+                    if (statoSegreta == Parser.IDsParole.NONVALIDO.getId()) {
+                        System.out.println("Parola non valida!");
+
+                    } else if (statoSegreta == Parser.IDsParole.LUNGA.getId()) {
+                        System.out.println("Parola troppo lunga!");
+
+                    } else if (statoSegreta == Parser.IDsParole.CORTA.getId()) {
+                        System.out.println("Parola troppo corta!");
+
+                    }
+                } else {
+                    System.out.println("Per impostare una nuova parola"
+                            + " segreta devi abbandonare la partita!");
+                }
+            } else if (input == Parser.IDsComandi.GIOCA.getId()) {
+
+                comando.gioca(gioco, mat);
+            }
+        } while (input != Parser.IDsComandi.ESCI.getId());
     }
 }
