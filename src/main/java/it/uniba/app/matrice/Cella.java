@@ -53,4 +53,22 @@ public class Cella {
      * Attributo di tipo String che prende in carico il codice UTF.
      */
     private String coloreUTF;
+
+    /**
+     * Ogni cella viene inzializzata con i tre attributi vuoti.
+     */
+    public Cella() {
+        colore = 0;
+        lettera = ' ';
+        coloreUTF = VUOTO;
+    }
+
+    /**
+     * Metodo che permette di ottenere il colore della cella.
+     *
+     * @return colore - valore numerico del colore della cella
+     */
+    public int getColore() {
+        return colore;
+    }
 }
