@@ -22,9 +22,9 @@ public class Comando {
      * @see Parser#parseParola(String)
      */
     public int nuova(final String input, final Gioco gioco) {
-        int stato = new Parser().parseParola(input);
+        int stato = new Parser().parseParola(input, gioco.getLunghezza());
 
-        if (stato == Parser.IDsParole.ACCETTABILE.id) {
+        if (stato == Parser.IDsParole.ACCETTABILE.getId()) {
             gioco.setParolaSegreta(input);
         }
         return stato;
