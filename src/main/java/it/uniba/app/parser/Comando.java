@@ -24,16 +24,4 @@ public class Comando {
         gioco.setParolaSegreta(input);
     }
 
-    /**
-     * Esecuzione effettiva del comando "/mostra".
-     * 
-     * @param gioco La partita attuale che contiene la parola segreta che si vuole mostrare
-     * @return La parola segreta come String
-     * 
-     * Sergio Mari - 741336
-     */
-    public String mostra(Gioco gioco){
-        return gioco.getParolaSegreta();
-    }
-
 }
