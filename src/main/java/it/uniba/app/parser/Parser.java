@@ -123,4 +123,25 @@ public class Parser {
 
         return risultato;
     }
+
+    /**
+     * parseInput è un metodo di Parser che richiama la funzione corretta della stessa classe in base al contenuto dell'input.
+     * 
+     * @see #parseParola(String)
+     * @see #parseComando(String)
+     * 
+     * @param input String input inserita dall'utente su cui effettuare la selezione.
+     * @return L'identificatore del risulato della operazione selezionata in base all'input. 
+     */
+    public int parseInput(String input){
+        int risultato = 0;
+
+        if(input.charAt(0) == '/'){
+            risultato = parseComando(input);
+        }else{
+            risultato = parseParola(input);
+        }
+
+        return risultato;
+    }
 }
