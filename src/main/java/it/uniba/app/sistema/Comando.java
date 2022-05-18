@@ -1,4 +1,4 @@
-package it.uniba.app.parser;
+package it.uniba.app.sistema;
 
 import it.uniba.app.Gioco;
 
