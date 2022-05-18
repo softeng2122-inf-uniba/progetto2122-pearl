@@ -116,4 +116,31 @@ public class Cella {
     public char getLettera() {
         return lettera;
     }
+
+    /**
+     * Metodo che riceve una lettera e la inserisce nella cella.
+     *
+     * @param carattere - carattere da inserire
+     */
+    public void setLettera(final char carattere) {
+        lettera = carattere;
+    }
+
+    /**
+     * Metodo che converte la cella in una stringa (String), formato da:
+     * il colore di sfondo (anche vuoto);
+     * se lo sfondo è colorato, cambia il colore anche al carattere;
+     * lettera contenuta nella cella;
+     * reset dei colori naturali del terminale.
+     *
+     * @return la stringa (String) che rappresenta la cella
+     */
+    @Override
+    public String toString() {
+        if (colore == 0) {
+            return coloreUTF + '[' + lettera + ']' + VUOTO;
+        } else {
+            return coloreUTF + CARATTERE + '[' + lettera + ']' + VUOTO;
+        }
+    }
 }
