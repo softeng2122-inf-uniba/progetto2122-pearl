@@ -24,7 +24,7 @@ public class Gioco {
     }
 
     /**
-     * Ottieni la lunghezza che ci si aspetta la parola segreta e i tentativi abbiano per la partita attuale.
+     * Ottieni la lunghezza che ci si aspetta abbiano la parola segreta e i tentativi per la partita attuale.
      * 
      * @return La lunghezza annunciata come numero intero (int)
      */
