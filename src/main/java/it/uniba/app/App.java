@@ -1,25 +1,31 @@
 package it.uniba.app;
 
+import it.uniba.app.matrice.Matrice;
+import it.uniba.app.sistema.Comando;
+import it.uniba.app.sistema.Parser;
+import java.util.Scanner;
+
 /**
- * Main class of the application.
+ * App e' una classe <<Boundary>>.
+ * Rappresenta la classe principale.
  */
 public final class App {
 
     /**
-     * Get a greeting sentence.
+     * Inizio dell'applicazione.
      *
-     * @return the "Hello World!" string.
-     */
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
-    /**
-     * Entrypoint of the application.
-     *
-     * @param args command line arguments
+     * @param args - argomenti da linea di comando
      */
     public static void main(final String[] args) {
-        System.out.println(new App().getGreeting());
+        Scanner scanner = new Scanner(System.in);
+
+        Parser parser = new Parser();
+        Comando comando = new Comando();
+        Gioco gioco = new Gioco(Matrice.COLONNE, Matrice.RIGHE);
+        Matrice mat = new Matrice();
+
+        String inputSTR;
+        int input;
+        int statoSegreta;
     }
 }
