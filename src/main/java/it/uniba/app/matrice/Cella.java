@@ -71,4 +71,49 @@ public class Cella {
     public int getColore() {
         return colore;
     }
+
+    /**
+     * Metodo che in base al valore ricevuto,
+     * setta il codice UTF corrispondente.
+     *
+     * @param color - valore numerico del colore da impostare alla cella
+     */
+    public void setColore(final int color) {
+        final int vuoto = 0;
+        final int grigio = 1;
+        final int giallo = 2;
+        final int verde = 3;
+
+        switch (color) {
+            case vuoto:
+                colore = color;
+                coloreUTF = VUOTO;
+                break;
+            case grigio:
+                colore = color;
+                coloreUTF = GRIGIO;
+                break;
+            case giallo:
+                colore = color;
+                coloreUTF = GIALLO;
+                break;
+            case verde:
+                colore = color;
+                coloreUTF = VERDE;
+                break;
+            default:
+                System.out.println("setColore(int colore) error:\n"
+                    + "colore non valido, i colori possibili sono:\n"
+                    + "0 = null\n1 = grigio\n2 = giallo\n3 = verde");
+        }
+    }
+
+    /**
+     * Metodo che permette di ottenere la lettera contenuta nella cella.
+     *
+     * @return lettera - carattere contenuto nella cella
+     */
+    public char getLettera() {
+        return lettera;
+    }
 }
