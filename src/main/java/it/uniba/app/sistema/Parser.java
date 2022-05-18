@@ -45,7 +45,8 @@ public class Parser {
         MOSTRA(2),
         /**
          * 3.
-         * Riferimento a comando /gioca da completare
+         *
+         * @see Comando#gioca(it.uniba.app.Gioco, it.uniba.app.matrice.Matrice)
          */
         GIOCA(3),
         /**
@@ -161,6 +162,9 @@ public class Parser {
                 break;
             case "/mostra":
                 risultato = IDsComandi.MOSTRA.getId();
+                break;
+            case "/gioca":
+                risultato = IDsComandi.GIOCA.getId();
                 break;
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
