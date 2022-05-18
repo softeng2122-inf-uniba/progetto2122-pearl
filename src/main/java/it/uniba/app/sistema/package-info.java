@@ -1,4 +1,4 @@
 /**
  * Parser package of the application.
  */
-package it.uniba.app.parser;
+package it.uniba.app.sistema;
