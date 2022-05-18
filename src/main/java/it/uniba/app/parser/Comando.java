@@ -14,12 +14,18 @@ public class Comando {
      * 
      * Esecuzione effettiva del comando "/nuova [PAROLA]".
      * 
-     * @param input String da utilizzare come parola segreta
+     * @param input [PAROLA] String da utilizzare come parola segreta
      * @param gioco La partita attuale (Gioco) che contiene la parola segreta che si vuole modficare
+     * 
+     * @return Accettabilità della parola input. 
+     * @see Parser#parseParola(String)
      */
-    //TODO Decidere se eseguire i controlli qui o all'esterno
-    public void nuova(String input, Gioco gioco){
-        gioco.setParolaSegreta(input);
+    public int nuova(String input, Gioco gioco){
+        int stato = new Parser().parseParola(input);
+        if(stato == Parser.IDsParole.ACCETTABILE.id){
+            gioco.setParolaSegreta(input);
+        }
+        return stato;
     }
 
 }
