@@ -1,5 +1,7 @@
 package it.uniba.app.parser;
 
+import java.util.StringTokenizer;
+
 /**
  * Parser è una classe Control.
  * Offre strumenti di controllo dei comandi e delle parole ricevute in input dall'applicazione.
@@ -68,8 +70,10 @@ public class Parser {
      * Sergio Mari - 741336
      */
     public int parseComando(String input){
+        StringTokenizer tok = new StringTokenizer(input, " ");
+        String primaSubstr = tok.nextToken();
         int risultato = 0;
-        switch(input){
+        switch(primaSubstr){
             case "/nuova":{
                 risultato = IDsComandi.NUOVA.id;
                 break;
