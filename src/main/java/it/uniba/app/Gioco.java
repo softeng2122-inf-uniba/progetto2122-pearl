@@ -26,6 +26,11 @@ public class Gioco {
     private int tentativiMassimi;
 
     /**
+     * Attributo di tipo boolean; segnala se il gioco e' in esecuzione o meno.
+     */
+    private boolean esecuzione;
+
+    /**
      *
      * @param lung
      * - Lunghezza della parola segreta come numero intero (int)
@@ -73,5 +78,24 @@ public class Gioco {
      */
     public String getParolaSegreta() {
         return parolaSegreta;
+    }
+
+    /**
+     * Metodo che permette di ottenere lo stato di esecuzione del gioco.
+     *
+     * @return true se in esecuzione, false altrimenti.
+     */
+    public boolean getEsecuzione() {
+        return esecuzione;
+    }
+
+    /**
+     * Metodo che si occupa di impostare lo stato di esecuzione del gioco, se in
+     * running o meno.
+     *
+     * @param stato true se il gioco e' in stato di running, false altrimenti.
+     */
+    public void setEsecuzione(final boolean stato) {
+        esecuzione = stato;
     }
 }
