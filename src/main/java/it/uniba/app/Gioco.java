@@ -6,6 +6,7 @@ package it.uniba.app;
  * Rappresenta la partita attualmente in esecuzione.
  *
  * @author Sergio Mari - 741336
+ * @author Alessandro Mazzotta - 766414
  *
  */
 public class Gioco {
