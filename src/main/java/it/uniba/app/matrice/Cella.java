@@ -34,4 +34,23 @@ public class Cella {
      * usato a causa del poco contrasto con sfondo colorato.
      */
     private static final String CARATTERE = "\u001b[38;2;0;0;0m";
+
+    /**
+     * Attributo di tipo int che segna il colore che deve assumere la cella.
+     * colore vuoto = 0
+     * colore grigio = 1
+     * colore giallo = 2
+     * colore verde = 3
+     */
+    private int colore;
+
+    /**
+     * Attributo di tipo char che contiene la lettera della cella.
+     */
+    private char lettera;
+
+    /**
+     * Attributo di tipo String che prende in carico il codice UTF.
+     */
+    private String coloreUTF;
 }
