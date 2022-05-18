@@ -22,9 +22,6 @@ public class Parser {
      * HELP: 4 - /help
      * ABBANDONA: 5 - /abbandona
      * ESCI: 6 - /esci
-     * 
-     * Sergio Mari - 741336
-     * 
      */
     public enum IDsComandi{
         NONVALIDO(0), NUOVA(1), MOSTRA(2), GIOCA(3), HELP(4), ABBANDONA(5), ESCI(6);
@@ -46,8 +43,6 @@ public class Parser {
      * CORTA: 2 - L'input è troppo corto
      * ACCETTABILE: 3 - L'input segue i criteri di accettazione
      * 
-     * Sergio Mari - 741336
-     * 
      */
     public enum IDsParole{
         NONVALIDO(0), LUNGA(1), CORTA(2), ACCETTABILE(3);
@@ -61,13 +56,11 @@ public class Parser {
 
     /**
      * parseComando è un metodo di Parser per identificare un comando richiesto dall'utente. Il metodo ritorna un numero intero (int) che ne indentifica il comando.
-     * @see #Parser.IDsComandi
+     * @see Parser.IDsComandi
      * 
      * @param input String input inserita dall'utente in cui cercare il comando
      * 
      * @return L'identificatore del comando ricevuto. 
-     * 
-     * Sergio Mari - 741336
      */
     public int parseComando(String input){
         StringTokenizer tok = new StringTokenizer(input, " ");
@@ -96,13 +89,11 @@ public class Parser {
      * Input di esattamente 5 lettere.
      * Input con solo caratteri latini.
      * 
-     * @see #Parser.IDsParole
+     * @see Parser.IDsParole
      * 
      * @param input String input inserita dall'utente su cui controllare la correttezza
      * 
      * @return L'identificatore dello stato della correttezza della parola
-     * 
-     * Sergio Mari - 741336
      */
     public int parseParola(String input){
         int risultato = IDsParole.ACCETTABILE.id; //Si presuppone sia accettabile per poi contraddire

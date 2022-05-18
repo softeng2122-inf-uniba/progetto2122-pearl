@@ -17,8 +17,6 @@ public class Gioco {
      *  
      * @param lunghezza Lunghezza della parola segreta come numero intero (int)
      * @param tentativiMassimi Tentativi massimi per trovare la parola segreta come numero intero (int)
-     * 
-     * Sergio Mari - 741336
      */
     public Gioco(int lunghezza, int tentativiMassimi){
         this.lunghezza = lunghezza;
@@ -29,8 +27,6 @@ public class Gioco {
      * Ottieni la lunghezza che ci si aspetta la parola segreta e i tentativi abbiano la per la partita attuale.
      * 
      * @return La lunghezza annunciata come numero intero (int)
-     * 
-     * Sergio Mari - 741336
      */
     public int getLunghezza(){
         return lunghezza;
@@ -40,8 +36,6 @@ public class Gioco {
      * Ottieni la quantità di tentativi massimi che l'utente può eseguire in questa partita.
      * 
      * @return La quantità di tentativi massimi come numero intero (int)
-     * 
-     * Sergio Mari - 741336
      */
     public int getTentativiMassimi(){
         return tentativiMassimi;
@@ -51,8 +45,6 @@ public class Gioco {
      * Imposta una nuova parola segreta per la partita corrente.
      * 
      * @param nuova La nuova parola segreta da impostare come String
-     * 
-     * Sergio Mari - 741336
      */
     public void setParolaSegreta(String nuova){
         parolaSegreta = nuova;
@@ -62,8 +54,6 @@ public class Gioco {
      * Ottieni la parola segreta attulamente impostata nella partita.
      * 
      * @return La parola segreta come String.
-     * 
-     * Sergio Mari - 741336
      */
     public String getParolaSegreta(){
         return parolaSegreta;
