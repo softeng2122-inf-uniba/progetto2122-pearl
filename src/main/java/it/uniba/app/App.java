@@ -60,6 +60,13 @@ public final class App {
                     System.out.println("Per impostare una nuova parola"
                             + " segreta devi abbandonare la partita!");
                 }
+            } else if (input == Parser.IDsComandi.MOSTRA.getId()) {
+                if (gioco.getEsecuzione()) {
+                    final String output = "La parola segreta è ";
+                    System.out.println(output + gioco.getParolaSegreta());
+                } else {
+                    System.out.println("Nessuna parola segreta è impostata.");
+                }
             } else if (input == Parser.IDsComandi.GIOCA.getId()) {
 
                 cmd.gioca(gioco, mat);

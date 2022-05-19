@@ -33,11 +33,11 @@ public class Comando {
 
     /**
      * Esecuzione effettiva del comando "/mostra".
-     * 
-     * @param gioco - La partita attuale che contiene la parola segreta che si vuole mostrare
+     *
+     * @param gioco - La partita che contiene la parola segreta da mostrare
      * @return La parola segreta come String
      */
-    public String mostra(Gioco gioco){
+    public String mostra(final Gioco gioco) {
         return gioco.getParolaSegreta();
     }
 
