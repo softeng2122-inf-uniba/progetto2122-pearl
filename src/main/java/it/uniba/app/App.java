@@ -61,9 +61,10 @@ public final class App {
                             + " segreta devi abbandonare la partita!");
                 }
             } else if (input == Parser.IDsComandi.MOSTRA.getId()) {
-                if (gioco.getEsecuzione()) {
+                String secret = cmd.mostra(gioco);
+                if (secret != "") {
                     final String output = "La parola segreta è ";
-                    System.out.println(output + cmd.mostra(gioco));
+                    System.out.println(output + secret);
                 } else {
                     System.out.println("Nessuna parola segreta è impostata.");
                 }
