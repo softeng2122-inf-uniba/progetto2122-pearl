@@ -44,7 +44,7 @@ public class Parser {
 
         /**
          * 2.
-         * Riferimento a comando /mostra da completare
+         * @see Comando#mostra(it.uniba.app.Gioco)
          */
         MOSTRA(2),
 
