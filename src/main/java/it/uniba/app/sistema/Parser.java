@@ -95,9 +95,9 @@ public class Parser {
      * Ogni id corrisponde ad un diverso stato, mostrati di seguito.
      * Possibili valori di id...
      * NONVALIDO: 0 - Input contenente caratteri non validi
-     * LUNGA: 1 - L'input è trollo lungo
-     * CORTA: 2 - L'input è troppo corto
-     * ACCETTABILE: 3 - L'input segue i criteri di accettazione
+     * LUNGA: -1 - L'input è trollo lungo
+     * CORTA: -2 - L'input è troppo corto
+     * ACCETTABILE: -3 - L'input segue i criteri di accettazione
      *
      */
     public enum IDsParole {
@@ -111,18 +111,18 @@ public class Parser {
          * Si riferisce a tutte le parole più lunghe di una certa lunghezza.
          * @see it.uniba.app.Gioco#getLunghezza()
          */
-        LUNGA(1),
+        LUNGA(-1),
         /**
          * 2.
          * Si riferisce a tutte le parole più corte di una certa lunghezza.
          * @see it.uniba.app.Gioco#getLunghezza()
          */
-        CORTA(2),
+        CORTA(-2),
         /**
          * Si riferisce a tutte le parole che seguono i requisiti imposti.
          * @see #parseParola(String)
          */
-        ACCETTABILE(3);
+        ACCETTABILE(-3);
 
         /**
          * Elemento identificatore degli stati.
