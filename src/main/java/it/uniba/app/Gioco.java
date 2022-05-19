@@ -2,7 +2,7 @@ package it.uniba.app;
 
 /**
  *
- * Gioco è una classe <<Entity>>.
+ * Gioco e' una classe <<Entity>>.
  * Rappresenta la partita attualmente in esecuzione.
  *
  * @author Sergio Mari - 741336
@@ -10,19 +10,22 @@ package it.uniba.app;
  *
  */
 public class Gioco {
+
     /**
      * Parola segreta della partita corrente.
      * Inizializzata sempre a vuoto per richiesta.
      * @see it.uniba.app.sistema.Comando#nuova(String, Gioco)
      */
     private String parolaSegreta = "";
+
     /**
-     * Quanità di caratteri della parola segreta.
-     * Sarà anche la lunghezza dei tentativi per trovare la stessa.
+     * Quanita' di caratteri della parola segreta.
+     * Sara' anche la lunghezza dei tentativi per trovare la stessa.
      */
     private int lunghezza;
+
     /**
-     * Quanità massima di tentativi per trovare la parola segreta.
+     * Quanita' massima di tentativi per trovare la parola segreta.
      */
     private int tentativiMassimi;
 
@@ -54,10 +57,10 @@ public class Gioco {
     }
 
     /**
-     * Ottieni la quantità di tentativi massimi che l'utente può eseguire
+     * Ottieni la quantita' di tentativi massimi che l'utente puo' eseguire
      *  in questa partita.
      *
-     * @return La quantità di tentativi massimi come numero intero (int)
+     * @return La quantita' di tentativi massimi come numero intero (int)
      */
     public int getTentativiMassimi() {
         return tentativiMassimi;
