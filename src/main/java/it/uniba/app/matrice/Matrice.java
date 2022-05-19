@@ -1,7 +1,7 @@
 package it.uniba.app.matrice;
 
 /**
- * Matrice è una classe <<Entity>>.
+ * Matrice e' una classe <<Entity>>.
  * Rappresenta la matrice di gioco.
  *
  * @author Alessandro Mazzotta - 766414
