@@ -63,7 +63,7 @@ public final class App {
             } else if (input == Parser.IDsComandi.MOSTRA.getId()) {
                 if (gioco.getEsecuzione()) {
                     final String output = "La parola segreta è ";
-                    System.out.println(output + gioco.getParolaSegreta());
+                    System.out.println(output + cmd.mostra(gioco));
                 } else {
                     System.out.println("Nessuna parola segreta è impostata.");
                 }
