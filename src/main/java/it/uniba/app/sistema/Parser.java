@@ -5,16 +5,17 @@ import java.util.StringTokenizer;
 import it.uniba.app.Gioco;
 
 /**
- * Parser è una classe <<Control>>.
+ * Parser e' una classe <<Control>>.
  * Offre strumenti di controllo dei comandi e delle parole.
  *
  * @author Vito Verna - 746463
  * @author Sergio Mari - 741336
  */
 public class Parser {
+
     /**
-     * IDsComandi è un enumeratore con identificatori finali per i comandi.
-     * Aiuta nella flessibilità del codice.
+     * IDsComandi e' un enumeratore con identificatori finali per i comandi.
+     * Aiuta nella flessibilita' del codice.
      *
      * id (int) - Valore costante che fa da identificatore del comando.
      * Ogni id corrisponde al suo omonimo comando, mostrati di seguito.
@@ -28,36 +29,44 @@ public class Parser {
      * ESCI: 6 - /esci
      */
     public enum IDsComandi {
+
         /**
          * 0.
          * Si riferisce a tutti i comandi non esistenti.
          */
         NONVALIDO(0),
+
         /**
          * 1.
          * @see Comando#nuova(String, it.uniba.app.Gioco)
          */
         NUOVA(1),
+
         /**
          * 2.
          * Riferimento a comando /mostra da completare
          */
         MOSTRA(2),
+
         /**
          * 3.
-         * Riferimento a comando /gioca da completare
+         *
+         * @see Comando#gioca(it.uniba.app.Gioco, it.uniba.app.matrice.Matrice)
          */
         GIOCA(3),
+
         /**
          * 4.
          * Riferimento a comando /help da completare
          */
         HELP(4),
+
         /**
          * 5.
          * Riferimento a comando /abbandona da completare
          */
         ABBANDONA(5),
+
         /**
          * 6.
          * Riferimento a comando /esci da completare
@@ -87,41 +96,46 @@ public class Parser {
     }
 
     /**
-     * IDsParole è un enumeratore con identificatori per lo stato delle parole.
-     * Aiuta nella flessibilità del codice.
+     * IDsParole e' un enumeratore con identificatori per lo stato delle parole.
+     * Aiuta nella flessibilita' del codice.
      *
      * id (int) - Valore costante che fa da identificatore dello stato.
      * Ogni id corrisponde ad un diverso stato, mostrati di seguito.
      * Possibili valori di id...
      * NONVALIDO: 0 - Input contenente caratteri non validi
-     * LUNGA: 1 - L'input è trollo lungo
-     * CORTA: 2 - L'input è troppo corto
-     * ACCETTABILE: 3 - L'input segue i criteri di accettazione
+     * LUNGA: -1 - L'input e' troppo lungo
+     * CORTA: -2 - L'input e' troppo corto
+     * ACCETTABILE: -3 - L'input segue i criteri di accettazione
      *
      */
     public enum IDsParole {
+
         /**
          * 0.
          * Si riferisce a tutte le parole che contengono caratteri negati.
          */
         NONVALIDO(0),
+
         /**
-         * 1.
-         * Si riferisce a tutte le parole più lunghe di una certa lunghezza.
+         * -1.
+         * Si riferisce a tutte le parole piu' lunghe di una certa lunghezza.
          * @see it.uniba.app.Gioco#getLunghezza()
          */
-        LUNGA(1),
+        LUNGA(-1),
+
         /**
-         * 2.
-         * Si riferisce a tutte le parole più corte di una certa lunghezza.
+         * -2.
+         * Si riferisce a tutte le parole piu' corte di una certa lunghezza.
          * @see it.uniba.app.Gioco#getLunghezza()
          */
-        CORTA(2),
+        CORTA(-2),
+
         /**
+         * -3
          * Si riferisce a tutte le parole che seguono i requisiti imposti.
          * @see #parseParola(String)
          */
-        ACCETTABILE(3);
+        ACCETTABILE(-3);
 
         /**
          * Elemento identificatore degli stati.
@@ -162,6 +176,9 @@ public class Parser {
             case "/mostra":
                 risultato = IDsComandi.MOSTRA.getId();
                 break;
+            case "/gioca":
+                risultato = IDsComandi.GIOCA.getId();
+                break;
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
         }
@@ -180,7 +197,7 @@ public class Parser {
      * @param input
      *  - String input inserita dall'utente su cui controllare la correttezza
      * @param lunghezzafrz
-     *  - Lunghezza che l'input dovrà necessariamente seguire.
+     *  - Lunghezza che l'input dovra' necessariamente seguire.
      *
      * @return L'identificatore dello stato della correttezza della parola
      */
