@@ -1,6 +1,9 @@
 package it.uniba.app.sistema;
 
 import java.util.StringTokenizer;
+import it.uniba.app.matrice.Cella;
+import java.util.Map;
+import java.util.HashMap;
 
 import it.uniba.app.Gioco;
 
@@ -245,5 +248,75 @@ public class Parser {
         }
 
         return risultato;
+    }
+
+    /**
+     * @param tentativi effettuati dall'utente a ogni inserimento
+     * @param Gioco gioco usato per accedere al valore dei tentativi massimi.
+     * @param input Stringa inserita dall'utente per indovinare la parola
+     * 
+     * @return numero tentativi effettuati
+     */
+
+    public Cella[] parseTentativi(int tentativi, Gioco gioco, String input)
+    {
+        Map<Character, Integer> dizionario = new HashMap<Character, Integer>();
+        char char_input[] = new char [5];
+        char char_parola[] = new char [5];
+        int arr[] = new int [input.length()];
+
+        if((gioco.getTentativiMassimi()) != tentativi)
+        {
+            tentativi++;
+            for(byte i = 0; i < input.length(); i++) {
+                char_input[i] = input.charAt(i);
+                char_parola[i] = gioco.getParolaSegreta().charAt(i);
+                if (dizionario.containsKey(gioco.getParolaSegreta().charAt(i))) {
+                    dizionario.replace(gioco.getParolaSegreta().charAt(i), dizionario.get(gioco.getParolaSegreta().charAt(i))+1);
+                } else {
+                    dizionario.put(char_parola[i], 1);
+                }
+            }
+    
+            for (byte i = 0; i < input.length(); i++) {
+                if (char_input[i] == char_parola[i]) {
+                    dizionario.replace(char_parola[i], dizionario.get(char_parola[i])-1);
+                   arr[i] = 1;
+                } 
+            }
+            for (byte i = 0; i < input.length(); i++) {
+                 if (dizionario.containsKey(char_input[i])) {
+                     if (arr[i] != 1) {
+                        if (dizionario.get(char_input[i]) != 0) {
+                            dizionario.replace(char_input[i], dizionario.get(char_input[i])-1);
+                            arr[i] = 2;
+                        } else {
+                            arr[i] = 3;
+                        }
+                    }
+                } else {
+                    arr[i] = 3;
+                }
+            }
+        } 
+        Cella array[] = new Cella [5];
+        for (int i = 0; i < input.length(); i++) {
+            array[i] = new Cella();
+            array[i].setLettera(char_input[i]);
+            switch (arr[i]) {
+                case 1:
+                array[i].setColore(3);
+                    break;
+                case 2:
+                array[i].setColore(2);
+                    break;
+                case 3:
+                array[i].setColore(1);
+                    break;
+                default:
+                    break;
+        }
+    }    
+        return array;
     }
 }

@@ -1,7 +1,7 @@
 package it.uniba.app.matrice;
 
 /**
- * Matrice e' una classe <<Entity>>.
+ * Matrice e' una classe <<Controllo>>.
  * Rappresenta la matrice di gioco.
  *
  * @author Alessandro Mazzotta - 766414
@@ -38,6 +38,26 @@ public class Matrice {
                 mat[i][j] = new Cella();
             }
         }
+    }
+    
+    /**
+     * 
+     * @param array, set di caratteri scansionati per impostare il colore
+     * @param tentativo, usato come posizione all'interno dell'array
+     * @return valore booleano che indica se la parola è corretta o meno.
+     */
+    public boolean setRiga(Cella array[], int tentativo)
+    {
+        int verde = 3;
+        boolean corretto = true;
+        for (int i = 0; i < COLONNE; i++) {
+            if(array[i].getColore() != verde)
+            {
+                corretto = false;
+            }
+            this.setCella(tentativo, i, array[i].getColore(), array[i].getLettera());
+        }
+        return corretto;
     }
 
     /**

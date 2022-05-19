@@ -30,6 +30,11 @@ public class Gioco {
     private int tentativiMassimi;
 
     /**
+     * Numero attuale del tentativo
+     */
+    private int tentativoAttuale;
+
+    /**
      * Attributo di tipo boolean; segnala se il gioco e' in esecuzione o meno.
      */
     private boolean esecuzione;
@@ -44,6 +49,7 @@ public class Gioco {
     public Gioco(final int lung, final int tentativiMax) {
         this.lunghezza = lung;
         this.tentativiMassimi = tentativiMax;
+        tentativoAttuale = 1;
     }
 
     /**
@@ -64,6 +70,20 @@ public class Gioco {
      */
     public int getTentativiMassimi() {
         return tentativiMassimi;
+    }
+
+    /**
+     * Ottieni il numero dei tentativi attuali durante l'esecuzione.
+     * @return il numero di tentativi.
+     */
+    public int getTentativo()
+    {
+        return tentativoAttuale;
+    }
+
+    public void setTentativo(final int tentativo)
+    {
+        tentativoAttuale = tentativo;
     }
 
     /**
