@@ -1,29 +1,27 @@
 package it.uniba.app;
 
+import java.util.Scanner;
+
 import it.uniba.app.matrice.Matrice;
 import it.uniba.app.sistema.Comando;
 import it.uniba.app.sistema.Parser;
-import java.util.Scanner;
 
 /**
- * App e' una classe <<Boundary>>.
- * Rappresenta la classe principale.
+ * App e' una classe <<Boundary>>. Rappresenta la classe principale.
  */
 public final class App {
 
     /**
-     * Inizio dell'applicazione.
+     * Metodo principale dell'applicazione che viene chiamato nel metodo main().
      *
-     * @param args - argomenti da linea di comando
+     * @param sc - lo scanner dal quale prendere la string di input
+     * @param pars - il parser che si occupa di riconoscere la stringa
+     * @param cmd - il comando da eseguire
+     * @param gioco - la partita da far iniziare
+     * @param mat - la matrice di gioco
      */
-    public static void main(final String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        Parser parser = new Parser();
-        Comando comando = new Comando();
-        Gioco gioco = new Gioco(Matrice.COLONNE, Matrice.RIGHE);
-        Matrice mat = new Matrice();
-
+    public void start(final Scanner sc, final Parser pars,
+            final Comando cmd, final Gioco gioco, final Matrice mat) {
         String inputSTR;
         int input;
         int statoSegreta;
@@ -35,16 +33,17 @@ public final class App {
             } else {
                 System.out.println("Inserisci un comando o fai un tentativo!");
             }
-            inputSTR = scanner.next();
-            input = parser.parseInput(inputSTR, gioco);
+
+            inputSTR = sc.next();
+            input = pars.parseInput(inputSTR, gioco);
 
             if (input == Parser.IDsComandi.NONVALIDO.getId()) {
                 System.out.println("Comando inesistente!");
 
             } else if (input == Parser.IDsComandi.NUOVA.getId()) {
                 if (!gioco.getEsecuzione()) {
-                    inputSTR = scanner.next();
-                    statoSegreta = comando.nuova(inputSTR, gioco);
+                    inputSTR = sc.next();
+                    statoSegreta = cmd.nuova(inputSTR, gioco);
 
                     if (statoSegreta == Parser.IDsParole.NONVALIDO.getId()) {
                         System.out.println("Parola non valida!");
@@ -62,8 +61,24 @@ public final class App {
                 }
             } else if (input == Parser.IDsComandi.GIOCA.getId()) {
 
-                comando.gioca(gioco, mat);
+                cmd.gioca(gioco, mat);
             }
         } while (input != Parser.IDsComandi.ESCI.getId());
+    }
+
+    /**
+     * Inizio dell'applicazione.
+     *
+     * @param args - argomenti da linea di comando
+     */
+    public static void main(final String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        Parser parser = new Parser();
+        Comando comando = new Comando();
+        Gioco gioco = new Gioco(Matrice.COLONNE, Matrice.RIGHE);
+        Matrice matrice = new Matrice();
+
+        new App().start(scanner, parser, comando, gioco, matrice);
     }
 }
