@@ -14,7 +14,6 @@ public final class App {
     /**
      * Metodo principale dell'applicazione che viene chiamato nel metodo main().
      *
-     * @param sc - lo scanner dal quale prendere la string di input
      * @param pars - il parser che si occupa di riconoscere la stringa
      * @param cmd - il comando da eseguire
      * @param gioco - la partita da far iniziare
