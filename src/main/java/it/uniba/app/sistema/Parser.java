@@ -251,6 +251,9 @@ public class Parser {
     }
 
     /**
+     * Effettua un controllo sulla parola inserita ad ogni tentativo
+     * e assegna ad ogni carattere il rispettivo colore.
+     * 
      * @param tentativi effettuati dall'utente a ogni inserimento
      * @param Gioco gioco usato per accedere al valore dei tentativi massimi.
      * @param input Stringa inserita dall'utente per indovinare la parola

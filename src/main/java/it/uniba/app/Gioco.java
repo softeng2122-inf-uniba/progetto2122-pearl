@@ -81,6 +81,12 @@ public class Gioco {
         return tentativoAttuale;
     }
 
+    /**
+     * Salva il valore del tentativo attuale.
+     * 
+     * @param valore tentativo salvato da getTenativo()
+     */
+
     public void setTentativo(final int tentativo)
     {
         tentativoAttuale = tentativo;
