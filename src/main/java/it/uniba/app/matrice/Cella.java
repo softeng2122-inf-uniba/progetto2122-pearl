@@ -1,7 +1,7 @@
 package it.uniba.app.matrice;
 
 /**
- * Cella è una classe <<Entity>>.
+ * Cella e' una classe <<Entity>>.
  * Rappresenta la singola cella della matrice di gioco.
  *
  * @author Alessandro Mazzotta - 766414
