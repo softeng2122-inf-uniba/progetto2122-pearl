@@ -4,7 +4,7 @@ import it.uniba.app.Gioco;
 import it.uniba.app.matrice.Matrice;
 
 /**
- * Comando è una classe <<Control>>.
+ * Comando e' una classe <<Control>>.
  * Offre definizioni interne dei comandi accessibili dall'applicazione.
  *
  * @author Vito Verna - 746463
@@ -19,7 +19,7 @@ public class Comando {
      * @param gioco
      *  - La partita (Gioco) che contiene la parola segreta da modificare
      *
-     * @return Accettabilità della parola input.
+     * @return Accettabilita' della parola input.
      * @see Parser#parseParola(String)
      */
     public int nuova(final String input, final Gioco gioco) {
