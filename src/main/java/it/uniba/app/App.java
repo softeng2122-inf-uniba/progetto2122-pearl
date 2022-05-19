@@ -20,8 +20,10 @@ public final class App {
      * @param gioco - la partita da far iniziare
      * @param mat - la matrice di gioco
      */
-    public void start(final Scanner sc, final Parser pars,
+    public void start(final Parser pars,
             final Comando cmd, final Gioco gioco, final Matrice mat) {
+        Scanner scanner = new Scanner(System.in, "UTF-8");
+
         String inputSTR;
         int input;
         int statoSegreta;
@@ -34,7 +36,7 @@ public final class App {
                 System.out.println("Inserisci un comando o fai un tentativo!");
             }
 
-            inputSTR = sc.next();
+            inputSTR = scanner.next();
             input = pars.parseInput(inputSTR, gioco);
 
             if (input == Parser.IDsComandi.NONVALIDO.getId()) {
@@ -42,7 +44,7 @@ public final class App {
 
             } else if (input == Parser.IDsComandi.NUOVA.getId()) {
                 if (!gioco.getEsecuzione()) {
-                    inputSTR = sc.next();
+                    inputSTR = scanner.next();
                     statoSegreta = cmd.nuova(inputSTR, gioco);
 
                     if (statoSegreta == Parser.IDsParole.NONVALIDO.getId()) {
@@ -64,6 +66,8 @@ public final class App {
                 cmd.gioca(gioco, mat);
             }
         } while (input != Parser.IDsComandi.ESCI.getId());
+
+        scanner.close();
     }
 
     /**
@@ -72,13 +76,12 @@ public final class App {
      * @param args - argomenti da linea di comando
      */
     public static void main(final String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         Parser parser = new Parser();
         Comando comando = new Comando();
         Gioco gioco = new Gioco(Matrice.COLONNE, Matrice.RIGHE);
         Matrice matrice = new Matrice();
 
-        new App().start(scanner, parser, comando, gioco, matrice);
+        new App().start(parser, comando, gioco, matrice);
     }
 }
