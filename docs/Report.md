@@ -133,3 +133,16 @@ Le seguenti story inizierebbero con **Come giocatore** voglio ...
 - abbandonare una partita
 - effettuare un tentativo per indovinare la parola segreta
 - chiudere il gioco
+
+## 3.2 Requisiti non funzionali
+1. il container docker dell’app deve essere eseguito da terminali che supportano Unicode con encoding UTF-8 o UTF-16.
+
+Elenco di terminali supportati
+Linux:
+- terminal
+Mac OS
+- terminal
+Windows
+- Powershell
+- Git Bash (in questo caso il comando Docker ha come prefisso winpty; es: winpty docker -it ....)
+---
