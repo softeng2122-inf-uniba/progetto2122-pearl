@@ -182,3 +182,35 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         end
         deactivate Comando
 ```
+
+## 5.2 Come Paroliere voglio mostrare la parola segreta 
+Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore.
+```mermaid
+    sequenceDiagram
+        autonumber
+        actor Giocatore
+        participant App
+        participant Parser
+        participant Comando
+        participant Gioco
+
+        Giocatore->>+App: /mostra
+        App->>+Parser: parseInput(/mostra, gioco)
+        deactivate App
+        Parser-->>+App: IDsComandi.MOSTRA.id
+        deactivate Parser
+        App->>+Comando: mostra(gioco)
+        deactivate App
+        Comando->>+Gioco: getParolaSegreta()
+        deactivate Comando
+        Gioco-->>+Comando: secret
+        deactivate Gioco
+        alt secret != ""
+            Comando-->>+App: secret
+            App--)Giocatore: Stampa secret
+            deactivate App
+        else secret == ""
+            Comando--)Giocatore: Stampa errore
+        end
+        deactivate Comando
+```
