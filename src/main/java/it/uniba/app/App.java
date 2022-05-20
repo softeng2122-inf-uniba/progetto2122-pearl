@@ -18,10 +18,11 @@ public final class App {
      * @param cmd - il comando da eseguire
      * @param gioco - la partita da far iniziare
      * @param mat - la matrice di gioco
+     * @param flag - il flag passato come parametro alla prima 
+     * esecuzione del programma
      */
-
-    public void start(final Parser pars,
-            final Comando cmd, final Gioco gioco, final Matrice mat) {
+    public void start(final Parser pars, final Comando cmd,
+            final Gioco gioco, final Matrice mat, final String flag) {
 
         Scanner scanner = new Scanner(System.in, "UTF-8");
 
@@ -30,6 +31,15 @@ public final class App {
         int statoSegreta;
         boolean risolto;
         boolean chiusura = false;
+
+        if (!"".equals(flag)) {
+            input = pars.parseInput(flag, gioco);
+            if (input == Parser.IDsComandi.HELP.getId()){
+                cmd.help();
+            }
+        } else {
+            System.out.println("Comando " + flag + " insistente!");
+        }
 
         do {
             if (!gioco.getEsecuzione()) {
@@ -98,6 +108,8 @@ public final class App {
                     System.out.println("Non puoi abbandonare una "
                             + "partita inesistente!");
                 }
+            } else if (input == Parser.IDsComandi.HELP.getId()) {
+                cmd.help();
             } else if (input == Parser.IDsParole.ACCETTABILE.getId()) {
               if (gioco.getEsecuzione()) {
                 risolto =  mat.setRiga(pars.parseTentativi(
@@ -121,6 +133,7 @@ public final class App {
                 }
             }
         } while (!chiusura);
+
         scanner.close();
     }
 
@@ -136,6 +149,9 @@ public final class App {
         Gioco gioco = new Gioco(Matrice.COLONNE, Matrice.RIGHE);
         Matrice matrice = new Matrice();
 
-        new App().start(parser, comando, gioco, matrice);
+        if (args.length != 0)
+            new App().start(parser, comando, gioco, matrice, args[0]);
+        else
+            new App().start(parser, comando, gioco, matrice, "");
     }
 }
