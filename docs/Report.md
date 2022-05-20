@@ -373,3 +373,29 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
             App-->>Giocatore: Stampa errore
         end
 ```
+
+## 5.7 Come Giocatore voglio uscire dal gioco
+```mermaid
+    sequenceDiagram
+        autonumber
+        actor Giocatore
+        participant App
+        participant Parser
+        participant Comando
+
+        loop chiusura == false
+            Giocatore->>+App: /esci
+            App->>+Parser: parseInput(/esci, gioco)
+            deactivate App
+            Parser-->>+App: IDsComandi.ESCI.id
+            deactivate Parser
+            App-->>+Giocatore: Richiede conferma
+            deactivate App
+            Giocatore->>+App: input
+            deactivate Giocatore
+            App->>+Comando: esci(input)
+            deactivate App
+            Comando->>Giocatore: chiusura
+            deactivate Comando
+        end
+```
