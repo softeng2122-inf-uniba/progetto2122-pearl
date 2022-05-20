@@ -1,6 +1,7 @@
 package it.uniba.app;
 
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 import it.uniba.app.matrice.Matrice;
 import it.uniba.app.sistema.Comando;
@@ -18,10 +19,11 @@ public final class App {
      * @param cmd - il comando da eseguire
      * @param gioco - la partita da far iniziare
      * @param mat - la matrice di gioco
+     * @param flag - il flag passato come parametro alla prima
+     * esecuzione del programma
      */
-
-    public void start(final Parser pars,
-            final Comando cmd, final Gioco gioco, final Matrice mat) {
+    public void start(final Parser pars, final Comando cmd,
+            final Gioco gioco, final Matrice mat, final String flag) {
 
         Scanner scanner = new Scanner(System.in, "UTF-8");
 
@@ -31,6 +33,15 @@ public final class App {
         boolean risolto;
         boolean chiusura = false;
 
+        if (!"".equals(flag)) {
+            input = pars.parseInput(flag, gioco);
+            if (input == Parser.IDsComandi.HELP.getId()) {
+                cmd.help();
+            } else {
+                System.out.println("Comando " + flag + "inesistente!");
+            }
+        }
+
         do {
             if (!gioco.getEsecuzione()) {
                 System.out.println("Scrivi /help per vedere la lista dei "
@@ -39,8 +50,7 @@ public final class App {
                 System.out.println("Inserisci un comando o fai un tentativo!");
             }
 
-            inputSTR = scanner.next().toLowerCase();
-            scanner.nextLine();
+            inputSTR = scanner.nextLine().toLowerCase();
             input = pars.parseInput(inputSTR, gioco);
 
             if (input == Parser.IDsComandi.NONVALIDO.getId()) {
@@ -48,20 +58,24 @@ public final class App {
 
             } else if (input == Parser.IDsComandi.NUOVA.getId()) {
                 if (!gioco.getEsecuzione()) {
-                    System.out.println("Inserisci la nuova parola segreta");
-                    inputSTR = scanner.next().toLowerCase();
-                    scanner.nextLine();
-                    statoSegreta = cmd.nuova(inputSTR, gioco);
+                    StringTokenizer strtok = new StringTokenizer(inputSTR, " ");
+                    strtok.nextToken();
 
-                    if (statoSegreta == Parser.IDsParole.NONVALIDO.getId()) {
-                        System.out.println("Parola non valida!");
+                    if(strtok.hasMoreTokens()) {
+                        statoSegreta = cmd.nuova(strtok.nextToken(), gioco);
 
-                    } else if (statoSegreta == Parser.IDsParole.LUNGA.getId()) {
-                        System.out.println("Parola troppo lunga!");
-
-                    } else if (statoSegreta == Parser.IDsParole.CORTA.getId()) {
-                        System.out.println("Parola troppo corta!");
-
+                        if (statoSegreta == Parser.IDsParole.NONVALIDO.getId()) {
+                            System.out.println("Parola non valida!");
+    
+                        } else if (statoSegreta == Parser.IDsParole.LUNGA.getId()) {
+                            System.out.println("Parola troppo lunga!");
+    
+                        } else if (statoSegreta == Parser.IDsParole.CORTA.getId()) {
+                            System.out.println("Parola troppo corta!");
+    
+                        }
+                    } else {
+                        System.out.println("Parola segreta non inserita!");
                     }
                 } else {
                     System.out.println("Per impostare una nuova parola"
@@ -79,10 +93,10 @@ public final class App {
 
                 cmd.gioca(gioco, mat);
             } else if (input == Parser.IDsComandi.ESCI.getId()) {
+                scanner.nextLine();
                 System.out.print("Sei Sicuro di voler uscire? "
                         + "Premi S per confermare, N per non uscire");
                 inputSTR = scanner.next().toLowerCase();
-                scanner.nextLine();
                 chiusura = cmd.esci(inputSTR);
             } else if (input == Parser.IDsComandi.ABBANDONA.getId()) {
                 if (gioco.getEsecuzione()) {
@@ -90,14 +104,16 @@ public final class App {
                     do {
                         System.out.println("Sei sicuro di voler abbandonare? "
                                 + "Premi S per confermare, N per annullare.");
-                        inputSTR = scanner.next().toLowerCase();
                         scanner.nextLine();
+                        inputSTR = scanner.next().toLowerCase();
                         risultato = cmd.abbandona(gioco, mat, inputSTR);
                     } while (risultato);
                 } else {
                     System.out.println("Non puoi abbandonare una "
                             + "partita inesistente!");
                 }
+            } else if (input == Parser.IDsComandi.HELP.getId()) {
+                cmd.help();
             } else if (input == Parser.IDsParole.ACCETTABILE.getId()) {
               if (gioco.getEsecuzione()) {
                 risolto =  mat.setRiga(pars.parseTentativi(
@@ -121,6 +137,7 @@ public final class App {
                 }
             }
         } while (!chiusura);
+
         scanner.close();
     }
 
@@ -136,6 +153,10 @@ public final class App {
         Gioco gioco = new Gioco(Matrice.COLONNE, Matrice.RIGHE);
         Matrice matrice = new Matrice();
 
-        new App().start(parser, comando, gioco, matrice);
+        if (args.length > 0) {
+            new App().start(parser, comando, gioco, matrice, args[0]);
+        } else {
+            new App().start(parser, comando, gioco, matrice, "");
+        }
     }
 }

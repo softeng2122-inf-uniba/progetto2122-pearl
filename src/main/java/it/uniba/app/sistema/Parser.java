@@ -64,7 +64,8 @@ public class Parser {
 
         /**
          * 4.
-         * Riferimento a comando /help da completare
+         *
+         * @see Comando#help()
          */
         HELP(4),
 
@@ -195,6 +196,15 @@ public class Parser {
             case "/abbandona":
                 risultato = IDsComandi.ABBANDONA.getId();
                 break;
+            case "/help":
+                risultato = IDsComandi.HELP.getId();
+                break;
+            case "--help":
+                risultato = IDsComandi.HELP.getId();
+                break;
+            case "-h":
+                risultato = IDsComandi.HELP.getId();
+                break;
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
         }
@@ -255,6 +265,10 @@ public class Parser {
         int risultato = 0;
 
         if (input.charAt(0) == '/') {
+            risultato = parseComando(input);
+        } else if (input.startsWith("-")) {
+            risultato = parseComando(input);
+        } else if (input.startsWith("--")) {
             risultato = parseComando(input);
         } else {
             risultato = parseParola(input, gioco.getLunghezza());
