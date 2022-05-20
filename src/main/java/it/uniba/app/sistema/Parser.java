@@ -288,22 +288,22 @@ public class Parser {
                 if (charInput[i] == charParola[i]) {
                     dizionario.replace(charParola[i],
                     dizionario.get(charParola[i]) - 1);
-                   arr[i] = 3;
+                   arr[i] = Cella.IDsColori.VERDE.getId();
                 }
             }
             for (byte i = 0; i < input.length(); i++) {
                  if (dizionario.containsKey(charInput[i])) {
-                     if (arr[i] != 3) {
+                     if (arr[i] != Cella.IDsColori.VERDE.getId()) {
                         if (dizionario.get(charInput[i]) != 0) {
                             dizionario.replace(charInput[i],
                             dizionario.get(charInput[i]) - 1);
-                            arr[i] = 2;
+                            arr[i] = Cella.IDsColori.GIALLO.getId();
                         } else {
-                            arr[i] = 1;
+                            arr[i] = Cella.IDsColori.GRIGIO.getId();
                         }
                     }
                 } else {
-                    arr[i] = 1;
+                    arr[i] = Cella.IDsColori.GRIGIO.getId();
                 }
             }
         }
