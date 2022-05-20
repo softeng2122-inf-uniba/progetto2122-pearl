@@ -70,13 +70,16 @@ public class Parser {
 
         /**
          * 5.
-         * Riferimento a comando /abbandona da completare
+         *
+         * @see Comando#abbandona(it.uniba.app.Gioco,
+         * it.uniba.app.matrice.Matrice, java.lang.String)
          */
         ABBANDONA(5),
 
         /**
          * 6.
-         * Riferimento a comando /esci da completare
+         *
+         * @see Comando#esci(java.lang.String)
          */
         ESCI(6);
 
@@ -189,6 +192,9 @@ public class Parser {
             case "/esci":
                 risultato = IDsComandi.ESCI.getId();
                 break;
+            case "/abbandona":
+                risultato = IDsComandi.ABBANDONA.getId();
+                break;
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
         }
@@ -270,7 +276,7 @@ public class Parser {
 
     public Cella[] parseTentativi(final int tentativi, final Gioco gioco,
     final String input) {
-        Map<Character, Integer> dizionario = new HashMap<Character, Integer>();
+        Map<Character, Integer> dizionario = new HashMap<>();
         char[] charInput = new char[Matrice.COLONNE];
         char[] charParola = new char[Matrice.COLONNE];
         int[] arr = new int[input.length()];
