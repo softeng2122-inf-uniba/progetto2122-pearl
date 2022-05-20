@@ -70,13 +70,16 @@ public class Parser {
 
         /**
          * 5.
-         * Riferimento a comando /abbandona da completare
+         *
+         * @see Comando#abbandona(it.uniba.app.Gioco,
+         * it.uniba.app.matrice.Matrice, java.lang.String)
          */
         ABBANDONA(5),
 
         /**
          * 6.
-         * Riferimento a comando /esci da completare
+         *
+         * @see Comando#esci(java.lang.String)
          */
         ESCI(6);
 
