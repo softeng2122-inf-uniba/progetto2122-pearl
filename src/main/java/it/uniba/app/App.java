@@ -77,7 +77,7 @@ public final class App {
                 cmd.gioca(gioco, mat);
             } else if (input == Parser.IDsComandi.ESCI.getId()) {
                 System.out.print("Sei Sicuro di voler uscire? Premi S per confermare,");
-                System.out.println(" N per tornare al menu");
+                System.out.println(" N per non uscire");
                 inputSTR = scanner.next().toLowerCase();
                 chiusura = cmd.esci(inputSTR);
             } else if (input == Parser.IDsParole.ACCETTABILE.getId()) {

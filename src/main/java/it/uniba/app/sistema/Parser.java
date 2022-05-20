@@ -15,6 +15,8 @@ import it.uniba.app.Gioco;
  *
  * @author Vito Verna - 746463
  * @author Sergio Mari - 741336
+ * @author Fabio Spiriticchio - 736518
+ * @author Alessia Marsico - 738959
  */
 public class Parser {
 
