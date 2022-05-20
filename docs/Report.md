@@ -146,3 +146,39 @@ Windows
 - Powershell
 - Git Bash (in questo caso il comando Docker ha come prefisso winpty; es: winpty docker -it ....)
 ---
+### Comando per l’esecuzione del container
+Dopo aver eseguito il comando docker pull copiandolo da GitHub Packages, il comando Docker da usare per eseguire il container contenente l’applicazione è:
+```
+docker run --rm -it ghcr.io/softeng2122-inf-uniba/wordle-pearl:latest
+```
+
+# 5 OO Design
+## 5.1 Come Paroliere voglio impostare una parola segreta
+Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore.
+```mermaid
+    sequenceDiagram
+    autonumber
+        actor Giocatore
+        participant App
+        participant Parser
+        participant Comando
+        participant Gioco
+
+        Giocatore->>+App: /nuova
+        App-)+Giocatore: Richiesta input
+        deactivate App
+        Giocatore-)+App: input
+        deactivate Giocatore
+        App->>+Parser: parseInput(input, gioco)
+        deactivate App
+        Parser-->>+App: IDsComandi.NUOVA.id
+        deactivate Parser
+        App->>+Comando: nuova(input, gioco)
+        deactivate App
+        Comando-->>+App: stato
+        deactivate App
+        opt stato == IDsParole.ACCETTABILE.id 
+            Comando->>+Gioco: setParolaSegreta(input)
+        end
+        deactivate Comando
+```
