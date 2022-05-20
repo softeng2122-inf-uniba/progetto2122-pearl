@@ -195,6 +195,15 @@ public class Parser {
             case "/abbandona":
                 risultato = IDsComandi.ABBANDONA.getId();
                 break;
+            case "/help":
+                risultato = IDsComandi.HELP.getId();
+                break;
+            case "--help":
+                risultato = IDsComandi.HELP.getId();
+                break;
+            case "-h":
+                risultato = IDsComandi.HELP.getId();
+                break; 
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
         }
