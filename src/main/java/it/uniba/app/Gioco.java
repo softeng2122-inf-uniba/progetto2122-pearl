@@ -2,7 +2,7 @@ package it.uniba.app;
 
 /**
  *
- * Gioco e' una classe <<Entity>>.
+ * Gioco e' una classe <<noECB>>.
  * Rappresenta la partita attualmente in esecuzione.
  *
  * @author Sergio Mari - 741336
