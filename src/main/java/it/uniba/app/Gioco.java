@@ -30,7 +30,7 @@ public class Gioco {
     private int tentativiMassimi;
 
     /**
-     * Numero attuale del tentativo
+     * Numero attuale del tentativo.
      */
     private int tentativoAttuale;
 
@@ -76,19 +76,16 @@ public class Gioco {
      * Ottieni il numero dei tentativi attuali durante l'esecuzione.
      * @return il numero di tentativi.
      */
-    public int getTentativo()
-    {
+    public int getTentativo() {
         return tentativoAttuale;
     }
 
     /**
      * Salva il valore del tentativo attuale.
-     * 
-     * @param valore tentativo salvato da getTenativo()
+     * @param tentativo salvato da getTenativo().
      */
 
-    public void setTentativo(final int tentativo)
-    {
+    public void setTentativo(final int tentativo) {
         tentativoAttuale = tentativo;
     }
 

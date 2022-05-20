@@ -38,21 +38,19 @@ public class Matrice {
                 mat[i][j] = new Cella();
             }
         }
-    }
+    }    
     
     /**
-     * 
-     * @param array, set di caratteri scansionati per impostare il colore
-     * @param tentativo, usato come posizione all'interno dell'array
+     * Imposta il colore verde se il carattere è corretto, giallo o grigio altrimenti.
+     * @param array set di caratteri scansionati per impostare il colore
+     * @param tentativo usato come posizione all'interno dell'array
      * @return valore booleano che indica se la parola è corretta o meno.
      */
-    public boolean setRiga(Cella array[], int tentativo)
-    {
+    public boolean setRiga(final Cella[] array, final int tentativo) {
         int verde = 3;
         boolean corretto = true;
         for (int i = 0; i < COLONNE; i++) {
-            if(array[i].getColore() != verde)
-            {
+            if (array[i].getColore() != verde) {
                 corretto = false;
             }
             this.setCella(tentativo, i, array[i].getColore(), array[i].getLettera());

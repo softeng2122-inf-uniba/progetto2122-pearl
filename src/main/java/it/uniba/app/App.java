@@ -26,7 +26,7 @@ public final class App {
         String inputSTR;
         int input;
         int statoSegreta;
-        boolean Risolto;
+        boolean risolto;
 
         do {
             if (!gioco.getEsecuzione()) {
@@ -65,26 +65,23 @@ public final class App {
 
                 cmd.gioca(gioco, mat);
             } else if (input == Parser.IDsParole.ACCETTABILE.getId()) {
-              if (gioco.getEsecuzione())
-              {
-                Risolto =  mat.setRiga(pars.parseTentativi(gioco.getTentativo(), gioco, inputSTR), gioco.getTentativo()-1);
+              if (gioco.getEsecuzione()) {
+                risolto =  mat.setRiga(pars.parseTentativi(gioco.getTentativo(), gioco, inputSTR), gioco.getTentativo() - 1);
                 mat.stampaMatrice();
-                if(Risolto)
-                {
-                    System.out.println("Parola trovata in "+gioco.getTentativo()+" tentativi");
+
+                if (risolto) {
+                    System.out.println("Parola trovata in " + gioco.getTentativo() + " tentativi");
                     gioco.setEsecuzione(false);
                 }
-                gioco.setTentativo(gioco.getTentativo()+1);
+                gioco.setTentativo(gioco.getTentativo() + 1);
               } else {
-                  System.out.println("Gioco non eseguito");
-              }
-                
+                System.out.println("Gioco non eseguito");
+              } 
             }
         } while (input != Parser.IDsComandi.ESCI.getId());
 
         scanner.close();
     }    
-
     /**
      * Inizio dell'applicazione.
      *
