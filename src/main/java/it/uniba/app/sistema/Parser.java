@@ -263,7 +263,7 @@ public class Parser {
      * @return numero tentativi effettuati
      */
 
-    public Cella[] parseTentativi(int tentativi, final Gioco gioco,
+    public Cella[] parseTentativi(final int tentativi, final Gioco gioco,
     final String input) {
         Map<Character, Integer> dizionario = new HashMap<Character, Integer>();
         char[] charInput = new char[Matrice.COLONNE];
@@ -271,7 +271,6 @@ public class Parser {
         int[] arr = new int[input.length()];
 
         if ((gioco.getTentativiMassimi()) >= tentativi) {
-            tentativi++;
             for (byte i = 0; i < input.length(); i++) {
                 charInput[i] = input.charAt(i);
                 charParola[i] = gioco.getParolaSegreta().charAt(i);

@@ -89,7 +89,8 @@ public final class App {
                 gioco.setTentativo(gioco.getTentativo() + 1);
                 if (gioco.getTentativiMassimi() < gioco.getTentativo()) {
                     gioco.setEsecuzione(false);
-                    System.out.println("Tentativi terminati. La parola segreta e':" + gioco.getParolaSegreta());
+                    System.out.println("Tentativi terminati."
+                    + " La parola segreta e':" + gioco.getParolaSegreta());
                 }
               } else {
                 System.out.println("Gioco non eseguito");
