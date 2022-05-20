@@ -13,17 +13,6 @@ import it.uniba.app.sistema.Parser;
 public final class App {
 
     /**
-     * Metodo che si occupa della pulizia dello schermo dopo
-     * determinate stampe.
-     */
-    private void pulisciSchermo() {
-        final String ANSI_CLS = "\u001b[2J";
-        final String ANSI_HOME = "\u001b[H";
-        System.out.print(ANSI_CLS + ANSI_HOME);
-        System.out.flush();
-    }
-
-    /**
      * Metodo principale dell'applicazione che viene chiamato nel metodo main().
      *
      * @param pars - il parser che si occupa di riconoscere la stringa
@@ -75,22 +64,25 @@ public final class App {
                     StringTokenizer strtok = new StringTokenizer(inputSTR, " ");
                     strtok.nextToken();
 
-                    if(strtok.hasMoreTokens()) {
+                    if (strtok.hasMoreTokens()) {
                         pulisciSchermo();
                         statoSegreta = cmd.nuova(strtok.nextToken(), gioco);
 
-                        if (statoSegreta == Parser.IDsParole.NONVALIDO.getId()) {
+                        if (statoSegreta
+                            == Parser.IDsParole.NONVALIDO.getId()) {
                             pulisciSchermo();
                             System.out.println("Parola non valida!");
-    
-                        } else if (statoSegreta == Parser.IDsParole.LUNGA.getId()) {
+
+                        } else if (statoSegreta
+                            == Parser.IDsParole.LUNGA.getId()) {
                             pulisciSchermo();
                             System.out.println("Parola troppo lunga!");
-    
-                        } else if (statoSegreta == Parser.IDsParole.CORTA.getId()) {
+
+                        } else if (statoSegreta
+                            == Parser.IDsParole.CORTA.getId()) {
                             pulisciSchermo();
                             System.out.println("Parola troppo corta!");
-    
+
                         }
                     } else {
                         pulisciSchermo();
@@ -165,6 +157,17 @@ public final class App {
         } while (!chiusura);
 
         scanner.close();
+    }
+
+    /**
+     * Metodo che si occupa della pulizia dello schermo dopo
+     * determinate stampe.
+     */
+    private void pulisciSchermo() {
+        final String ansiCLS = "\u001b[2J";
+        final String ansiHOME = "\u001b[H";
+        System.out.print(ansiCLS + ansiHOME);
+        System.out.flush();
     }
 
     /**
