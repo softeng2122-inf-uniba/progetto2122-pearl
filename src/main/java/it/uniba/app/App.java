@@ -44,6 +44,8 @@ public final class App {
         boolean risolto;
         boolean chiusura = false;
 
+        pulisciSchermo();
+
         if (!"".equals(flag)) {
             input = pars.parseInput(flag, gioco);
             if (input == Parser.IDsComandi.HELP.getId()) {
@@ -65,6 +67,7 @@ public final class App {
             input = pars.parseInput(inputSTR, gioco);
 
             if (input == Parser.IDsComandi.NONVALIDO.getId()) {
+                pulisciSchermo();
                 System.out.println("Comando inesistente!");
 
             } else if (input == Parser.IDsComandi.NUOVA.getId()) {
@@ -73,22 +76,28 @@ public final class App {
                     strtok.nextToken();
 
                     if(strtok.hasMoreTokens()) {
+                        pulisciSchermo();
                         statoSegreta = cmd.nuova(strtok.nextToken(), gioco);
 
                         if (statoSegreta == Parser.IDsParole.NONVALIDO.getId()) {
+                            pulisciSchermo();
                             System.out.println("Parola non valida!");
     
                         } else if (statoSegreta == Parser.IDsParole.LUNGA.getId()) {
+                            pulisciSchermo();
                             System.out.println("Parola troppo lunga!");
     
                         } else if (statoSegreta == Parser.IDsParole.CORTA.getId()) {
+                            pulisciSchermo();
                             System.out.println("Parola troppo corta!");
     
                         }
                     } else {
+                        pulisciSchermo();
                         System.out.println("Parola segreta non inserita!");
                     }
                 } else {
+                    pulisciSchermo();
                     System.out.println("Per impostare una nuova parola"
                             + " segreta devi abbandonare la partita!");
                 }
@@ -98,16 +107,17 @@ public final class App {
                     final String output = "La parola segreta e' ";
                     System.out.println(output + secret);
                 } else {
+                    pulisciSchermo();
                     System.out.println("Nessuna parola segreta e' impostata.");
                 }
             } else if (input == Parser.IDsComandi.GIOCA.getId()) {
-
+                pulisciSchermo();
                 cmd.gioca(gioco, mat);
             } else if (input == Parser.IDsComandi.ESCI.getId()) {
-                scanner.nextLine();
-                System.out.print("Sei Sicuro di voler uscire? "
+                System.out.println("Sei Sicuro di voler uscire? "
                         + "Premi S per confermare, N per non uscire");
                 inputSTR = scanner.next().toLowerCase();
+                scanner.nextLine();
                 chiusura = cmd.esci(inputSTR);
             } else if (input == Parser.IDsComandi.ABBANDONA.getId()) {
                 if (gioco.getEsecuzione()) {
@@ -115,17 +125,20 @@ public final class App {
                     do {
                         System.out.println("Sei sicuro di voler abbandonare? "
                                 + "Premi S per confermare, N per annullare.");
-                        scanner.nextLine();
                         inputSTR = scanner.next().toLowerCase();
                         risultato = cmd.abbandona(gioco, mat, inputSTR);
+                        scanner.nextLine();
                     } while (risultato);
+                    pulisciSchermo();
                 } else {
                     System.out.println("Non puoi abbandonare una "
                             + "partita inesistente!");
                 }
             } else if (input == Parser.IDsComandi.HELP.getId()) {
+                pulisciSchermo();
                 cmd.help();
             } else if (input == Parser.IDsParole.ACCETTABILE.getId()) {
+                pulisciSchermo();
               if (gioco.getEsecuzione()) {
                 risolto =  mat.setRiga(pars.parseTentativi(
                     gioco.getTentativo(), gioco, inputSTR),
@@ -133,12 +146,14 @@ public final class App {
                 mat.stampaMatrice();
 
                 if (risolto) {
+                    pulisciSchermo();
                     System.out.println("Parola trovata in "
                     + gioco.getTentativo() + " tentativi");
                     cmd.abbandona(gioco, mat, "s");
                 }
                 gioco.setTentativo(gioco.getTentativo() + 1);
                 if (gioco.getTentativiMassimi() < gioco.getTentativo()) {
+                    pulisciSchermo();
                     System.out.println("Tentativi terminati."
                     + " La parola segreta e': " + gioco.getParolaSegreta());
                     cmd.abbandona(gioco, mat, "s");
