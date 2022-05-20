@@ -288,22 +288,22 @@ public class Parser {
                 if (charInput[i] == charParola[i]) {
                     dizionario.replace(charParola[i],
                     dizionario.get(charParola[i]) - 1);
-                   arr[i] = 1;
+                   arr[i] = 3;
                 }
             }
             for (byte i = 0; i < input.length(); i++) {
                  if (dizionario.containsKey(charInput[i])) {
-                     if (arr[i] != 1) {
+                     if (arr[i] != 3) {
                         if (dizionario.get(charInput[i]) != 0) {
                             dizionario.replace(charInput[i],
                             dizionario.get(charInput[i]) - 1);
                             arr[i] = 2;
                         } else {
-                            arr[i] = 3;
+                            arr[i] = 1;
                         }
                     }
                 } else {
-                    arr[i] = 3;
+                    arr[i] = 1;
                 }
             }
         }
@@ -312,11 +312,11 @@ public class Parser {
             array[i] = new Cella();
             array[i].setLettera(charInput[i]);
             if (arr[i] == Cella.IDsColori.VERDE.getId()) {
-                array[i].setColore(Cella.IDsColori.GRIGIO.getId());
+                array[i].setColore(Cella.IDsColori.VERDE.getId());
             } else if (arr[i] == Cella.IDsColori.GIALLO.getId()) {
                 array[i].setColore(Cella.IDsColori.GIALLO.getId());
             } else if (arr[i] == Cella.IDsColori.GRIGIO.getId()) {
-                array[i].setColore(Cella.IDsColori.VERDE.getId());
+                array[i].setColore(Cella.IDsColori.GRIGIO.getId());
             }
         }
         return array;
