@@ -214,3 +214,41 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         end
         deactivate Comando
 ```
+
+## 5.3 Come Giocatore voglio iniziare una nuova partita 
+```mermaid
+    sequenceDiagram
+        autonumber
+        actor Giocatore
+        participant App
+        participant Parser
+        participant Comando
+        participant Gioco
+
+        Giocatore->>+App: /gioca
+        App->>+Parser: parseInput(/gioca, gioco)
+        deactivate App
+        Parser-->>+App: IDsComandi.GIOCA.id
+        deactivate Parser
+        App->>+Comando: gioca(gioco, matrice)
+        deactivate App
+        Comando->>+Gioco: getEsecuzione()
+        deactivate Comando
+        Gioco-->>+Comando: esecuzione
+        deactivate Gioco
+        alt esecuzione == false
+            Comando->>+Gioco: getParolaSegreta()
+            deactivate Comando
+            Gioco-->>+Comando: parolaSegreta
+            deactivate Gioco
+            alt parolaSegreta != ""
+                Comando->>+Gioco: setEsecuzione(true)
+                Comando-)Giocatore: stampaMatrice()
+            else parolaSegreta == ""
+                Comando-)Giocatore: Stampa errore parola
+            end
+        else esecuzione == true
+            Comando-)Giocatore: Stampa errore esecuzione
+        end
+        deactivate Comando
+```
