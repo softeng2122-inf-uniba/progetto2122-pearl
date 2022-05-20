@@ -9,6 +9,8 @@ import it.uniba.app.matrice.Matrice;
  *
  * @author Vito Verna - 746463
  * @author Sergio Mari - 741336
+ * @author Spiriticchio Fabio - 736518
+ * @author Alessia Marsico - 738959
  */
 public class Comando {
     /**

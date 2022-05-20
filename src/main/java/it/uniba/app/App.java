@@ -19,13 +19,16 @@ public final class App {
      * @param gioco - la partita da far iniziare
      * @param mat - la matrice di gioco
      */
+
     public void start(final Parser pars,
             final Comando cmd, final Gioco gioco, final Matrice mat) {
+
         Scanner scanner = new Scanner(System.in, "UTF-8");
 
         String inputSTR;
         int input;
         int statoSegreta;
+        boolean risolto;
 
         do {
             if (!gioco.getEsecuzione()) {
@@ -63,9 +66,28 @@ public final class App {
             } else if (input == Parser.IDsComandi.GIOCA.getId()) {
 
                 cmd.gioca(gioco, mat);
+            } else if (input == Parser.IDsParole.ACCETTABILE.getId()) {
+              if (gioco.getEsecuzione()) {
+                risolto =  mat.setRiga(pars.parseTentativi(
+                    gioco.getTentativo(), gioco, inputSTR),
+                    gioco.getTentativo() - 1);
+                mat.stampaMatrice();
+
+                if (risolto) {
+                    System.out.println("Parola trovata in "
+                    + gioco.getTentativo() + " tentativi");
+                    gioco.setEsecuzione(false);
+                }
+                gioco.setTentativo(gioco.getTentativo() + 1);
+                if (gioco.getTentativiMassimi() < gioco.getTentativo()) {
+                    gioco.setEsecuzione(false);
+                    System.out.println("Tentativi terminati. La parola segreta e':" + gioco.getParolaSegreta());
+                }
+              } else {
+                System.out.println("Gioco non eseguito");
+                }
             }
         } while (input != Parser.IDsComandi.ESCI.getId());
-
         scanner.close();
     }
 
