@@ -2,6 +2,8 @@ package it.uniba.app.sistema;
 
 import java.util.StringTokenizer;
 import it.uniba.app.matrice.Cella;
+import it.uniba.app.matrice.Matrice;
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -253,18 +255,19 @@ public class Parser {
     /**
      * Effettua un controllo sulla parola inserita ad ogni tentativo
      * e assegna ad ogni carattere il rispettivo colore.
-     * 
+     *
      * @param tentativi effettuati dall'utente a ogni inserimento
      * @param gioco usato per accedere al valore dei tentativi massimi.
      * @param input Stringa inserita dall'utente per indovinare la parola
-     * 
+     *
      * @return numero tentativi effettuati
      */
 
-    public Cella[] parseTentativi(int tentativi, final Gioco gioco, final String input) {
+    public Cella[] parseTentativi(int tentativi, final Gioco gioco,
+    final String input) {
         Map<Character, Integer> dizionario = new HashMap<Character, Integer>();
-        char[] charInput = new char[5];
-        char[] charParola = new char[5];
+        char[] charInput = new char[Matrice.COLONNE];
+        char[] charParola = new char[Matrice.COLONNE];
         int[] arr = new int[input.length()];
 
         if ((gioco.getTentativiMassimi()) != tentativi) {
@@ -272,24 +275,29 @@ public class Parser {
             for (byte i = 0; i < input.length(); i++) {
                 charInput[i] = input.charAt(i);
                 charParola[i] = gioco.getParolaSegreta().charAt(i);
-                if (dizionario.containsKey(gioco.getParolaSegreta().charAt(i))) {
-                    dizionario.replace(gioco.getParolaSegreta().charAt(i), dizionario.get(gioco.getParolaSegreta().charAt(i)) + 1);
+                if (dizionario.containsKey(
+                        gioco.getParolaSegreta().charAt(i))) {
+                    dizionario.replace(
+                        gioco.getParolaSegreta().charAt(i),
+                        dizionario.get(gioco.getParolaSegreta().charAt(i)) + 1);
                 } else {
                     dizionario.put(charParola[i], 1);
                 }
             }
-    
+
             for (byte i = 0; i < input.length(); i++) {
                 if (charInput[i] == charParola[i]) {
-                    dizionario.replace(charParola[i], dizionario.get(charParola[i]) - 1);
+                    dizionario.replace(charParola[i],
+                    dizionario.get(charParola[i]) - 1);
                    arr[i] = 1;
-                } 
+                }
             }
             for (byte i = 0; i < input.length(); i++) {
                  if (dizionario.containsKey(charInput[i])) {
                      if (arr[i] != 1) {
                         if (dizionario.get(charInput[i]) != 0) {
-                            dizionario.replace(charInput[i], dizionario.get(charInput[i]) - 1);
+                            dizionario.replace(charInput[i],
+                            dizionario.get(charInput[i]) - 1);
                             arr[i] = 2;
                         } else {
                             arr[i] = 3;
@@ -299,8 +307,8 @@ public class Parser {
                     arr[i] = 3;
                 }
             }
-        } 
-        Cella array[] = new Cella[5];
+        }
+        Cella[] array = new Cella[Matrice.COLONNE];
         for (int i = 0; i < input.length(); i++) {
             array[i] = new Cella();
             array[i].setLettera(charInput[i]);
@@ -316,8 +324,8 @@ public class Parser {
                     break;
                 default:
                     break;
+            }
         }
-    }    
         return array;
     }
 }
