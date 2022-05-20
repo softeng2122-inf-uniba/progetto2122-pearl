@@ -29,6 +29,7 @@ public final class App {
         int input;
         int statoSegreta;
         boolean risolto;
+        boolean chiusura = false;
 
         do {
             if (!gioco.getEsecuzione()) {
@@ -74,6 +75,11 @@ public final class App {
             } else if (input == Parser.IDsComandi.GIOCA.getId()) {
 
                 cmd.gioca(gioco, mat);
+            } else if (input == Parser.IDsComandi.ESCI.getId()) {
+                System.out.print("Sei Sicuro di voler uscire? Premi S per confermare,");
+                System.out.println(" N per non uscire");
+                inputSTR = scanner.next().toLowerCase();
+                chiusura = cmd.esci(inputSTR);
             } else if (input == Parser.IDsParole.ACCETTABILE.getId()) {
               if (gioco.getEsecuzione()) {
                 risolto =  mat.setRiga(pars.parseTentativi(
@@ -96,7 +102,7 @@ public final class App {
                 System.out.println("Gioco non eseguito");
                 }
             }
-        } while (input != Parser.IDsComandi.ESCI.getId());
+        } while (!chiusura);
         scanner.close();
     }
 

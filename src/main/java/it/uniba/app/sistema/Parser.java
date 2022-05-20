@@ -15,6 +15,8 @@ import it.uniba.app.Gioco;
  *
  * @author Vito Verna - 746463
  * @author Sergio Mari - 741336
+ * @author Fabio Spiriticchio - 736518
+ * @author Alessia Marsico - 738959
  */
 public class Parser {
 
@@ -183,6 +185,9 @@ public class Parser {
                 break;
             case "/gioca":
                 risultato = IDsComandi.GIOCA.getId();
+                break;
+            case "/esci":
+                risultato = IDsComandi.ESCI.getId();
                 break;
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
