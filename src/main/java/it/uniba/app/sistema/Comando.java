@@ -60,4 +60,19 @@ public class Comando {
             System.out.println("Il gioco e' gia' in esecuzione!");
         }
     }
+
+    /**
+     * Raccolta stringa per uscita.
+     *
+     * @param input
+     * @return true se la stringa corrisponde.
+     */
+
+    public boolean esci(final String input) {
+        boolean risultato = false;
+        if (input.charAt(0) == 's') {
+            risultato = true;
+        }
+        return risultato;
+    }
 }
