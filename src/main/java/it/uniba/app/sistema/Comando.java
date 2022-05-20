@@ -22,6 +22,7 @@ public class Comando {
      *  - La partita (Gioco) che contiene la parola segreta da modificare
      *
      * @return Accettabilita' della parola input.
+     *
      * @see Parser#parseParola(String)
      */
     public int nuova(final String input, final Gioco gioco) {
@@ -29,6 +30,7 @@ public class Comando {
 
         if (stato == Parser.IDsParole.ACCETTABILE.getId()) {
             gioco.setParolaSegreta(input);
+            System.out.println("Parola segreta impostata correttamente!");
         }
         return stato;
     }
@@ -37,6 +39,7 @@ public class Comando {
      * Esecuzione effettiva del comando "/mostra".
      *
      * @param gioco - La partita che contiene la parola segreta da mostrare
+     *
      * @return La parola segreta come String
      */
     public String mostra(final Gioco gioco) {
@@ -65,6 +68,7 @@ public class Comando {
      * Raccolta stringa per uscita.
      *
      * @param input
+     *
      * @return true se la stringa corrisponde.
      */
     public boolean esci(final String input) {
@@ -81,6 +85,7 @@ public class Comando {
      * @param gioco - per il reset delle informazioni del gioco
      * @param mat - per il reset della matrice
      * @param input - per la conferma dell'utente
+     *
      * @return true se l'input e' stato riconosciuto
      */
     public boolean abbandona(final Gioco gioco, final Matrice mat,
