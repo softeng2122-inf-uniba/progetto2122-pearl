@@ -270,7 +270,7 @@ public class Parser {
         char[] charParola = new char[Matrice.COLONNE];
         int[] arr = new int[input.length()];
 
-        if ((gioco.getTentativiMassimi()) != tentativi) {
+        if ((gioco.getTentativiMassimi()) >= tentativi) {
             tentativi++;
             for (byte i = 0; i < input.length(); i++) {
                 charInput[i] = input.charAt(i);
