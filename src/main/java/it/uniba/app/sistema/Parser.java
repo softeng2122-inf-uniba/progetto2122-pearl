@@ -184,6 +184,9 @@ public class Parser {
             case "/gioca":
                 risultato = IDsComandi.GIOCA.getId();
                 break;
+            case "/esci":
+                risultato = IDsComandi.ESCI.getId();
+                break;
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
         }
