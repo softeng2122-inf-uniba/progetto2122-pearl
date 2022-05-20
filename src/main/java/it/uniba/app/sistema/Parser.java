@@ -189,6 +189,9 @@ public class Parser {
             case "/esci":
                 risultato = IDsComandi.ESCI.getId();
                 break;
+            case "/abbandona":
+                risultato = IDsComandi.ABBANDONA.getId();
+                break;
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
         }
@@ -270,7 +273,7 @@ public class Parser {
 
     public Cella[] parseTentativi(final int tentativi, final Gioco gioco,
     final String input) {
-        Map<Character, Integer> dizionario = new HashMap<Character, Integer>();
+        Map<Character, Integer> dizionario = new HashMap<>();
         char[] charInput = new char[Matrice.COLONNE];
         char[] charParola = new char[Matrice.COLONNE];
         int[] arr = new int[input.length()];
