@@ -68,13 +68,13 @@ public class Matrice {
     public void stampaMatrice() {
         int i;
         int j;
-        System.out.println();
         for (i = 0; i < RIGHE; i++) {
             for (j = 0; j < COLONNE; j++) {
                 System.out.print(mat[i][j]);
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     /**

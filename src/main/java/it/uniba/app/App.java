@@ -57,7 +57,7 @@ public final class App {
 
             if (input == Parser.IDsComandi.NONVALIDO.getId()) {
                 pulisciSchermo();
-                System.out.println("Comando " + inputSTR + "inesistente!");
+                System.out.println("Comando " + inputSTR + " inesistente!");
 
             } else if (input == Parser.IDsComandi.NUOVA.getId()) {
                 if (!gioco.getEsecuzione()) {
@@ -142,8 +142,9 @@ public final class App {
                     System.out.println("Parola trovata in "
                     + gioco.getTentativo() + " tentativi");
                     cmd.abbandona(gioco, mat, "s");
+                } else {
+                    gioco.setTentativo(gioco.getTentativo() + 1);
                 }
-                gioco.setTentativo(gioco.getTentativo() + 1);
                 if (gioco.getTentativiMassimi() < gioco.getTentativo()) {
                     pulisciSchermo();
                     System.out.println("Tentativi terminati."
