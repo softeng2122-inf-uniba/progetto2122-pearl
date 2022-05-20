@@ -18,7 +18,7 @@ public final class App {
      * @param cmd - il comando da eseguire
      * @param gioco - la partita da far iniziare
      * @param mat - la matrice di gioco
-     * @param flag - il flag passato come parametro alla prima 
+     * @param flag - il flag passato come parametro alla prima
      * esecuzione del programma
      */
     public void start(final Parser pars, final Comando cmd,
@@ -34,7 +34,7 @@ public final class App {
 
         if (!"".equals(flag)) {
             input = pars.parseInput(flag, gioco);
-            if (input == Parser.IDsComandi.HELP.getId()){
+            if (input == Parser.IDsComandi.HELP.getId()) {
                 cmd.help();
             }
         } else {
@@ -149,9 +149,10 @@ public final class App {
         Gioco gioco = new Gioco(Matrice.COLONNE, Matrice.RIGHE);
         Matrice matrice = new Matrice();
 
-        if (args.length != 0)
+        if (args.length != 0) {
             new App().start(parser, comando, gioco, matrice, args[0]);
-        else
+        } else {
             new App().start(parser, comando, gioco, matrice, "");
+        }
     }
 }

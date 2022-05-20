@@ -204,7 +204,7 @@ public class Parser {
                 break;
             case "-h":
                 risultato = IDsComandi.HELP.getId();
-                break; 
+                break;
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
         }

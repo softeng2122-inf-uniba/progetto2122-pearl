@@ -105,7 +105,7 @@ public class Comando {
     }
 
     /**
-     * Esecuzione effettiva del comando /help. 
+     * Esecuzione effettiva del comando /help.
      */
     public void help() {
         System.out.println("Benvenuto in WORDLE\n");
@@ -118,7 +118,7 @@ public class Comando {
                 + " - Verde --> la lettera fa parte della parola ed e' nella "
                 + "poszione giusta.\n"
                 + "Di seguito hai la lista dei comandi.\n");
-        
+
         System.out.println("La lista dei comandi possibili e':\n"
                 + " /nuova <parola segreta> \t Per impostare una parola segreta"
                 + "\n /mostra \t\t\t Per mostrare la parola segreta\n"
