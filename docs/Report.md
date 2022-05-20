@@ -119,3 +119,17 @@ Gioco ..> Comando
 
 direction RL
 ```
+# 3. Requisiti specifici
+## 3.1 Requisiti funzionali
+Attori: Giocatore e "Paroliere"
+
+Le seguenti user story inizierebbero con **Come paroliere** voglio ...
+- impostare una parola segreta manualmente
+- mostrare la parola segreta
+
+Le seguenti story inizierebbero con **Come giocatore** voglio ...
+- mostrare l'help con elenco comandi e regole del gioco
+- iniziare una nuova partita
+- abbandonare una partita
+- effettuare un tentativo per indovinare la parola segreta
+- chiudere il gioco
