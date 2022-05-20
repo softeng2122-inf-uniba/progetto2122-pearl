@@ -13,6 +13,17 @@ import it.uniba.app.sistema.Parser;
 public final class App {
 
     /**
+     * Metodo che si occupa della pulizia dello schermo dopo
+     * determinate stampe.
+     */
+    private void pulisciSchermo() {
+        final String ANSI_CLS = "\u001b[2J";
+        final String ANSI_HOME = "\u001b[H";
+        System.out.print(ANSI_CLS + ANSI_HOME);
+        System.out.flush();
+    }
+
+    /**
      * Metodo principale dell'applicazione che viene chiamato nel metodo main().
      *
      * @param pars - il parser che si occupa di riconoscere la stringa
