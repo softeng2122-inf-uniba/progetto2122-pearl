@@ -252,3 +252,23 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         end
         deactivate Comando
 ```
+
+## 5.4 Come Giocatore voglio mostrare l'help con l'elenco comandi 
+```mermaid
+    sequenceDiagram
+        autonumber
+        actor Giocatore
+        participant App
+        participant Parser
+        participant Comando
+
+        Giocatore->>+App: /help, -h, --help
+        App->>+Parser: parseInput(/help, gioco)
+        deactivate App
+        Parser-->>+App: IDsComandi.HELP.id
+        deactivate Parser
+        App->>+Comando: help()
+        deactivate App
+        Comando->>+Giocatore: Stampa help
+        deactivate Comando
+```
