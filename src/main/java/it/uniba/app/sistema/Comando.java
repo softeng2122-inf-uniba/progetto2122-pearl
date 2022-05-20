@@ -103,4 +103,28 @@ public class Comando {
         }
         return risultato;
     }
+
+    /**
+     * Esecuzione effettiva del comando /help. 
+     */
+    public void help() {
+        System.out.println("Benvenuto in WORDLE\n");
+        System.out.println("In questo gioco per poter vincere dovrai indovinare"
+                + "la parola segreta. Il gioco ti aiutera' ad indovinare la "
+                + "parola grazie all'uso dei colori, dove:\n"
+                + " - Grigio --> la lettera non fa parte della parola;\n"
+                + " - Giallo --> la lettera fa parte della parola ma e' in una "
+                + "posizione errata;\n"
+                + " - Verde --> la lettera fa parte della parola ed e' nella "
+                + "poszione giusta.\n"
+                + "Di seguito hai la lista dei comandi.\n");
+        
+        System.out.println("La lista dei comandi possibili e':\n"
+                + " /nuova <parola segreta> \t Per impostare una parola segreta"
+                + "\n /mostra \t\t\t Per mostrare la parola segreta\n"
+                + " /gioca \t\t\t Per iniziare una nuova partita\n"
+                + " /help o --help o -h \t\t Per vedere la lista dei comandi\n"
+                + " /abbandona \t\t\t Per abbandonare la partita in corso\n"
+                + " /esci \t\t\t\t Per uscire dall'applicazione\n");
+    }
 }
