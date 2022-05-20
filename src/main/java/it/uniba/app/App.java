@@ -29,6 +29,7 @@ public final class App {
         int input;
         int statoSegreta;
         boolean risolto;
+        boolean chiusura = false;
 
         do {
             if (!gioco.getEsecuzione()) {
@@ -38,7 +39,8 @@ public final class App {
                 System.out.println("Inserisci un comando o fai un tentativo!");
             }
 
-            inputSTR = scanner.next();
+            inputSTR = scanner.next().toLowerCase();
+            scanner.nextLine();
             input = pars.parseInput(inputSTR, gioco);
 
             if (input == Parser.IDsComandi.NONVALIDO.getId()) {
@@ -46,7 +48,9 @@ public final class App {
 
             } else if (input == Parser.IDsComandi.NUOVA.getId()) {
                 if (!gioco.getEsecuzione()) {
-                    inputSTR = scanner.next();
+                    System.out.println("Inserisci la nuova parola segreta");
+                    inputSTR = scanner.next().toLowerCase();
+                    scanner.nextLine();
                     statoSegreta = cmd.nuova(inputSTR, gioco);
 
                     if (statoSegreta == Parser.IDsParole.NONVALIDO.getId()) {
@@ -65,15 +69,35 @@ public final class App {
                 }
             } else if (input == Parser.IDsComandi.MOSTRA.getId()) {
                 String secret = cmd.mostra(gioco);
-                if (secret != "") {
-                    final String output = "La parola segreta è ";
+                if (!"".equals(secret)) {
+                    final String output = "La parola segreta e' ";
                     System.out.println(output + secret);
                 } else {
-                    System.out.println("Nessuna parola segreta è impostata.");
+                    System.out.println("Nessuna parola segreta e' impostata.");
                 }
             } else if (input == Parser.IDsComandi.GIOCA.getId()) {
 
                 cmd.gioca(gioco, mat);
+            } else if (input == Parser.IDsComandi.ESCI.getId()) {
+                System.out.print("Sei Sicuro di voler uscire? "
+                        + "Premi S per confermare, N per non uscire");
+                inputSTR = scanner.next().toLowerCase();
+                scanner.nextLine();
+                chiusura = cmd.esci(inputSTR);
+            } else if (input == Parser.IDsComandi.ABBANDONA.getId()) {
+                if (gioco.getEsecuzione()) {
+                    boolean risultato;
+                    do {
+                        System.out.println("Sei sicuro di voler abbandonare? "
+                                + "Premi S per confermare, N per annullare.");
+                        inputSTR = scanner.next().toLowerCase();
+                        scanner.nextLine();
+                        risultato = cmd.abbandona(gioco, mat, inputSTR);
+                    } while (risultato);
+                } else {
+                    System.out.println("Non puoi abbandonare una "
+                            + "partita inesistente!");
+                }
             } else if (input == Parser.IDsParole.ACCETTABILE.getId()) {
               if (gioco.getEsecuzione()) {
                 risolto =  mat.setRiga(pars.parseTentativi(
@@ -84,19 +108,19 @@ public final class App {
                 if (risolto) {
                     System.out.println("Parola trovata in "
                     + gioco.getTentativo() + " tentativi");
-                    gioco.setEsecuzione(false);
+                    cmd.abbandona(gioco, mat, "s");
                 }
                 gioco.setTentativo(gioco.getTentativo() + 1);
                 if (gioco.getTentativiMassimi() < gioco.getTentativo()) {
-                    gioco.setEsecuzione(false);
                     System.out.println("Tentativi terminati."
-                    + " La parola segreta e':" + gioco.getParolaSegreta());
+                    + " La parola segreta e': " + gioco.getParolaSegreta());
+                    cmd.abbandona(gioco, mat, "s");
                 }
               } else {
                 System.out.println("Gioco non eseguito");
                 }
             }
-        } while (input != Parser.IDsComandi.ESCI.getId());
+        } while (!chiusura);
         scanner.close();
     }
 

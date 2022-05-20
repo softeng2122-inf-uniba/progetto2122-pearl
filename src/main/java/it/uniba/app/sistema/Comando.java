@@ -9,7 +9,7 @@ import it.uniba.app.matrice.Matrice;
  *
  * @author Vito Verna - 746463
  * @author Sergio Mari - 741336
- * @author Spiriticchio Fabio - 736518
+ * @author Fabio Spiriticchio - 736518
  * @author Alessia Marsico - 738959
  */
 public class Comando {
@@ -59,5 +59,48 @@ public class Comando {
         } else {
             System.out.println("Il gioco e' gia' in esecuzione!");
         }
+    }
+
+    /**
+     * Raccolta stringa per uscita.
+     *
+     * @param input
+     * @return true se la stringa corrisponde.
+     */
+    public boolean esci(final String input) {
+        boolean risultato = false;
+        if (input.charAt(0) == 's') {
+            risultato = true;
+        }
+        return risultato;
+    }
+
+    /**
+     * Esecuzione effettiva del comando /abbandona.
+     *
+     * @param gioco - per il reset delle informazioni del gioco
+     * @param mat - per il reset della matrice
+     * @param input - per la conferma dell'utente
+     * @return true se l'input e' stato riconosciuto
+     */
+    public boolean abbandona(final Gioco gioco, final Matrice mat,
+            final String input) {
+        boolean risultato;
+        switch (input.charAt(0)) {
+            case 's':
+                risultato = false;
+                gioco.setEsecuzione(false);
+                gioco.setTentativo(1);
+                mat.resetMatrice();
+                break;
+            case 'n':
+                risultato = false;
+                break;
+            default:
+                System.out.println("Non capisco cosa vuoi dirmi");
+                risultato = true;
+                break;
+        }
+        return risultato;
     }
 }
