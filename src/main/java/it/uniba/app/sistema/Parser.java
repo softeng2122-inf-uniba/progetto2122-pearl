@@ -265,6 +265,10 @@ public class Parser {
 
         if (input.charAt(0) == '/') {
             risultato = parseComando(input);
+        } else if (input.startsWith("-")) {
+            risultato = parseComando(input);
+        } else if (input.startsWith("--")) {
+            risultato = parseComando(input);
         } else {
             risultato = parseParola(input, gioco.getLunghezza());
         }
