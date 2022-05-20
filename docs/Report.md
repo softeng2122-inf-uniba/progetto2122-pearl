@@ -272,3 +272,59 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         Comando->>+Giocatore: Stampa help
         deactivate Comando
 ```
+
+## 5.5 Come Giocatore voglio effettuare un nuovo tentativo 
+```mermaid
+    sequenceDiagram
+    autonumber
+    actor Giocatore
+    participant App
+    participant Parser
+    participant Gioco
+    participant Matrice
+    participant Cella
+
+    loop input != IDsComandi.ESCI.id
+        Giocatore->>+App: input
+        App->>+Parser: parseInput(input, gioco)
+        deactivate App
+        Parser->>+Gioco: getEsecuzione()
+        deactivate Parser
+        Gioco-->>+App: esecuzione
+        deactivate Gioco
+        alt esecuzione == true
+            App->>Matrice: stampaMatrice()
+            App ->>Gioco: setEsecuzione(false)
+            App->>Gioco: setTentativo(tentativo+1)
+            App->>+Parser: parseTentativi(tentativo, gioco, input)
+        else esecuzione == false
+            App->>Giocatore: Stampa errore
+            deactivate App
+        end
+        Parser->>+Gioco: getTentativiMassimi()
+        deactivate Parser
+        Gioco-->>+Parser: tentativiMassimi
+        deactivate Gioco
+        opt tentativiMassimi >= tentativi
+            Parser->>+Gioco: getParolaSegreta()
+            deactivate Parser
+            Gioco-->>+Parser: parolaSegreta
+            deactivate Gioco
+            Parser->>Cella: setColore(int)
+            Parser->>Cella: setLettera(char_input[i])
+        end
+        Parser-->>+App: array //riga
+        deactivate Parser
+        App->>+Matrice: setRiga(array, tentativo-1)
+        deactivate App
+        Matrice->>+Matrice: setCella(tentativo, i, colore, lettera)
+        deactivate Matrice
+        Matrice-->>+App: corretto
+        deactivate Matrice
+        opt corretto == true
+            App->>Giocatore: Stampa successo
+            App->>Gioco: setEsecuzione(false)
+        end
+        deactivate App
+    end
+```
