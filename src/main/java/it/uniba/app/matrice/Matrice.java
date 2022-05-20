@@ -50,10 +50,9 @@ public class Matrice {
      * @return valore booleano che indica se la parola è corretta o meno.
      */
     public boolean setRiga(final Cella[] array, final int tentativo) {
-        int verde = 3;
         boolean corretto = true;
         for (int i = 0; i < COLONNE; i++) {
-            if (array[i].getColore() != verde) {
+            if (array[i].getColore() != Cella.IDsColori.VERDE.getId()) {
                 corretto = false;
             }
             this.setCella(tentativo, i, array[i].getColore(),
@@ -102,7 +101,7 @@ public class Matrice {
 
         for (i = 0; i < RIGHE; i++) {
             for (j = 0; j < COLONNE; j++) {
-                setCella(i, j, 0, ' ');
+                setCella(i, j, Cella.IDsColori.VUOTO.getId(), ' ');
             }
         }
     }

@@ -6,34 +6,82 @@ package it.uniba.app.matrice;
  *
  * @author Alessandro Mazzotta - 766414
  * @author Vito Verna - 746463
+ * @author Sergio Mari - 741336
  */
 public class Cella {
-
     /**
-     * Costante di tipo String; codice UTF per il reset dello sfondo.
+     * IDsColori e' un enumeratore con identificatori finali sequenziali
+     * per i colori disponibili come sfondo o per i caratteri.
+     * Ogni colore ha anche un codice UTF per l'effettiva visualizzazione a
+     * schermo.
+     *
+     * id (int) - Valore costante che fa da identificatore del colore.
+     * uftString (String) - Codice UTF per il rispettivo colore.
+     * Possibili valori di id...
+     * CARATTERENERO: -1 - Colore del carattere nero
+     * VUOTO: 0 - Colore di sfondo non impostato (come per inizializzazione)
+     * GRIGIO: 1 - Colore di sfondo grigio
+     * GIALLO: 2 - Colore di sfondo giallo
+     * VERDE: 3 - Colore di sfondo verde
      */
-    private static final String VUOTO = "\u001b[0m";
+    public enum IDsColori {
+        /**
+        * Costante di tipo String; codice UTF per il carattere nero
+        * usato a causa del poco contrasto con sfondo colorato.
+        */
+        CARATTERENERO(-1, "\u001b[38;2;0;0;0m"),
+        /**
+        * ID e codice UTF per il reset dello sfondo.
+        */
+        VUOTO(0, "\u001b[0m"),
+        /**
+        * ID e codice UTF per lo sfondo grigio.
+        */
+        GRIGIO(1, "\u001b[48;2;128;128;128m"),
+        /**
+        * ID e codice UTF per lo sfondo giallo.
+        */
+        GIALLO(2, "\u001b[48;2;204;204;0m"),
+        /**
+        * Costante di tipo String; codice UTF per lo sfondo verde.
+        */
+        VERDE(3, "\u001b[48;2;0;204;0m");
 
-    /**
-     * Costante di tipo String; codice UTF per lo sfondo grigio.
-     */
-    private static final String GRIGIO = "\u001b[48;2;128;128;128m";
+        /**
+        * Elemento identificatore dei colori.
+        */
+        private int id;
+        /**
+        * Elemento con stringa UTF dei colori.
+        */
+        private String uftString;
 
-    /**
-     * Costante di tipo String; codice UTF per lo sfondo giallo.
-     */
-    private static final String GIALLO = "\u001b[48;2;204;204;0m";
+        /**
+         * Preparatore enumerazione.
+         * @param nid - L'id da assegnare agli elementi dell'enumeratore.
+         * @param nutfString - La stringa UTF da assegnare agli elementi.
+         */
+        IDsColori(final int nid, final String nutfString) {
+            id = nid;
+            uftString = nutfString;
+        }
 
-    /**
-     * Costante di tipo String; codice UTF per lo sfondo verde.
-     */
-    private static final String VERDE = "\u001b[48;2;0;204;0m";
+        /**
+         * Rilascio dell'identificatore privato del colore.
+         * @return L'identificatore del colore.
+         */
+        public int getId() {
+            return id;
+        }
 
-    /**
-     * Costante di tipo String; codice UTF per il carattere nero
-     * usato a causa del poco contrasto con sfondo colorato.
-     */
-    private static final String CARATTERE = "\u001b[38;2;0;0;0m";
+        /**
+         * Rilascio della stringa UTF privata del colore.
+         * @return La stringa UTF del colore.
+         */
+        public String getUTFString() {
+            return uftString;
+        }
+    }
 
     /**
      * Attributo di tipo int che segna il colore che deve assumere la cella.
@@ -58,9 +106,9 @@ public class Cella {
      * Ogni cella viene inzializzata con i tre attributi vuoti.
      */
     public Cella() {
-        colore = 0;
+        colore = IDsColori.VUOTO.getId();
         lettera = ' ';
-        coloreUTF = VUOTO;
+        coloreUTF = IDsColori.VUOTO.getUTFString();
     }
 
     /**
@@ -79,32 +127,22 @@ public class Cella {
      * @param color - valore numerico del colore da impostare alla cella
      */
     public void setColore(final int color) {
-        final int vuoto = 0;
-        final int grigio = 1;
-        final int giallo = 2;
-        final int verde = 3;
-
-        switch (color) {
-            case vuoto:
-                colore = color;
-                coloreUTF = VUOTO;
-                break;
-            case grigio:
-                colore = color;
-                coloreUTF = GRIGIO;
-                break;
-            case giallo:
-                colore = color;
-                coloreUTF = GIALLO;
-                break;
-            case verde:
-                colore = color;
-                coloreUTF = VERDE;
-                break;
-            default:
-                System.out.println("setColore(int colore) error:\n"
-                    + "colore non valido, i colori possibili sono:\n"
-                    + "0 = null\n1 = grigio\n2 = giallo\n3 = verde");
+        if (color == IDsColori.VUOTO.getId()) {
+            colore = color;
+            coloreUTF = IDsColori.VUOTO.getUTFString();
+        } else if (color == IDsColori.GRIGIO.getId()) {
+            colore = color;
+            coloreUTF = IDsColori.GRIGIO.getUTFString();
+        } else if (color == IDsColori.GIALLO.getId()) {
+            colore = color;
+            coloreUTF = IDsColori.GIALLO.getUTFString();
+        } else if (color == IDsColori.VERDE.getId()) {
+            colore = color;
+            coloreUTF = IDsColori.VERDE.getUTFString();
+        } else {
+            System.out.println("setColore(int colore) error:\n"
+            + "colore non valido, i colori possibili sono:\n"
+            + "0 = null\n1 = grigio\n2 = giallo\n3 = verde");
         }
     }
 
@@ -138,9 +176,12 @@ public class Cella {
     @Override
     public String toString() {
         if (colore == 0) {
-            return coloreUTF + '[' + lettera + ']' + VUOTO;
+            return coloreUTF + '[' + lettera + ']'
+                + IDsColori.VUOTO.getUTFString();
         } else {
-            return coloreUTF + CARATTERE + '[' + lettera + ']' + VUOTO;
+            return coloreUTF + IDsColori.CARATTERENERO.getUTFString()
+                + '[' + lettera + ']'
+                + IDsColori.VUOTO.getUTFString();
         }
     }
 }

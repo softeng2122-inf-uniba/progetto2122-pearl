@@ -70,13 +70,16 @@ public class Parser {
 
         /**
          * 5.
-         * Riferimento a comando /abbandona da completare
+         *
+         * @see Comando#abbandona(it.uniba.app.Gioco,
+         * it.uniba.app.matrice.Matrice, java.lang.String)
          */
         ABBANDONA(5),
 
         /**
          * 6.
-         * Riferimento a comando /esci da completare
+         *
+         * @see Comando#esci(java.lang.String)
          */
         ESCI(6);
 
@@ -189,6 +192,9 @@ public class Parser {
             case "/esci":
                 risultato = IDsComandi.ESCI.getId();
                 break;
+            case "/abbandona":
+                risultato = IDsComandi.ABBANDONA.getId();
+                break;
             default:
                 risultato = IDsComandi.NONVALIDO.getId();
         }
@@ -270,7 +276,7 @@ public class Parser {
 
     public Cella[] parseTentativi(final int tentativi, final Gioco gioco,
     final String input) {
-        Map<Character, Integer> dizionario = new HashMap<Character, Integer>();
+        Map<Character, Integer> dizionario = new HashMap<>();
         char[] charInput = new char[Matrice.COLONNE];
         char[] charParola = new char[Matrice.COLONNE];
         int[] arr = new int[input.length()];
@@ -293,22 +299,22 @@ public class Parser {
                 if (charInput[i] == charParola[i]) {
                     dizionario.replace(charParola[i],
                     dizionario.get(charParola[i]) - 1);
-                   arr[i] = 1;
+                   arr[i] = Cella.IDsColori.VERDE.getId();
                 }
             }
             for (byte i = 0; i < input.length(); i++) {
                  if (dizionario.containsKey(charInput[i])) {
-                     if (arr[i] != 1) {
+                     if (arr[i] != Cella.IDsColori.VERDE.getId()) {
                         if (dizionario.get(charInput[i]) != 0) {
                             dizionario.replace(charInput[i],
                             dizionario.get(charInput[i]) - 1);
-                            arr[i] = 2;
+                            arr[i] = Cella.IDsColori.GIALLO.getId();
                         } else {
-                            arr[i] = 3;
+                            arr[i] = Cella.IDsColori.GRIGIO.getId();
                         }
                     }
                 } else {
-                    arr[i] = 3;
+                    arr[i] = Cella.IDsColori.GRIGIO.getId();
                 }
             }
         }
@@ -316,18 +322,12 @@ public class Parser {
         for (int i = 0; i < input.length(); i++) {
             array[i] = new Cella();
             array[i].setLettera(charInput[i]);
-            switch (arr[i]) {
-                case 1:
-                array[i].setColore(3);
-                    break;
-                case 2:
-                array[i].setColore(2);
-                    break;
-                case 3:
-                array[i].setColore(1);
-                    break;
-                default:
-                    break;
+            if (arr[i] == Cella.IDsColori.VERDE.getId()) {
+                array[i].setColore(Cella.IDsColori.VERDE.getId());
+            } else if (arr[i] == Cella.IDsColori.GIALLO.getId()) {
+                array[i].setColore(Cella.IDsColori.GIALLO.getId());
+            } else if (arr[i] == Cella.IDsColori.GRIGIO.getId()) {
+                array[i].setColore(Cella.IDsColori.GRIGIO.getId());
             }
         }
         return array;
