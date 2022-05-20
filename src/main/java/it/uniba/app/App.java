@@ -63,6 +63,14 @@ public final class App {
                     System.out.println("Per impostare una nuova parola"
                             + " segreta devi abbandonare la partita!");
                 }
+            } else if (input == Parser.IDsComandi.MOSTRA.getId()) {
+                String secret = cmd.mostra(gioco);
+                if (secret != "") {
+                    final String output = "La parola segreta è ";
+                    System.out.println(output + secret);
+                } else {
+                    System.out.println("Nessuna parola segreta è impostata.");
+                }
             } else if (input == Parser.IDsComandi.GIOCA.getId()) {
 
                 cmd.gioca(gioco, mat);
@@ -81,7 +89,8 @@ public final class App {
                 gioco.setTentativo(gioco.getTentativo() + 1);
                 if (gioco.getTentativiMassimi() < gioco.getTentativo()) {
                     gioco.setEsecuzione(false);
-                    System.out.println("Tentativi terminati. La parola segreta e':" + gioco.getParolaSegreta());
+                    System.out.println("Tentativi terminati."
+                    + " La parola segreta e':" + gioco.getParolaSegreta());
                 }
               } else {
                 System.out.println("Gioco non eseguito");

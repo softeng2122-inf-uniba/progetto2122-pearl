@@ -34,7 +34,16 @@ public class Comando {
     }
 
     /**
-     * Esecuzione effettiva del comando "/gioca".
+     * Esecuzione effettiva del comando "/mostra".
+     *
+     * @param gioco - La partita che contiene la parola segreta da mostrare
+     * @return La parola segreta come String
+     */
+    public String mostra(final Gioco gioco) {
+        return gioco.getParolaSegreta();
+    }
+
+    /** Esecuzione effettiva del comando "/gioca".
      *
      * @param gioco - La partita (gioco) che sta per iniziare
      * @param mat - La prima stampa della matrice di gioco
