@@ -74,4 +74,33 @@ public class Comando {
         }
         return risultato;
     }
+
+    /**
+     * Esecuzione effettiva del comando /abbandona.
+     *
+     * @param gioco - per il reset delle informazioni del gioco
+     * @param mat - per il reset della matrice
+     * @param input - per la conferma dell'utente
+     * @return true se l'input e' stato riconosciuto
+     */
+    public boolean abbandona(final Gioco gioco, final Matrice mat,
+            final String input) {
+        boolean risultato;
+        switch (input.charAt(0)) {
+            case 's':
+                risultato = false;
+                gioco.setEsecuzione(false);
+                gioco.setTentativo(1);
+                mat.resetMatrice();
+                break;
+            case 'n':
+                risultato = false;
+                break;
+            default:
+                System.out.println("Non capisco cosa vuoi dirmi");
+                risultato = true;
+                break;
+        }
+        return risultato;
+    }
 }
