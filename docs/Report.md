@@ -328,3 +328,48 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         deactivate App
     end
 ```
+
+## 5.6 Come Giocatore voglio abbandonare la partita
+```mermaid
+    sequenceDiagram
+        autonumber
+        actor Giocatore
+        participant App
+        participant Parser
+        participant Comando
+        participant Gioco
+        participant Matrice
+
+        Giocatore->>+App: /abbandona
+        App->>+Parser: parseInput(/abbandona, gioco)
+        deactivate App
+        Parser-->>+App: IDsComandi.ABBANDONA.id
+        deactivate Parser
+        App->>+Gioco: getEsecuzione()
+        deactivate App
+        Gioco-->>+App: esecuzione
+        alt esecuzione == true
+            loop risultato = true
+                App->>+Giocatore: Richiesta conferma
+                deactivate App
+                Giocatore->>+App: Input
+                deactivate Giocatore
+                App->>+Comando: abbandona(gioco, matrice, input)
+                deactivate App
+                alt input == 'S'
+                    Comando->>Gioco: setEsecuzione(false)
+                    Comando->>Gioco: setTentativo(1)
+                    Comando->>Matrice: resetMatrice()
+                    Comando-->>+App: risultato = false
+                else input == 'N'
+                    Comando-->>+App: risultato = false
+                else
+                    Comando-->>Giocatore: Stampa errore
+                    Comando-->>+App: risultato = true
+                end
+                deactivate Comando
+            end
+        else esecuzione == false
+            App-->>Giocatore: Stampa errore
+        end
+```
