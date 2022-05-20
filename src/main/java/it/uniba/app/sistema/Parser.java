@@ -39,18 +39,21 @@ public class Parser {
 
         /**
          * 0.
+         *
          * Si riferisce a tutti i comandi non esistenti.
          */
         NONVALIDO(0),
 
         /**
          * 1.
+         *
          * @see Comando#nuova(String, it.uniba.app.Gioco)
          */
         NUOVA(1),
 
         /**
          * 2.
+         *
          * @see Comando#mostra(it.uniba.app.Gioco)
          */
         MOSTRA(2),
@@ -91,6 +94,7 @@ public class Parser {
 
         /**
          * Preparatore enumerazione.
+         *
          * @param nid - L'id da assegnare agli elementi dell'enumeratore.
          */
         IDsComandi(final int nid) {
@@ -99,6 +103,7 @@ public class Parser {
 
         /**
          * Rilascio dell'identificatore privato del comando.
+         *
          * @return L'identificatore del comando.
          */
         public int getId() {
@@ -123,12 +128,14 @@ public class Parser {
 
         /**
          * 0.
+         *
          * Si riferisce a tutte le parole che contengono caratteri negati.
          */
         NONVALIDO(0),
 
         /**
          * -1.
+         *
          * Si riferisce a tutte le parole piu' lunghe di una certa lunghezza.
          * @see it.uniba.app.Gioco#getLunghezza()
          */
@@ -136,6 +143,7 @@ public class Parser {
 
         /**
          * -2.
+         *
          * Si riferisce a tutte le parole piu' corte di una certa lunghezza.
          * @see it.uniba.app.Gioco#getLunghezza()
          */
@@ -143,6 +151,7 @@ public class Parser {
 
         /**
          * -3
+         *
          * Si riferisce a tutte le parole che seguono i requisiti imposti.
          * @see #parseParola(String)
          */
@@ -159,6 +168,7 @@ public class Parser {
 
         /**
          * Rilascio dell'identificatore privato dello stato.
+         *
          * @return L'identificatore dello stato.
          */
         public int getId() {
@@ -169,6 +179,7 @@ public class Parser {
     /**
      * parseComando identifica un comando richiesto dall'utente.
      * Il metodo ritorna un numero intero (int) che ne identifica il comando.
+     *
      * @see Parser.IDsComandi
      *
      * @param input
