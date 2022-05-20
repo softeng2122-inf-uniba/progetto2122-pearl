@@ -64,7 +64,8 @@ public class Parser {
 
         /**
          * 4.
-         * Riferimento a comando /help da completare
+         *
+         * @see Comando#help()
          */
         HELP(4),
 
