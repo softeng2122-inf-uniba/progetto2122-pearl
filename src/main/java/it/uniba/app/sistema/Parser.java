@@ -297,13 +297,13 @@ public class Parser {
                         if (dizionario.get(charInput[i]) != 0) {
                             dizionario.replace(charInput[i],
                             dizionario.get(charInput[i]) - 1);
-                            arr[i] = Cella.IDsColori.GIALLO.getId();
+                            arr[i] = 2;
                         } else {
-                            arr[i] = Cella.IDsColori.VERDE.getId();
+                            arr[i] = 3;
                         }
                     }
                 } else {
-                    arr[i] = Cella.IDsColori.VERDE.getId();
+                    arr[i] = 3;
                 }
             }
         }
@@ -312,11 +312,11 @@ public class Parser {
             array[i] = new Cella();
             array[i].setLettera(charInput[i]);
             if (arr[i] == Cella.IDsColori.VERDE.getId()) {
-                array[i].setColore(Cella.IDsColori.VERDE.getId());
+                array[i].setColore(Cella.IDsColori.GRIGIO.getId());
             } else if (arr[i] == Cella.IDsColori.GIALLO.getId()) {
                 array[i].setColore(Cella.IDsColori.GIALLO.getId());
             } else if (arr[i] == Cella.IDsColori.GRIGIO.getId()) {
-                array[i].setColore(Cella.IDsColori.GRIGIO.getId());
+                array[i].setColore(Cella.IDsColori.VERDE.getId());
             }
         }
         return array;

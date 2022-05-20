@@ -130,15 +130,15 @@ public class Cella {
         if (color == IDsColori.VUOTO.getId()) {
             colore = color;
             coloreUTF = IDsColori.VUOTO.getUTFString();
-        } else if (color == IDsColori.VUOTO.getId()) {
-            colore = color;
-            coloreUTF = IDsColori.GRIGIO.getUTFString();
         } else if (color == IDsColori.GRIGIO.getId()) {
             colore = color;
             coloreUTF = IDsColori.GRIGIO.getUTFString();
         } else if (color == IDsColori.GIALLO.getId()) {
             colore = color;
             coloreUTF = IDsColori.GIALLO.getUTFString();
+        } else if (color == IDsColori.VERDE.getId()) {
+            colore = color;
+            coloreUTF = IDsColori.VERDE.getUTFString();
         } else {
             System.out.println("setColore(int colore) error:\n"
             + "colore non valido, i colori possibili sono:\n"
