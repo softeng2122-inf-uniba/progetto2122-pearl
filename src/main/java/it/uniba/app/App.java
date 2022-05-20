@@ -68,7 +68,7 @@ public final class App {
 
             if (input == Parser.IDsComandi.NONVALIDO.getId()) {
                 pulisciSchermo();
-                System.out.println("Comando inesistente!");
+                System.out.println("Comando " + inputSTR + "inesistente!");
 
             } else if (input == Parser.IDsComandi.NUOVA.getId()) {
                 if (!gioco.getEsecuzione()) {
