@@ -116,7 +116,8 @@ public final class App {
                         System.out.println("Sei sicuro di voler abbandonare? "
                                 + "Premi S per confermare, N per annullare.");
                         inputSTR = scanner.next().toLowerCase();
-                        risultato = cmd.abbandona(gioco, gioco.getMatrice(), inputSTR);
+                        risultato = cmd.abbandona(
+                            gioco, gioco.getMatrice(), inputSTR);
                         scanner.nextLine();
                     } while (risultato);
                     pulisciSchermo();

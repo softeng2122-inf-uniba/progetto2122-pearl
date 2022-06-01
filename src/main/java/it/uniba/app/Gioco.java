@@ -47,7 +47,7 @@ public class Gioco {
     private Matrice matrice;
 
     /**
-     *
+     * Costruttore di Gioco che prende le sue impostazioni dall'esterno.
      * @param lung
      * - Lunghezza della parola segreta come numero intero (int)
      * @param tentativiMax
@@ -62,11 +62,7 @@ public class Gioco {
     }
 
     /**
-     *
-     * @param lung
-     * - Lunghezza della parola segreta come numero intero (int)
-     * @param tentativiMax
-     * - Tentativi massimi per trovare la parola segreta (int)
+     * Costruttore di Gioco che prende delle impostazioni preimpostate.
      */
     public Gioco() {
         this.lunghezza = Matrice.COLONNE;
@@ -152,10 +148,10 @@ public class Gioco {
 
     /**
      * Metodo che permette di ottenere il contenitore dei tentativi.
-     * 
+     *
      * @return Il contenitore dei tentativi (Matrice)
      */
-    public Matrice getMatrice(){
+    public Matrice getMatrice() {
         return matrice;
     }
 }
