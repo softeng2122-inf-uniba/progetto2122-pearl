@@ -3,7 +3,6 @@ package it.uniba.app;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import it.uniba.app.matrice.Matrice;
 import it.uniba.app.sistema.Comando;
 import it.uniba.app.sistema.Parser;
 
@@ -18,12 +17,11 @@ public final class App {
      * @param pars - il parser che si occupa di riconoscere la stringa
      * @param cmd - il comando da eseguire
      * @param gioco - la partita da far iniziare
-     * @param mat - la matrice di gioco
      * @param flag - il flag passato come parametro alla prima
      * esecuzione del programma
      */
     public void start(final Parser pars, final Comando cmd,
-            final Gioco gioco, final Matrice mat, final String flag) {
+            final Gioco gioco, final String flag) {
 
         Scanner scanner = new Scanner(System.in, "UTF-8");
 
@@ -104,7 +102,7 @@ public final class App {
                 }
             } else if (input == Parser.IDsComandi.GIOCA.getId()) {
                 pulisciSchermo();
-                cmd.gioca(gioco, mat);
+                cmd.gioca(gioco, gioco.getMatrice());
             } else if (input == Parser.IDsComandi.ESCI.getId()) {
                 System.out.println("Sei Sicuro di voler uscire? "
                         + "Premi S per confermare, N per non uscire");
@@ -118,7 +116,7 @@ public final class App {
                         System.out.println("Sei sicuro di voler abbandonare? "
                                 + "Premi S per confermare, N per annullare.");
                         inputSTR = scanner.next().toLowerCase();
-                        risultato = cmd.abbandona(gioco, mat, inputSTR);
+                        risultato = cmd.abbandona(gioco, gioco.getMatrice(), inputSTR);
                         scanner.nextLine();
                     } while (risultato);
                     pulisciSchermo();
@@ -132,16 +130,16 @@ public final class App {
             } else if (input == Parser.IDsParole.ACCETTABILE.getId()) {
                 pulisciSchermo();
               if (gioco.getEsecuzione()) {
-                risolto =  mat.setRiga(pars.parseTentativi(
+                risolto =  gioco.getMatrice().setRiga(pars.parseTentativi(
                     gioco.getTentativo(), gioco, inputSTR),
                     gioco.getTentativo() - 1);
-                mat.stampaMatrice();
+                gioco.getMatrice().stampaMatrice();
 
                 if (risolto) {
                     pulisciSchermo();
                     System.out.println("Parola trovata in "
                     + gioco.getTentativo() + " tentativi");
-                    cmd.abbandona(gioco, mat, "s");
+                    cmd.abbandona(gioco, gioco.getMatrice(), "s");
                 } else {
                     gioco.setTentativo(gioco.getTentativo() + 1);
                 }
@@ -149,7 +147,7 @@ public final class App {
                     pulisciSchermo();
                     System.out.println("Tentativi terminati."
                     + " La parola segreta e': " + gioco.getParolaSegreta());
-                    cmd.abbandona(gioco, mat, "s");
+                    cmd.abbandona(gioco, gioco.getMatrice(), "s");
                 }
               } else {
                 System.out.println("Gioco non eseguito");
@@ -180,13 +178,12 @@ public final class App {
 
         Parser parser = new Parser();
         Comando comando = new Comando();
-        Gioco gioco = new Gioco(Matrice.COLONNE, Matrice.RIGHE);
-        Matrice matrice = new Matrice();
+        Gioco gioco = new Gioco();
 
         if (args.length > 0) {
-            new App().start(parser, comando, gioco, matrice, args[0]);
+            new App().start(parser, comando, gioco, args[0]);
         } else {
-            new App().start(parser, comando, gioco, matrice, "");
+            new App().start(parser, comando, gioco, "");
         }
     }
 }

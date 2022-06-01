@@ -1,5 +1,7 @@
 package it.uniba.app;
 
+import it.uniba.app.matrice.Matrice;
+
 /**
  *
  * Gioco e' una classe <<noECB>>.
@@ -40,6 +42,11 @@ public class Gioco {
     private boolean esecuzione;
 
     /**
+     * Componente di Gioco che rappresenta il contenitore dei tentativi.
+     */
+    private Matrice matrice;
+
+    /**
      *
      * @param lung
      * - Lunghezza della parola segreta come numero intero (int)
@@ -50,6 +57,23 @@ public class Gioco {
         this.lunghezza = lung;
         this.tentativiMassimi = tentativiMax;
         tentativoAttuale = 1;
+
+        matrice = new Matrice();
+    }
+
+    /**
+     *
+     * @param lung
+     * - Lunghezza della parola segreta come numero intero (int)
+     * @param tentativiMax
+     * - Tentativi massimi per trovare la parola segreta (int)
+     */
+    public Gioco() {
+        this.lunghezza = Matrice.COLONNE;
+        this.tentativiMassimi = Matrice.RIGHE;
+        tentativoAttuale = 1;
+
+        matrice = new Matrice();
     }
 
     /**
@@ -124,5 +148,14 @@ public class Gioco {
      */
     public void setEsecuzione(final boolean stato) {
         esecuzione = stato;
+    }
+
+    /**
+     * Metodo che permette di ottenere il contenitore dei tentativi.
+     * 
+     * @return Il contenitore dei tentativi (Matrice)
+     */
+    public Matrice getMatrice(){
+        return matrice;
     }
 }
