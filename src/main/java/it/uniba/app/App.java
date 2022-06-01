@@ -130,7 +130,7 @@ public final class App {
             } else if (input == IDsParole.ACCETTABILE.getId()) {
                 pulisciSchermo();
               if (gioco.getEsecuzione()) {
-                risolto =  gioco.setRigaMatrice(pars.parseTentativi(
+                risolto =  gioco.setRigaMatrice(gioco.controlloTentativi(
                     gioco.getTentativo(), gioco, inputSTR),
                     gioco.getTentativo() - 1);
                 gioco.getMatrice().stampaMatrice();
