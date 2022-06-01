@@ -30,45 +30,45 @@ public enum IDsComandi {
      *
      * Si riferisce a tutti i comandi non esistenti.
      */
-    NONVALIDO(0),
+    NONVALIDO(1),
     /**
      * 1.
      *
      * @see it.uniba.app.sistema.Comando#nuova(String, it.uniba.app.Gioco)
      */
-    NUOVA(1),
+    NUOVA(2),
     /**
      * 2.
      *
      * @see it.uniba.app.sistema.Comando#mostra(it.uniba.app.Gioco)
      */
-    MOSTRA(2),
+    MOSTRA(3),
     /**
      * 3.
      *
      * @see it.uniba.app.sistema.Comando#gioca(it.uniba.app.Gioco,
      * it.uniba.app.matrice.Matrice)
      */
-    GIOCA(3),
+    GIOCA(4),
     /**
      * 4.
      *
      * @see it.uniba.app.sistema.Comando#help()
      */
-    HELP(4),
+    HELP(5),
     /**
      * 5.
      *
      * @see it.uniba.app.sistema.Comando#abbandona(it.uniba.app.Gioco,
      * it.uniba.app.matrice.Matrice, java.lang.String)
      */
-    ABBANDONA(5),
+    ABBANDONA(6),
     /**
      * 6.
      *
      * @see it.uniba.app.sistema.Comando#esci(java.lang.String)
      */
-    ESCI(6);
+    ESCI(7);
 
     /**
      * Elemento identificatore dei comandi.
