@@ -15,6 +15,7 @@ import it.uniba.app.enumerativi.IDsColori;
  *
  * @author Sergio Mari - 741336
  * @author Alessandro Mazzotta - 766414
+ * @author Vito Verna - 746463
  *
  */
 public class Gioco {
@@ -22,7 +23,7 @@ public class Gioco {
     /**
      * Parola segreta della partita corrente.
      * Inizializzata sempre a vuoto per richiesta.
-     * 
+     *
      * @see it.uniba.app.sistema.Comando#nuova(String, Gioco)
      */
     private String parolaSegreta = "";
@@ -55,11 +56,9 @@ public class Gioco {
 
     /**
      * Costruttore di Gioco che prende le sue impostazioni dall'esterno.
-     * 
-     * @param lung
-     *                     - Lunghezza della parola segreta come numero intero (int)
-     * @param tentativiMax
-     *                     - Tentativi massimi per trovare la parola segreta (int)
+     *
+     * @param lung Lunghezza della parola segreta come numero intero (int)
+     * @param tentativiMax Tentativi massimi per trovare la parola segreta (int)
      */
     public Gioco(final int lung, final int tentativiMax) {
         this.lunghezza = lung;
@@ -102,7 +101,7 @@ public class Gioco {
 
     /**
      * Ottieni il numero dei tentativi attuali durante l'esecuzione.
-     * 
+     *
      * @return il numero di tentativi.
      */
     public int getTentativo() {
@@ -111,7 +110,7 @@ public class Gioco {
 
     /**
      * Salva il valore del tentativo attuale.
-     * 
+     *
      * @param tentativo salvato da getTenativo().
      */
 
@@ -211,7 +210,8 @@ public class Gioco {
                         gioco.getParolaSegreta().charAt(i))) {
                     dizionario.replace(
                             gioco.getParolaSegreta().charAt(i),
-                            dizionario.get(gioco.getParolaSegreta().charAt(i)) + 1);
+                            dizionario.get(
+                                gioco.getParolaSegreta().charAt(i)) + 1);
                 } else {
                     dizionario.put(charParola[i], 1);
                 }

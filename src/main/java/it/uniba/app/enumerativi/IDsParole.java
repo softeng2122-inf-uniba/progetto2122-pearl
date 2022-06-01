@@ -8,7 +8,7 @@ package it.uniba.app.enumerativi;
  * <ul>
  * <li>id (int) - Valore costante che fa da identificatore dello stato. </li>
  * </ul>
- * 
+ *
  * Ogni id corrisponde ad un diverso stato, mostrati di seguito.
  * Possibili valori di id:
  * <ul>

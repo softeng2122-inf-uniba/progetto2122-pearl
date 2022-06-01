@@ -14,7 +14,7 @@ package it.uniba.app.enumerativi;
  * Possibili valori di id:
  * <ul>
  * <li>CARATTERENERO: -1 - Colore del carattere nero </li>
- * <li>VUOTO: 0 - Colore di sfondo non impostato 
+ * <li>VUOTO: 0 - Colore di sfondo non impostato
  * (come per inizializzazione) </li>
  * <li>GRIGIO: 1 - Colore di sfondo grigio </li>
  * <li>GIALLO: 2 - Colore di sfondo giallo </li>
@@ -24,28 +24,28 @@ package it.uniba.app.enumerativi;
  * @author Sergio Mari - 741336
  */
 public enum IDsColori {
-    
+
     /**
      * Costante di tipo String; codice UTF per il carattere nero usato a causa
      * del poco contrasto con sfondo colorato.
      */
     CARATTERENERO(-1, "\u001b[38;2;0;0;0m"),
-    
+
     /**
      * ID e codice UTF per il reset dello sfondo.
      */
     VUOTO(0, "\u001b[0m"),
-    
+
     /**
      * ID e codice UTF per lo sfondo grigio.
      */
     GRIGIO(1, "\u001b[48;2;128;128;128m"),
-    
+
     /**
      * ID e codice UTF per lo sfondo giallo.
      */
     GIALLO(2, "\u001b[48;2;204;204;0m"),
-    
+
     /**
      * Costante di tipo String; codice UTF per lo sfondo verde.
      */

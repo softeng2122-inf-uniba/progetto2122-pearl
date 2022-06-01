@@ -9,8 +9,8 @@ package it.uniba.app.enumerativi;
  * <li>id (int) - Valore costante che fa da identificatore del comando. </li>
  * </ul>
  *
- * Ogni id corrisponde al suo omonimo comando, mostrati di seguito. 
- * Possibili valori di id: 
+ * Ogni id corrisponde al suo omonimo comando, mostrati di seguito.
+ * Possibili valori di id:
  * <ul>
  * <li>NONVALIDO: 0 - Comando non esistente </li>
  * <li>NUOVA: 1 - /nuova &lt;parola&gt; </li>
@@ -19,7 +19,7 @@ package it.uniba.app.enumerativi;
  * <li>HELP: 4 - /help </li>
  * <li>ABBANDONA: 5 - /abbandona </li>
  * <li>ESCI: 6 - /esci </li>
- * </ul> 
+ * </ul>
  *
  * @author Sergio Mari - 741336
  */
@@ -78,7 +78,7 @@ public enum IDsComandi {
     /**
      * Preparatore enumerazione.
      *
-     * @param nid 
+     * @param nid
      *      L'id da assegnare agli elementi dell'enumeratore.
      */
     IDsComandi(final int nid) {
@@ -88,7 +88,7 @@ public enum IDsComandi {
     /**
      * Rilascio dell'identificatore privato del comando.
      *
-     * @return 
+     * @return
      *      L'identificatore del comando.
      */
     public int getId() {
