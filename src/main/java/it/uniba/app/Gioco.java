@@ -22,6 +22,7 @@ public class Gioco {
     /**
      * Parola segreta della partita corrente.
      * Inizializzata sempre a vuoto per richiesta.
+     * 
      * @see it.uniba.app.sistema.Comando#nuova(String, Gioco)
      */
     private String parolaSegreta = "";
@@ -54,10 +55,11 @@ public class Gioco {
 
     /**
      * Costruttore di Gioco che prende le sue impostazioni dall'esterno.
+     * 
      * @param lung
-     * - Lunghezza della parola segreta come numero intero (int)
+     *                     - Lunghezza della parola segreta come numero intero (int)
      * @param tentativiMax
-     * - Tentativi massimi per trovare la parola segreta (int)
+     *                     - Tentativi massimi per trovare la parola segreta (int)
      */
     public Gioco(final int lung, final int tentativiMax) {
         this.lunghezza = lung;
@@ -80,7 +82,7 @@ public class Gioco {
 
     /**
      * Ottieni la lunghezza che ci si aspetta abbiano la parola segreta
-     *  e i tentativi per la partita attuale.
+     * e i tentativi per la partita attuale.
      *
      * @return La lunghezza annunciata come numero intero (int)
      */
@@ -90,7 +92,7 @@ public class Gioco {
 
     /**
      * Ottieni la quantita' di tentativi massimi che l'utente puo' eseguire
-     *  in questa partita.
+     * in questa partita.
      *
      * @return La quantita' di tentativi massimi come numero intero (int)
      */
@@ -100,6 +102,7 @@ public class Gioco {
 
     /**
      * Ottieni il numero dei tentativi attuali durante l'esecuzione.
+     * 
      * @return il numero di tentativi.
      */
     public int getTentativo() {
@@ -108,6 +111,7 @@ public class Gioco {
 
     /**
      * Salva il valore del tentativo attuale.
+     * 
      * @param tentativo salvato da getTenativo().
      */
 
@@ -161,12 +165,11 @@ public class Gioco {
         return matrice;
     }
 
-    
     /**
      * Imposta il colore verde se il carattere è corretto,
      * giallo o grigio altrimenti.
      *
-     * @param array set di caratteri scansionati per impostare il colore
+     * @param array     set di caratteri scansionati per impostare il colore
      * @param tentativo usato come posizione all'interno dell'array
      *
      * @return valore booleano che indica se la parola è corretta o meno.
@@ -178,23 +181,23 @@ public class Gioco {
                 corretto = false;
             }
             matrice.setCella(tentativo, i, array[i].getColore(),
-            array[i].getLettera());
+                    array[i].getLettera());
         }
         return corretto;
     }
 
-        /**
+    /**
      * Effettua un controllo sulla parola inserita ad ogni tentativo
      * e assegna ad ogni carattere il rispettivo colore.
      *
      * @param tentativi effettuati dall'utente a ogni inserimento
-     * @param gioco usato per accedere al valore dei tentativi massimi.
-     * @param input Stringa inserita dall'utente per indovinare la parola
+     * @param gioco     usato per accedere al valore dei tentativi massimi.
+     * @param input     Stringa inserita dall'utente per indovinare la parola
      *
      * @return numero tentativi effettuati
      */
     public Cella[] controlloTentativi(final int tentativi, final Gioco gioco,
-    final String input) {
+            final String input) {
         Map<Character, Integer> dizionario = new HashMap<>();
         char[] charInput = new char[Matrice.COLONNE];
         char[] charParola = new char[Matrice.COLONNE];
@@ -207,8 +210,8 @@ public class Gioco {
                 if (dizionario.containsKey(
                         gioco.getParolaSegreta().charAt(i))) {
                     dizionario.replace(
-                        gioco.getParolaSegreta().charAt(i),
-                        dizionario.get(gioco.getParolaSegreta().charAt(i)) + 1);
+                            gioco.getParolaSegreta().charAt(i),
+                            dizionario.get(gioco.getParolaSegreta().charAt(i)) + 1);
                 } else {
                     dizionario.put(charParola[i], 1);
                 }
@@ -217,16 +220,16 @@ public class Gioco {
             for (byte i = 0; i < input.length(); i++) {
                 if (charInput[i] == charParola[i]) {
                     dizionario.replace(charParola[i],
-                    dizionario.get(charParola[i]) - 1);
-                   arr[i] = IDsColori.VERDE.getId();
+                            dizionario.get(charParola[i]) - 1);
+                    arr[i] = IDsColori.VERDE.getId();
                 }
             }
             for (byte i = 0; i < input.length(); i++) {
-                 if (dizionario.containsKey(charInput[i])) {
-                     if (arr[i] != IDsColori.VERDE.getId()) {
+                if (dizionario.containsKey(charInput[i])) {
+                    if (arr[i] != IDsColori.VERDE.getId()) {
                         if (dizionario.get(charInput[i]) != 0) {
                             dizionario.replace(charInput[i],
-                            dizionario.get(charInput[i]) - 1);
+                                    dizionario.get(charInput[i]) - 1);
                             arr[i] = IDsColori.GIALLO.getId();
                         } else {
                             arr[i] = IDsColori.GRIGIO.getId();
