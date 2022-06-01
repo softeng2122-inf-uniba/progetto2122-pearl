@@ -1,5 +1,7 @@
 package it.uniba.app.matrice;
 
+import it.uniba.app.enumerativi.IDsColori;
+
 /**
  * Cella e' una classe <<Entity>>.
  * Rappresenta la singola cella della matrice di gioco.

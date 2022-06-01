@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 import it.uniba.app.Gioco;
 import it.uniba.app.enumerativi.IDsComandi;
+import it.uniba.app.enumerativi.IDsParole;
+import it.uniba.app.enumerativi.IDsColori;
 
 /**
  * Parser e' una classe <<Control>>.
@@ -169,22 +171,22 @@ public class Parser {
                 if (charInput[i] == charParola[i]) {
                     dizionario.replace(charParola[i],
                     dizionario.get(charParola[i]) - 1);
-                   arr[i] = Cella.IDsColori.VERDE.getId();
+                   arr[i] = IDsColori.VERDE.getId();
                 }
             }
             for (byte i = 0; i < input.length(); i++) {
                  if (dizionario.containsKey(charInput[i])) {
-                     if (arr[i] != Cella.IDsColori.VERDE.getId()) {
+                     if (arr[i] != IDsColori.VERDE.getId()) {
                         if (dizionario.get(charInput[i]) != 0) {
                             dizionario.replace(charInput[i],
                             dizionario.get(charInput[i]) - 1);
-                            arr[i] = Cella.IDsColori.GIALLO.getId();
+                            arr[i] = IDsColori.GIALLO.getId();
                         } else {
-                            arr[i] = Cella.IDsColori.GRIGIO.getId();
+                            arr[i] = IDsColori.GRIGIO.getId();
                         }
                     }
                 } else {
-                    arr[i] = Cella.IDsColori.GRIGIO.getId();
+                    arr[i] = IDsColori.GRIGIO.getId();
                 }
             }
         }
@@ -192,12 +194,12 @@ public class Parser {
         for (int i = 0; i < input.length(); i++) {
             array[i] = new Cella();
             array[i].setLettera(charInput[i]);
-            if (arr[i] == Cella.IDsColori.VERDE.getId()) {
-                array[i].setColore(Cella.IDsColori.VERDE.getId());
-            } else if (arr[i] == Cella.IDsColori.GIALLO.getId()) {
-                array[i].setColore(Cella.IDsColori.GIALLO.getId());
-            } else if (arr[i] == Cella.IDsColori.GRIGIO.getId()) {
-                array[i].setColore(Cella.IDsColori.GRIGIO.getId());
+            if (arr[i] == IDsColori.VERDE.getId()) {
+                array[i].setColore(IDsColori.VERDE.getId());
+            } else if (arr[i] == IDsColori.GIALLO.getId()) {
+                array[i].setColore(IDsColori.GIALLO.getId());
+            } else if (arr[i] == IDsColori.GRIGIO.getId()) {
+                array[i].setColore(IDsColori.GRIGIO.getId());
             }
         }
         return array;
