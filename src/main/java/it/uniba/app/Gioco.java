@@ -1,10 +1,12 @@
 package it.uniba.app;
 
 import it.uniba.app.matrice.Matrice;
+import it.uniba.app.matrice.Cella;
+import it.uniba.app.enumerativi.IDsColori;
 
 /**
  *
- * Gioco e' una classe <<noECB>>.
+ * Gioco e' una classe <<Control>>.
  * Rappresenta la partita attualmente in esecuzione.
  *
  * @author Sergio Mari - 741336
@@ -153,5 +155,27 @@ public class Gioco {
      */
     public Matrice getMatrice() {
         return matrice;
+    }
+
+    
+    /**
+     * Imposta il colore verde se il carattere è corretto,
+     * giallo o grigio altrimenti.
+     *
+     * @param array set di caratteri scansionati per impostare il colore
+     * @param tentativo usato come posizione all'interno dell'array
+     *
+     * @return valore booleano che indica se la parola è corretta o meno.
+     */
+    public boolean setRigaMatrice(final Cella[] array, final int tentativo) {
+        boolean corretto = true;
+        for (int i = 0; i < Matrice.COLONNE; i++) {
+            if (array[i].getColore() != IDsColori.VERDE.getId()) {
+                corretto = false;
+            }
+            matrice.setCella(tentativo, i, array[i].getColore(),
+            array[i].getLettera());
+        }
+        return corretto;
     }
 }
