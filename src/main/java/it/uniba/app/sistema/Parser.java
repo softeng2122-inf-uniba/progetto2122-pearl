@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.HashMap;
 
 import it.uniba.app.Gioco;
+import it.uniba.app.enumerativi.IDsComandi;
+import it.uniba.app.enumerativi.IDsParole;
+import it.uniba.app.enumerativi.IDsColori;
 
 /**
  * Parser e' una classe <<Control>>.
@@ -19,162 +22,6 @@ import it.uniba.app.Gioco;
  * @author Alessia Marsico - 738959
  */
 public class Parser {
-
-    /**
-     * IDsComandi e' un enumeratore con identificatori finali per i comandi.
-     * Aiuta nella flessibilita' del codice.
-     *
-     * id (int) - Valore costante che fa da identificatore del comando.
-     * Ogni id corrisponde al suo omonimo comando, mostrati di seguito.
-     * Possibili valori di id...
-     * NONVALIDO: 0 - Comando non esistente
-     * NUOVA: 1 - /nuova
-     * MOSTRA: 2 - /mostra
-     * GIOCA: 3 - /gioca
-     * HELP: 4 - /help
-     * ABBANDONA: 5 - /abbandona
-     * ESCI: 6 - /esci
-     */
-    public enum IDsComandi {
-
-        /**
-         * 0.
-         *
-         * Si riferisce a tutti i comandi non esistenti.
-         */
-        NONVALIDO(0),
-
-        /**
-         * 1.
-         *
-         * @see Comando#nuova(String, it.uniba.app.Gioco)
-         */
-        NUOVA(1),
-
-        /**
-         * 2.
-         *
-         * @see Comando#mostra(it.uniba.app.Gioco)
-         */
-        MOSTRA(2),
-
-        /**
-         * 3.
-         *
-         * @see Comando#gioca(it.uniba.app.Gioco, it.uniba.app.matrice.Matrice)
-         */
-        GIOCA(3),
-
-        /**
-         * 4.
-         *
-         * @see Comando#help()
-         */
-        HELP(4),
-
-        /**
-         * 5.
-         *
-         * @see Comando#abbandona(it.uniba.app.Gioco,
-         * it.uniba.app.matrice.Matrice, java.lang.String)
-         */
-        ABBANDONA(5),
-
-        /**
-         * 6.
-         *
-         * @see Comando#esci(java.lang.String)
-         */
-        ESCI(6);
-
-        /**
-         * Elemento identificatore dei comandi.
-         */
-        private final int id;
-
-        /**
-         * Preparatore enumerazione.
-         *
-         * @param nid - L'id da assegnare agli elementi dell'enumeratore.
-         */
-        IDsComandi(final int nid) {
-            this.id = nid;
-        }
-
-        /**
-         * Rilascio dell'identificatore privato del comando.
-         *
-         * @return L'identificatore del comando.
-         */
-        public int getId() {
-            return id;
-        }
-    }
-
-    /**
-     * IDsParole e' un enumeratore con identificatori per lo stato delle parole.
-     * Aiuta nella flessibilita' del codice.
-     *
-     * id (int) - Valore costante che fa da identificatore dello stato.
-     * Ogni id corrisponde ad un diverso stato, mostrati di seguito.
-     * Possibili valori di id...
-     * NONVALIDO: 0 - Input contenente caratteri non validi
-     * LUNGA: -1 - L'input e' troppo lungo
-     * CORTA: -2 - L'input e' troppo corto
-     * ACCETTABILE: -3 - L'input segue i criteri di accettazione
-     *
-     */
-    public enum IDsParole {
-
-        /**
-         * 0.
-         *
-         * Si riferisce a tutte le parole che contengono caratteri negati.
-         */
-        NONVALIDO(0),
-
-        /**
-         * -1.
-         *
-         * Si riferisce a tutte le parole piu' lunghe di una certa lunghezza.
-         * @see it.uniba.app.Gioco#getLunghezza()
-         */
-        LUNGA(-1),
-
-        /**
-         * -2.
-         *
-         * Si riferisce a tutte le parole piu' corte di una certa lunghezza.
-         * @see it.uniba.app.Gioco#getLunghezza()
-         */
-        CORTA(-2),
-
-        /**
-         * -3
-         *
-         * Si riferisce a tutte le parole che seguono i requisiti imposti.
-         * @see #parseParola(String)
-         */
-        ACCETTABILE(-3);
-
-        /**
-         * Elemento identificatore degli stati.
-         */
-        private final int id;
-
-        IDsParole(final int nid) {
-            this.id = nid;
-        }
-
-        /**
-         * Rilascio dell'identificatore privato dello stato.
-         *
-         * @return L'identificatore dello stato.
-         */
-        public int getId() {
-            return id;
-        }
-    }
 
     /**
      * parseComando identifica un comando richiesto dall'utente.
@@ -324,22 +171,22 @@ public class Parser {
                 if (charInput[i] == charParola[i]) {
                     dizionario.replace(charParola[i],
                     dizionario.get(charParola[i]) - 1);
-                   arr[i] = Cella.IDsColori.VERDE.getId();
+                   arr[i] = IDsColori.VERDE.getId();
                 }
             }
             for (byte i = 0; i < input.length(); i++) {
                  if (dizionario.containsKey(charInput[i])) {
-                     if (arr[i] != Cella.IDsColori.VERDE.getId()) {
+                     if (arr[i] != IDsColori.VERDE.getId()) {
                         if (dizionario.get(charInput[i]) != 0) {
                             dizionario.replace(charInput[i],
                             dizionario.get(charInput[i]) - 1);
-                            arr[i] = Cella.IDsColori.GIALLO.getId();
+                            arr[i] = IDsColori.GIALLO.getId();
                         } else {
-                            arr[i] = Cella.IDsColori.GRIGIO.getId();
+                            arr[i] = IDsColori.GRIGIO.getId();
                         }
                     }
                 } else {
-                    arr[i] = Cella.IDsColori.GRIGIO.getId();
+                    arr[i] = IDsColori.GRIGIO.getId();
                 }
             }
         }
@@ -347,12 +194,12 @@ public class Parser {
         for (int i = 0; i < input.length(); i++) {
             array[i] = new Cella();
             array[i].setLettera(charInput[i]);
-            if (arr[i] == Cella.IDsColori.VERDE.getId()) {
-                array[i].setColore(Cella.IDsColori.VERDE.getId());
-            } else if (arr[i] == Cella.IDsColori.GIALLO.getId()) {
-                array[i].setColore(Cella.IDsColori.GIALLO.getId());
-            } else if (arr[i] == Cella.IDsColori.GRIGIO.getId()) {
-                array[i].setColore(Cella.IDsColori.GRIGIO.getId());
+            if (arr[i] == IDsColori.VERDE.getId()) {
+                array[i].setColore(IDsColori.VERDE.getId());
+            } else if (arr[i] == IDsColori.GIALLO.getId()) {
+                array[i].setColore(IDsColori.GIALLO.getId());
+            } else if (arr[i] == IDsColori.GRIGIO.getId()) {
+                array[i].setColore(IDsColori.GRIGIO.getId());
             }
         }
         return array;

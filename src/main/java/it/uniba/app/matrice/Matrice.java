@@ -1,5 +1,7 @@
 package it.uniba.app.matrice;
 
+import it.uniba.app.enumerativi.IDsColori;
+
 /**
  * Matrice e' una classe <<Controllo>>.
  * Rappresenta la matrice di gioco.
@@ -52,7 +54,7 @@ public class Matrice {
     public boolean setRiga(final Cella[] array, final int tentativo) {
         boolean corretto = true;
         for (int i = 0; i < COLONNE; i++) {
-            if (array[i].getColore() != Cella.IDsColori.VERDE.getId()) {
+            if (array[i].getColore() != IDsColori.VERDE.getId()) {
                 corretto = false;
             }
             this.setCella(tentativo, i, array[i].getColore(),
@@ -101,7 +103,7 @@ public class Matrice {
 
         for (i = 0; i < RIGHE; i++) {
             for (j = 0; j < COLONNE; j++) {
-                setCella(i, j, Cella.IDsColori.VUOTO.getId(), ' ');
+                setCella(i, j, IDsColori.VUOTO.getId(), ' ');
             }
         }
     }
