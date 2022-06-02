@@ -2,6 +2,7 @@ package it.uniba.app.sistema;
 
 import it.uniba.app.Gioco;
 import it.uniba.app.matrice.Matrice;
+import it.uniba.app.enumerativi.IDsParole;
 
 /**
  * Comando e' una classe <<Control>>.
@@ -28,7 +29,7 @@ public class Comando {
     public int nuova(final String input, final Gioco gioco) {
         int stato = new Parser().parseParola(input, gioco.getLunghezza());
 
-        if (stato == Parser.IDsParole.ACCETTABILE.getId()) {
+        if (stato == IDsParole.ACCETTABILE.getId()) {
             gioco.setParolaSegreta(input);
             System.out.println("Parola segreta impostata correttamente!");
         }
