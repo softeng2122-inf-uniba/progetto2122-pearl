@@ -153,9 +153,11 @@ public final class App {
                 System.out.println("Gioco non eseguito");
                 }
             } else if (gioco.getEsecuzione() && input == IDsParole.CORTA.getId()) {
-                System.out.println("Parola troppo corta.");
+                System.out.println("Parola troppo corta\n");
             } else if (gioco.getEsecuzione() && input == IDsParole.LUNGA.getId()) {
-                System.out.println("Parola troppo lunga");
+                System.out.println("Parola troppo lunga\n");
+            } else if (gioco.getEsecuzione() && input != IDsParole.ACCETTABILE.getId()) {
+                System.out.println("Parola non valida\n");
             }
         } while (!chiusura);
 
