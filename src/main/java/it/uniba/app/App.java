@@ -119,7 +119,6 @@ public final class App {
                             gioco, gioco.getMatrice(), inputSTR);
                         scanner.nextLine();
                     } while (risultato);
-                    pulisciSchermo();
                 } else {
                     System.out.println("Non puoi abbandonare una "
                             + "partita inesistente!");
@@ -136,7 +135,6 @@ public final class App {
                 gioco.getMatrice().stampaMatrice();
 
                 if (risolto) {
-                    pulisciSchermo();
                     System.out.println("Parola trovata in "
                     + gioco.getTentativo() + " tentativi");
                     cmd.abbandona(gioco, gioco.getMatrice(), "s");
@@ -154,6 +152,7 @@ public final class App {
                 }
             }
         } while (!chiusura);
+        pulisciSchermo();
 
         scanner.close();
     }
