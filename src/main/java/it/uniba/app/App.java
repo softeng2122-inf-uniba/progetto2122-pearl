@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 
 import it.uniba.app.sistema.Comando;
 import it.uniba.app.sistema.Parser;
+import it.uniba.app.enumerativi.IDsColori;
 import it.uniba.app.enumerativi.IDsComandi;
 import it.uniba.app.enumerativi.IDsParole;
 
@@ -153,11 +154,11 @@ public final class App {
                 System.out.println("Gioco non eseguito");
                 }
             } else if (gioco.getEsecuzione() && input == IDsParole.CORTA.getId()) {
-                System.out.println("Parola troppo corta\n");
+                System.out.println(IDsColori.CARATTEREROSSO.getUTFString() + "Parola troppo corta\n" + IDsColori.VUOTO.getUTFString());
             } else if (gioco.getEsecuzione() && input == IDsParole.LUNGA.getId()) {
-                System.out.println("Parola troppo lunga\n");
+                System.out.println(IDsColori.CARATTEREROSSO.getUTFString() + "Parola troppo lunga\n" + IDsColori.VUOTO.getUTFString());
             } else if (gioco.getEsecuzione() && input != IDsParole.ACCETTABILE.getId()) {
-                System.out.println("Parola non valida\n");
+                System.out.println(IDsColori.CARATTEREROSSO.getUTFString() + "Parola non valida\n" + IDsColori.VUOTO.getUTFString());
             }
         } while (!chiusura);
 
