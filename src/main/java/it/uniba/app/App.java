@@ -153,12 +153,18 @@ public final class App {
               } else {
                 System.out.println("Gioco non eseguito");
                 }
-            } else if (gioco.getEsecuzione() && input == IDsParole.CORTA.getId()) {
-                System.out.println(IDsColori.CARATTEREROSSO.getUTFString() + "Parola troppo corta\n" + IDsColori.VUOTO.getUTFString());
-            } else if (gioco.getEsecuzione() && input == IDsParole.LUNGA.getId()) {
-                System.out.println(IDsColori.CARATTEREROSSO.getUTFString() + "Parola troppo lunga\n" + IDsColori.VUOTO.getUTFString());
-            } else if (gioco.getEsecuzione() && input != IDsParole.ACCETTABILE.getId()) {
-                System.out.println(IDsColori.CARATTEREROSSO.getUTFString() + "Parola non valida\n" + IDsColori.VUOTO.getUTFString());
+            } else if (gioco.getEsecuzione()
+            && input == IDsParole.CORTA.getId()) {
+                System.out.println(IDsColori.CARATTEREROSSO.getUTFString()
+                + "Parola troppo corta\n" + IDsColori.VUOTO.getUTFString());
+            } else if (gioco.getEsecuzione()
+            && input == IDsParole.LUNGA.getId()) {
+                System.out.println(IDsColori.CARATTEREROSSO.getUTFString()
+                + "Parola troppo lunga\n" + IDsColori.VUOTO.getUTFString());
+            } else if (gioco.getEsecuzione()
+            && input != IDsParole.ACCETTABILE.getId()) {
+                System.out.println(IDsColori.CARATTEREROSSO.getUTFString()
+                + "Parola non valida\n" + IDsColori.VUOTO.getUTFString());
             }
         } while (!chiusura);
 
