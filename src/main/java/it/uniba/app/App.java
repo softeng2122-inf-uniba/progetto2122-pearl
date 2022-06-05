@@ -27,8 +27,11 @@ public final class App {
             final Gioco gioco, final String flag) {
 
         Scanner scanner = new Scanner(System.in, "UTF-8");
-        String inputSTR; int input, statoSegreta; 
-        boolean risolto, chiusura = false;
+        String inputSTR;
+        int input;
+        int statoSegreta;
+        boolean risolto;
+        boolean chiusura = false;
 
         pulisciSchermo();
 
@@ -71,29 +74,37 @@ public final class App {
 
                         if (statoSegreta == IDsParole.NONVALIDO.getId()) {
                             pulisciSchermo();
-                            System.out.println(IDsColori.CARATTEREROSSO.getUTFString()
-                            + "Parola non valida!" + IDsColori.VUOTO.getUTFString());
+                            System.out.println(
+                            IDsColori.CARATTEREROSSO.getUTFString()
+                            + "Parola non valida!"
+                            + IDsColori.VUOTO.getUTFString());
 
                         } else if (statoSegreta == IDsParole.LUNGA.getId()) {
                             pulisciSchermo();
-                            System.out.println(IDsColori.CARATTEREROSSO.getUTFString() 
-                            + "Parola troppo lunga!" + IDsColori.VUOTO.getUTFString());
+                            System.out.println(
+                                IDsColori.CARATTEREROSSO.getUTFString()
+                            + "Parola troppo lunga!"
+                            + IDsColori.VUOTO.getUTFString());
 
                         } else if (statoSegreta == IDsParole.CORTA.getId()) {
                             pulisciSchermo();
-                            System.out.println(IDsColori.CARATTEREROSSO.getUTFString() 
-                            + "Parola troppo corta!" + IDsColori.VUOTO.getUTFString());
-
+                            System.out.println(
+                            IDsColori.CARATTEREROSSO.getUTFString()
+                            + "Parola troppo corta!"
+                            + IDsColori.VUOTO.getUTFString());
                         }
                     } else {
                         pulisciSchermo();
-                        System.out.println(IDsColori.CARATTEREROSSO.getUTFString() 
-                        + "Parola segreta non inserita!" + IDsColori.VUOTO.getUTFString());
+                        System.out.println(
+                        IDsColori.CARATTEREROSSO.getUTFString()
+                        + "Parola segreta non inserita!"
+                        + IDsColori.VUOTO.getUTFString());
                     }
                 } else {
                     pulisciSchermo();
-                    System.out.println(IDsColori.CARATTEREROSSO.getUTFString() 
-                    + "Per impostare una nuova parola segreta devi abbandonare la partita!"
+                    System.out.println(IDsColori.CARATTEREROSSO.getUTFString()
+                    + "Per impostare una nuova parola"
+                    + "segreta devi abbandonare la partita!"
                     + IDsColori.VUOTO.getUTFString());
                 }
             } else if (input == IDsComandi.MOSTRA.getId()) {
@@ -103,8 +114,10 @@ public final class App {
                     System.out.println(output + secret);
                 } else {
                     pulisciSchermo();
-                    System.out.println(IDsColori.CARATTEREROSSO.getUTFString()
-                    + "Nessuna parola segreta e' impostata." + IDsColori.VUOTO.getUTFString());
+                    System.out.println(
+                    IDsColori.CARATTEREROSSO.getUTFString()
+                    + "Nessuna parola segreta e' impostata."
+                    + IDsColori.VUOTO.getUTFString());
                 }
             } else if (input == IDsComandi.GIOCA.getId()) {
                 pulisciSchermo();
@@ -128,8 +141,11 @@ public final class App {
                     } while (risultato);
                     pulisciSchermo();
                 } else {
-                    System.out.println(IDsColori.CARATTEREROSSO.getUTFString() + "Non puoi abbandonare una "
-                    + "partita inesistente!" + IDsColori.VUOTO.getUTFString());
+                    System.out.println(
+                    IDsColori.CARATTEREROSSO.getUTFString()
+                    + "Non puoi abbandonare una "
+                    + "partita inesistente!"
+                    + IDsColori.VUOTO.getUTFString());
                 }
             } else if (input == IDsComandi.HELP.getId()) {
                 pulisciSchermo();

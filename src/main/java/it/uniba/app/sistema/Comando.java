@@ -32,7 +32,7 @@ public class Comando {
 
         if (stato == IDsParole.ACCETTABILE.getId()) {
             gioco.setParolaSegreta(input);
-            System.out.println(IDsColori.CARATTEREVERDE.getUTFString() 
+            System.out.println(IDsColori.CARATTEREVERDE.getUTFString()
             + "Parola segreta impostata correttamente!"
             + IDsColori.VUOTO.getUTFString());
         }
@@ -61,12 +61,14 @@ public class Comando {
                 gioco.setEsecuzione(true);
                 mat.stampaMatrice();
             } else {
-                System.out.println(IDsColori.CARATTEREROSSO.getUTFString() 
+                System.out.println(
+                IDsColori.CARATTEREROSSO.getUTFString()
                 + "Non e' stata impostata la parola segreta!"
                 + IDsColori.VUOTO.getUTFString());
             }
         } else {
-            System.out.println(IDsColori.CARATTEREROSSO.getUTFString()
+            System.out.println(
+            IDsColori.CARATTEREROSSO.getUTFString()
             + "Il gioco e' gia' in esecuzione!"
             + IDsColori.VUOTO.getUTFString());
         }
