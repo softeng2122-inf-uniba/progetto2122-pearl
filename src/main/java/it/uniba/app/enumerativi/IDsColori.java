@@ -20,6 +20,7 @@ package it.uniba.app.enumerativi;
  * <li>GIALLO: 2 - Colore di sfondo giallo </li>
  * <li>VERDE: 3 - Colore di sfondo verde </li>
  * <li>CARATTEREROSSO: 4 - Colore caratteri rosso </li>
+ * <li>CARATTEREVERDE: 5 - Colore caratteri verde </li>
  * </ul>
  *
  * @author Sergio Mari - 741336
@@ -53,9 +54,14 @@ public enum IDsColori {
     VERDE(3, "\u001b[48;2;0;204;0m"),
 
     /**
-     * Costante di tipo String; codice UTF per lo sfondo rosso.
+     * Costante di tipo String; codice UTF per il testo rosso.
      */
-    CARATTEREROSSO(4, "\u001b[31m");
+    CARATTEREROSSO(4, "\u001b[38;2;255;0;0m"),
+
+    /**
+     * Costante di tipo String; codice UTF per il testo verde.
+     */
+    CARATTEREVERDE(5, "\u001b[38;2;0;204;0m");
 
     /**
      * Elemento identificatore dei colori.
