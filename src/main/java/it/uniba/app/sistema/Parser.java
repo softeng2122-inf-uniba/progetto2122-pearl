@@ -112,18 +112,20 @@ public class Parser {
      *
      * @return
      *  L'identificatore del risultato della operazione selezionata.
+     *  0 se nessun input è stato inserito.
      */
     public int parseInput(final String input, final Gioco gioco) {
         int risultato = 0;
-
-        if (input.charAt(0) == '/') {
-            risultato = parseComando(input);
-        } else if (input.startsWith("-")) {
-            risultato = parseComando(input);
-        } else if (input.startsWith("--")) {
-            risultato = parseComando(input);
-        } else {
-            risultato = parseParola(input, gioco.getLunghezza());
+        if (input != null && input.length() > 0) {
+            if (input.charAt(0) == '/') {
+                risultato = parseComando(input);
+            } else if (input.startsWith("-")) {
+                risultato = parseComando(input);
+            } else if (input.startsWith("--")) {
+                risultato = parseComando(input);
+            } else {
+                risultato = parseParola(input, gioco.getLunghezza());
+            }
         }
 
         return risultato;
