@@ -139,7 +139,6 @@ public final class App {
                             gioco, gioco.getMatrice(), inputSTR);
                         scanner.nextLine();
                     } while (risultato);
-                    pulisciSchermo();
                 } else {
                     System.out.println(
                     IDsColori.CARATTEREROSSO.getUTFString()
@@ -159,7 +158,6 @@ public final class App {
                 gioco.getMatrice().stampaMatrice();
 
                 if (risolto) {
-                    pulisciSchermo();
                     System.out.println("Parola trovata in "
                     + gioco.getTentativo() + " tentativi");
                     cmd.abbandona(gioco, gioco.getMatrice(), "s");
@@ -190,6 +188,7 @@ public final class App {
                 + "Parola non valida\n" + IDsColori.VUOTO.getUTFString());
             }
         } while (!chiusura);
+        pulisciSchermo();
 
         scanner.close();
     }
