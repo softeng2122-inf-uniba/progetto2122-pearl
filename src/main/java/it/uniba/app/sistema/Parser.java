@@ -127,7 +127,7 @@ public class Parser {
             } else {
                 risultato = parseParola(input, gioco.getLunghezza());
             }
-        }else {
+        } else {
             risultato = IDsParole.NONVALIDO.getId();
         }
 
