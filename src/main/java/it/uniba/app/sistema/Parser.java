@@ -1,5 +1,6 @@
 package it.uniba.app.sistema;
 
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 import it.uniba.app.Gioco;
@@ -116,7 +117,7 @@ public class Parser {
      */
     public int parseInput(final String input, final Gioco gioco) {
         int risultato;
-        if (input != null && input.length() > 0) {
+        if (!Objects.isNull(input) && input.length() > 0) {
             if (input.charAt(0) == '/') {
                 risultato = parseComando(input);
             } else if (input.startsWith("-")) {
