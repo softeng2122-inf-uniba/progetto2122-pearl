@@ -115,7 +115,7 @@ public class Parser {
      *  0 se nessun input è stato inserito.
      */
     public int parseInput(final String input, final Gioco gioco) {
-        int risultato = 0;
+        int risultato;
         if (input != null && input.length() > 0) {
             if (input.charAt(0) == '/') {
                 risultato = parseComando(input);
@@ -126,6 +126,8 @@ public class Parser {
             } else {
                 risultato = parseParola(input, gioco.getLunghezza());
             }
+        }else {
+            risultato = IDsParole.NONVALIDO.getId();
         }
 
         return risultato;
