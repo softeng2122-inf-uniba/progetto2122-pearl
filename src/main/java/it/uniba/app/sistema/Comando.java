@@ -2,6 +2,7 @@ package it.uniba.app.sistema;
 
 import it.uniba.app.Gioco;
 import it.uniba.app.matrice.Matrice;
+import it.uniba.app.enumerativi.IDsColori;
 import it.uniba.app.enumerativi.IDsParole;
 
 /**
@@ -31,7 +32,9 @@ public class Comando {
 
         if (stato == IDsParole.ACCETTABILE.getId()) {
             gioco.setParolaSegreta(input);
-            System.out.println("Parola segreta impostata correttamente!");
+            System.out.println(IDsColori.CARATTEREVERDE.getUTFString()
+            + "Parola segreta impostata correttamente!"
+            + IDsColori.VUOTO.getUTFString());
         }
         return stato;
     }
@@ -58,10 +61,16 @@ public class Comando {
                 gioco.setEsecuzione(true);
                 mat.stampaMatrice();
             } else {
-                System.out.println("Non e' stata impostata la parola segreta!");
+                System.out.println(
+                IDsColori.CARATTEREROSSO.getUTFString()
+                + "Non e' stata impostata la parola segreta!"
+                + IDsColori.VUOTO.getUTFString());
             }
         } else {
-            System.out.println("Il gioco e' gia' in esecuzione!");
+            System.out.println(
+            IDsColori.CARATTEREROSSO.getUTFString()
+            + "Il gioco e' gia' in esecuzione!"
+            + IDsColori.VUOTO.getUTFString());
         }
     }
 

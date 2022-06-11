@@ -399,3 +399,7 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
             deactivate Comando
         end
 ```
+
+# 6 Analisi retrospettiva
+## 6.1 Sprint 1
+![retrospettiva](./img/retrospettiva.png)
