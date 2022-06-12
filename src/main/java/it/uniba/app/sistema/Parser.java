@@ -1,5 +1,6 @@
 package it.uniba.app.sistema;
 
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 import it.uniba.app.Gioco;
@@ -112,18 +113,22 @@ public class Parser {
      *
      * @return
      *  L'identificatore del risultato della operazione selezionata.
+     *  0 se nessun input è stato inserito.
      */
     public int parseInput(final String input, final Gioco gioco) {
-        int risultato = 0;
-
-        if (input.charAt(0) == '/') {
-            risultato = parseComando(input);
-        } else if (input.startsWith("-")) {
-            risultato = parseComando(input);
-        } else if (input.startsWith("--")) {
-            risultato = parseComando(input);
+        int risultato;
+        if (!Objects.isNull(input) && input.length() > 0) {
+            if (input.charAt(0) == '/') {
+                risultato = parseComando(input);
+            } else if (input.startsWith("-")) {
+                risultato = parseComando(input);
+            } else if (input.startsWith("--")) {
+                risultato = parseComando(input);
+            } else {
+                risultato = parseParola(input, gioco.getLunghezza());
+            }
         } else {
-            risultato = parseParola(input, gioco.getLunghezza());
+            risultato = IDsParole.NONVALIDO.getId();
         }
 
         return risultato;
