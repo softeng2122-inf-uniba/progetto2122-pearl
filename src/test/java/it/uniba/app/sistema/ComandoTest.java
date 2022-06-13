@@ -109,4 +109,18 @@ public class ComandoTest {
 
         assertFalse(comando.esci(" "), "input diverso da s o n");
     }
+
+    /**
+     * Metodo che testa il funzionamento del comando /abbandona.
+     */
+    @Test
+    @DisplayName("Test per il comando /abbandona")
+    public void testAbbandona() {
+        assertFalse(comando.abbandona(gioco, mat, "s"), "si");
+
+        assertFalse(comando.abbandona(gioco, mat, "n"), "no");
+
+        assertTrue(comando.abbandona(gioco, mat, " "),
+            "input diverso da s o n");
+    }
 }
