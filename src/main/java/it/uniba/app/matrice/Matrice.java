@@ -1,5 +1,7 @@
 package it.uniba.app.matrice;
 
+import java.util.Arrays;
+
 import it.uniba.app.enumerativi.IDsColori;
 
 /**
@@ -94,5 +96,45 @@ public class Matrice {
      */
     public Cella[][] getMat() {
         return mat.clone();
+    }
+
+    /**
+     * Override del metodo hashCode() della classe Object che viene utilizzato
+     * dal metodo equals(Object) di Matrice.
+     *
+     * @return il codice hash della matrice
+     */
+    @Override
+    public int hashCode() {
+        final int n = 97;
+        int hash = 3;
+        hash = n * hash + Arrays.deepHashCode(this.mat);
+        return hash;
+    }
+
+    /**
+     * Override del metodo equals(Object) della classe Object in modo da poter
+     * essere eseguito, nello specifico, per la matrice di gioco.
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        boolean risultato = false;
+        int contatore = 0;
+
+        if (obj instanceof Matrice) {
+            Matrice tempMatrice = (Matrice) obj;
+
+            for (int i = 0; i < Matrice.RIGHE; i++) {
+                for (int j = 0; j < Matrice.COLONNE; j++) {
+                    if (tempMatrice.mat[i][j].equals(this.mat[i][j])) {
+                        contatore++;
+                        if (contatore == (Matrice.RIGHE * Matrice.COLONNE)) {
+                                risultato = true;
+                        }
+                    }
+                }
+            }
+        }
+        return risultato;
     }
 }
