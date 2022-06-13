@@ -24,13 +24,13 @@ Di seguito la lista dei comandi:
 classDiagram 
 class IDsComandi {
     <<enum>>
-    NONVALIDO = 0
-    NUOVA = 1
-    MOSTRA = 2
-    GIOCA = 3
-    HELP = 4
-    ABBANDONA = 5
-    ESCI = 6
+    NONVALIDO = 1
+    NUOVA = 2
+    MOSTRA = 3
+    GIOCA = 4
+    HELP = 5
+    ABBANDONA = 6
+    ESCI = 7
     +getId() int
 }
 
@@ -43,23 +43,38 @@ class IDsParole {
     +getId() int
 }
 
+class IDsColori {
+    <<enum>>
+    CARATTERENERO = -1, "\u001b[38;2;0;0;0m"
+    VUOTO = 0, "\u001b[0m"
+    GRIGIO = 1, "\u001b[48;2;128;128;128m"
+    GIALLO = 2, "\u001b[48;2;204;204;0m"
+    VERDE = 3, "\u001b[48;2;0;204;0m"
+    CARATTEREROSSO = 4, "\u001b[38;2;255;0;0m"
+    CARATTEREVERDE = 5, "\u001b[38;2;0;204;0m"
+    +getId() int
+    +getUTFString() String
+}
+
 class Comando {
-    +nuova(String, Gioco) void
-    +mostra(Gioco) void
-    +gioca(Gioco) 
+    <<Control>>
+    +nuova(String, Gioco) int
+    +mostra(Gioco) String
+    +gioca(Gioco, Matrice) void 
     +help() void
-    +abbandona(Gioco) int
-    +esci(String) boolean 
+    +abbandona(Gioco, Matrice, String) boolean
+    +esci(String) boolean
 }
 
 class Parser {
-    +parseInput(String) int
+    <<Control>>
+    +parseInput(String, Gioco) int
     +parseComando(String) int
-    +parseParola(String) int 
-    +parseTentatvi(int, Gioco, String) Cella[]
+    +parseParola(String, int) int 
 }
 
 class Cella {
+    <<Entity>>
     -String coloreUTF
     -int colore
     -char lettera
@@ -71,50 +86,62 @@ class Cella {
 }
 
 class Matrice {
+    <<Entity>>
     +int RIGHE
     +int COLONNE
     -Cella[][] mat
     +Matrice()
+    +getMat() Cella[][]
     +stampaMatrice() void
     +setCella(int, int, int, char) void
-    +setRiga(Cella[], int) boolean
     +resetMatrice() void
 }
 
 class Gioco {
-    -String partolaSegreta
+    <<Control>>
+    -String parolaSegreta
     -int lunghezza
     -int tentativiMassimi
     -int tentativoAttuale
     -boolean esecuzione
+    -Matrice matrice
+    +Gioco()
     +Gioco(int, int)
     +getLunghezza() int
     +getTentativiMassimi() int
-    +setTentaiviMassimi(int) void
     +getTenativo() int
     +setTentativo(int) void
     +getParolaSegreta() String
     +setParolaSegreta(String) void
-    +getEzecuzione() boolean
+    +getEsecuzione() boolean
     +setEsecuzione(boolean) void
+    +getMatrice() Matrice
+    +setRigaMatrice(Cella[], int) boolean
+    +controlloTentativi(int, Gioco, String) Cella[]
 }
 
-class App  {
+class App {
+    <<Boundary>>
     +Parser parser
     +Gioco gioco
     +Comando comando
-    +start() void
+    +start(Parser, Comando, Gioco, String) void
 }
 
 IDsComandi --* Parser : Senza enum comandi non esiste parser
 IDsParole --* Parser : Senza enum parole non esiste parser
+IDsParole --* Comando
+IDsColori --* Gioco
+IDsColori --* App
+IDsColori --* Cella : Senza enum colori non esiste Cella colorata
 Cella ..> Matrice
+Cella ..> Gioco
 Parser -- App : Comunica con
 Comando -- App : Chiama
-Matrice --o Parser
-App *-- Gioco : Senza gioco non esiste app
-Gioco ..> Parser
-Gioco ..> Comando
+Comando ..> Gioco
+App -- Gioco : Comunica con
+Matrice ..> Gioco
+Matrice -- Comando
 
 
 direction RL
@@ -145,7 +172,7 @@ Mac OS
 Windows
 - Powershell
 - Git Bash (in questo caso il comando Docker ha come prefisso winpty; es: winpty docker -it ....)
----
+
 ### Comando per l’esecuzione del container
 Dopo aver eseguito il comando docker pull copiandolo da GitHub Packages, il comando Docker da usare per eseguire il container contenente l’applicazione è:
 ```
@@ -164,11 +191,7 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         participant Comando
         participant Gioco
 
-        Giocatore->>+App: /nuova
-        App-)+Giocatore: Richiesta input
-        deactivate App
-        Giocatore-)+App: input
-        deactivate Giocatore
+        Giocatore->>+App: /nuova input
         App->>+Parser: parseInput(input, gioco)
         deactivate App
         Parser-->>+App: IDsComandi.NUOVA.id
@@ -203,13 +226,13 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         deactivate App
         Comando->>+Gioco: getParolaSegreta()
         deactivate Comando
-        Gioco-->>+Comando: secret
+        Gioco-->>+Comando: parolaSegreta
         deactivate Gioco
-        alt secret != ""
-            Comando-->>+App: secret
-            App--)Giocatore: Stampa secret
+        alt parolaSegreta != ""
+            Comando-->>+App: parolaSegreta
+            App--)Giocatore: Stampa parolaSegreta
             deactivate App
-        else secret == ""
+        else parolaSegreta == ""
             Comando--)Giocatore: Stampa errore
         end
         deactivate Comando
@@ -282,50 +305,42 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
     participant Parser
     participant Gioco
     participant Matrice
-    participant Cella
 
-    loop input != IDsComandi.ESCI.id
+    loop input != IDsComandi.ESCI.id or input != IDsComandi.ABBANDONA.id
         Giocatore->>+App: input
         App->>+Parser: parseInput(input, gioco)
         deactivate App
-        Parser->>+Gioco: getEsecuzione()
+        Parser -->>+App: IDsParole.ACCETTABILE.id
         deactivate Parser
+        App->>+Gioco: getEsecuzione()
+        deactivate App
         Gioco-->>+App: esecuzione
         deactivate Gioco
         alt esecuzione == true
-            App->>Matrice: stampaMatrice()
-            App ->>Gioco: setEsecuzione(false)
-            App->>Gioco: setTentativo(tentativo+1)
-            App->>+Parser: parseTentativi(tentativo, gioco, input)
+            App->>+Gioco: controlloTentativi(tentativo, gioco, input)
+            deactivate App
+            Gioco-->>+App: Array di celle (riga)
+            deactivate Gioco
+            App->>+Gioco: setRigaMatrice(riga, tentativo)
+            deactivate App
+            Gioco-->>+App: corretto
+            deactivate Gioco
+            App->>+Matrice: stampaMatrice()
+            Matrice-->>Giocatore: Stampa matrice
+            deactivate Matrice
+            alt risolto == true
+                App->>Giocatore: Stampa successo
+            else risolto == false
+                App->>Gioco: setTentativo(tentativo+1)
+            end
+            opt tentativiMassimi < tentativo
+                App->>Giocatore: Stampa sconfitta
+                App->>Giocatore: Stampa parola segreta
+            end
         else esecuzione == false
             App->>Giocatore: Stampa errore
             deactivate App
         end
-        Parser->>+Gioco: getTentativiMassimi()
-        deactivate Parser
-        Gioco-->>+Parser: tentativiMassimi
-        deactivate Gioco
-        opt tentativiMassimi >= tentativi
-            Parser->>+Gioco: getParolaSegreta()
-            deactivate Parser
-            Gioco-->>+Parser: parolaSegreta
-            deactivate Gioco
-            Parser->>Cella: setColore(int)
-            Parser->>Cella: setLettera(char_input[i])
-        end
-        Parser-->>+App: array //riga
-        deactivate Parser
-        App->>+Matrice: setRiga(array, tentativo-1)
-        deactivate App
-        Matrice->>+Matrice: setCella(tentativo, i, colore, lettera)
-        deactivate Matrice
-        Matrice-->>+App: corretto
-        deactivate Matrice
-        opt corretto == true
-            App->>Giocatore: Stampa successo
-            App->>Gioco: setEsecuzione(false)
-        end
-        deactivate App
     end
 ```
 
