@@ -113,4 +113,39 @@ public class Cella {
                 + IDsColori.VUOTO.getUTFString();
         }
     }
+
+    /**
+     * Override del metodo hashCode() della classe Object che viene utilizzato
+     * dal metodo equals(Object) di Cella.
+     *
+     * @return il codice hash della cella
+     */
+    @Override
+    public int hashCode() {
+        final int n = 53;
+        int hash = 7;
+        hash = n * hash + this.colore;
+        hash = n * hash + this.lettera;
+        return hash;
+    }
+
+    /**
+     * Override del metodo equals(Object) della classe Object in modo da poter
+     * essere eseguito, nello specifico, per le celle della matrice di gioco.
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        boolean res = false;
+
+        if (obj instanceof Cella) {
+            Cella cellaTemp = (Cella) obj;
+            if (this.colore == cellaTemp.colore
+            && this.lettera == cellaTemp.lettera) {
+
+                res = true;
+            }
+        }
+
+        return res;
+    }
 }
