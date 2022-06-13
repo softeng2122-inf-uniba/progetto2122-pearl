@@ -56,4 +56,15 @@ public class TestGioco {
     public void testGetLunghezza() {
         assertEquals(Matrice.COLONNE, gioco.getLunghezza());
     }
+
+    /**
+     * Metodo che testa la restituzione del tentativo attuale.
+     */
+    @Test
+    @DisplayName("Restituisce tentativo attuale")
+    public void testGetTentativo() {
+        gioco.setTentativo(2);
+
+        assertEquals(2, gioco.getTentativo());
+    }
 }
