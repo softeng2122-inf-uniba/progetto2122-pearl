@@ -1,5 +1,6 @@
 package it.uniba.app;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,6 +17,7 @@ import it.uniba.app.matrice.Matrice;
  * Classe che contiene i casi di test per la classe Gioco.
  */
 public class TestGioco {
+    
     /**
      * Attributo di tipo Gioco che rappresenta il gioco attualmente in
      * esecuzione.
@@ -111,5 +113,26 @@ public class TestGioco {
         }
 
         assertTrue(gioco.setRigaMatrice(array, 1));
+    }
+
+    /**
+     * Metodo che testa la restituzione della matrice.
+     */
+    @Test
+    @DisplayName("Restituisce la matrice")
+    public void testGetMatrice() {
+        Cella[][] mat = new Cella[Matrice.RIGHE][Matrice.COLONNE];
+        Cella[][] tmp = gioco.getMatrice().getMat();
+
+        for (int i = 0; i < Matrice.RIGHE; i++) {
+            for (int j = 0; j < Matrice.COLONNE; j++) {
+                mat[i][j] = new Cella();
+            }
+        }
+
+        for (int i = 0; i < Matrice.RIGHE; i++) {
+
+            assertArrayEquals(mat[i], tmp[i]);
+        }
     }
 }
