@@ -17,7 +17,7 @@ import it.uniba.app.matrice.Matrice;
  * Classe che contiene i casi di test per la classe Gioco.
  */
 public class TestGioco {
-    
+
     /**
      * Attributo di tipo Gioco che rappresenta il gioco attualmente in
      * esecuzione.
@@ -134,5 +134,36 @@ public class TestGioco {
 
             assertArrayEquals(mat[i], tmp[i]);
         }
+    }
+
+    /**
+     * Metodo che testa la restituzione della riga della matrice colorata in
+     * base alla parola inserita.
+     */
+    @Test
+    @DisplayName("Restituisce la riga colorata")
+    public void testControlloTentativi() {
+        Cella[] array = new Cella[Matrice.COLONNE];
+        Cella cella;
+        final int n = 0;
+        final int k = 2;
+        final int j = 4;
+
+        parola = "barbe";
+
+        for (int i = 0; i < Matrice.COLONNE; i++) {
+            cella = new Cella();
+            cella.setLettera(parola.charAt(i));
+            if (i == n || i == j) {
+                cella.setColore(IDsColori.VERDE.getId());
+            } else if (i == k) {
+                cella.setColore(IDsColori.GIALLO.getId());
+            } else {
+                cella.setColore(IDsColori.GRIGIO.getId());
+            }
+            array[i] = cella;
+        }
+
+        assertArrayEquals(array, gioco.controlloTentativi(1, gioco, parola));
     }
 }
