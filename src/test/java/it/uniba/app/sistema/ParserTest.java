@@ -20,7 +20,7 @@ public class ParserTest {
      * Costante intera su cui i test per il parsing di input verranno eseguiti.
      * Simula la lunghezza massima impostata in un gioco.
      */
-    private final int lunghezzaInputConst = 5;
+    private static final int lunghezzaInputConst = 5;
 
     /**
      * Test del metodo wrapper parseInput.
@@ -115,7 +115,7 @@ public class ParserTest {
      */
     @Test
     public void testParseParola() {
-        int lunghezza = lunghezzaInputConst;
+        int lunghezza = ParserTest.lunghezzaInputConst;
 
         assertEquals(
             IDsParole.ACCETTABILE.getId(),
