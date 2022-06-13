@@ -1,11 +1,15 @@
 package it.uniba.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import it.uniba.app.enumerativi.IDsColori;
+import it.uniba.app.matrice.Cella;
 import it.uniba.app.matrice.Matrice;
 
 /**
@@ -80,5 +84,32 @@ public class TestGioco {
         gioco.setEsecuzione(true);
         assertTrue(gioco.getEsecuzione(),
             "Controllo gioco in esecuzione");
+    }
+
+    /**
+     * Metodo che testa l'impostazione della riga nella matrice.
+     */
+    @Test
+    @DisplayName("Imposta la riga nella matrice")
+    public void testSetRigaMatrice() {
+        Cella[] array = new Cella[Matrice.COLONNE];
+        Cella cella;
+
+        for (int i = 0; i < Matrice.COLONNE; i++) {
+            cella = new Cella();
+            cella.setLettera(parola.charAt(i));
+            array[i] = cella;
+        }
+
+        assertFalse(gioco.setRigaMatrice(array, 1));
+
+        for (int i = 0; i < Matrice.COLONNE; i++) {
+            cella = new Cella();
+            cella.setColore(IDsColori.VERDE.getId());
+            cella.setLettera(parola.charAt(i));
+            array[i] = cella;
+        }
+
+        assertTrue(gioco.setRigaMatrice(array, 1));
     }
 }
