@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import it.uniba.app.matrice.Matrice;
 
 /**
  * Classe che contiene i casi di test per la classe Gioco.
@@ -29,5 +32,19 @@ public class TestGioco {
         gioco.setParolaSegreta(parola);
 
         assertEquals(parola, gioco.getParolaSegreta());
+    }
+
+    /**
+     * Metodo che testa il costruttore con parametri di Gioco.
+     */
+    @Test
+    @DisplayName("Costruttore variabile di Gioco")
+    public void testGioco() {
+        Gioco giocoCostr = new Gioco(Matrice.COLONNE, Matrice.RIGHE);
+
+        assertEquals(Matrice.COLONNE, giocoCostr.getLunghezza(),
+            "Controllo lunghezza della parola");
+        assertEquals(Matrice.RIGHE, giocoCostr.getTentativiMassimi(),
+            "Controllo tentativi massimi");
     }
 }
