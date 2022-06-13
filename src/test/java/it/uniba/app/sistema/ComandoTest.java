@@ -56,6 +56,16 @@ public class ComandoTest {
 
         assertEquals(IDsParole.LUNGA.getId(),
             comando.nuova("brevissimo", gioco), "Parola troppo lunga");
+    }
 
+    /**
+     * Metodo che testa il funzionamento del comando /mostra.
+     */
+    @Test
+    @DisplayName("Testa il comando /mostra")
+    public void testMostra() {
+        gioco.setParolaSegreta(parola);
+
+        assertEquals(parola, comando.mostra(gioco));
     }
 }
