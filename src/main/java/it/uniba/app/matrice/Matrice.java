@@ -86,4 +86,13 @@ public class Matrice {
             }
         }
     }
+
+    /**
+     * Metodo che si occupa di restituire la matrice sotto forma di celle.
+     *
+     * @return la matrice di Celle[righe][colonne]
+     */
+    public Cella[][] getMat() {
+        return mat.clone();
+    }
 }
