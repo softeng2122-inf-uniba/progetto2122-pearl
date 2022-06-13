@@ -1,6 +1,8 @@
 package it.uniba.app.sistema;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -93,5 +95,18 @@ public class ComandoTest {
         comando.gioca(gioco, mat);
         assertEquals(giocoTemp.getEsecuzione(), gioco.getEsecuzione(),
             "Gioco gia' in esecuzione");
+    }
+
+    /**
+     * Metodo che testa il funzionamento del comando /esci.
+     */
+    @Test
+    @DisplayName("Test per il comando /esci")
+    public void testEsci() {
+        assertTrue(comando.esci("s"), "si");
+
+        assertFalse(comando.esci("n"), "no");
+
+        assertFalse(comando.esci(" "), "input diverso da s o n");
     }
 }
