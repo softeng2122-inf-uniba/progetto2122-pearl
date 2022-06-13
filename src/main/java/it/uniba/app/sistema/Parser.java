@@ -30,37 +30,44 @@ public class Parser {
      * @return L'identificatore del comando ricevuto.
      */
     public int parseComando(final String input) {
-        StringTokenizer tok = new StringTokenizer(input, " ");
-        String primaSubstr = tok.nextToken();
-        int risultato = 0;
-        switch (primaSubstr) {
-            case "/nuova":
-                risultato = IDsComandi.NUOVA.getId();
-                break;
-            case "/mostra":
-                risultato = IDsComandi.MOSTRA.getId();
-                break;
-            case "/gioca":
-                risultato = IDsComandi.GIOCA.getId();
-                break;
-            case "/esci":
-                risultato = IDsComandi.ESCI.getId();
-                break;
-            case "/abbandona":
-                risultato = IDsComandi.ABBANDONA.getId();
-                break;
-            case "/help":
-                risultato = IDsComandi.HELP.getId();
-                break;
-            case "--help":
-                risultato = IDsComandi.HELP.getId();
-                break;
-            case "-h":
-                risultato = IDsComandi.HELP.getId();
-                break;
-            default:
-                risultato = IDsComandi.NONVALIDO.getId();
+        int risultato;
+
+        if (!Objects.isNull(input) && input.length() > 0) {
+            StringTokenizer tok = new StringTokenizer(input, " ");
+            String primaSubstr = tok.nextToken();
+            risultato = 0;
+            switch (primaSubstr) {
+                case "/nuova":
+                    risultato = IDsComandi.NUOVA.getId();
+                    break;
+                case "/mostra":
+                    risultato = IDsComandi.MOSTRA.getId();
+                    break;
+                case "/gioca":
+                    risultato = IDsComandi.GIOCA.getId();
+                    break;
+                case "/esci":
+                    risultato = IDsComandi.ESCI.getId();
+                    break;
+                case "/abbandona":
+                    risultato = IDsComandi.ABBANDONA.getId();
+                    break;
+                case "/help":
+                    risultato = IDsComandi.HELP.getId();
+                    break;
+                case "--help":
+                    risultato = IDsComandi.HELP.getId();
+                    break;
+                case "-h":
+                    risultato = IDsComandi.HELP.getId();
+                    break;
+                default:
+                    risultato = IDsComandi.NONVALIDO.getId();
+            }
+        } else {
+            risultato = IDsComandi.NONVALIDO.getId();
         }
+
         return risultato;
     }
 
