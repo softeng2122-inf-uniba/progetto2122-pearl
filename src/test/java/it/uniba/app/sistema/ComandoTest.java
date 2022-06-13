@@ -68,4 +68,30 @@ public class ComandoTest {
 
         assertEquals(parola, comando.mostra(gioco));
     }
+
+    /**
+     * Metodo che testa il funzionamento del comando /gioca.
+     */
+    @Test
+    @DisplayName("Testa il comando /gioca")
+    public void testGioca() {
+        Gioco giocoTemp = new Gioco();
+
+        comando.gioca(gioco, mat);
+        assertEquals(giocoTemp, gioco, "Parola non impostata");
+
+        giocoTemp.setParolaSegreta(parola);
+        gioco.setParolaSegreta(parola);
+        giocoTemp.setEsecuzione(true);
+
+        comando.gioca(gioco, mat);
+        assertEquals(giocoTemp, gioco, "Parola impostata");
+
+        gioco.setEsecuzione(true);
+        giocoTemp.setEsecuzione(true);
+
+        comando.gioca(gioco, mat);
+        assertEquals(giocoTemp.getEsecuzione(), gioco.getEsecuzione(),
+            "Gioco gia' in esecuzione");
+    }
 }
