@@ -12,7 +12,7 @@ import it.uniba.app.enumerativi.IDsParole;
 public class ParserTest {
     /**
      * Oggetto Parser su cui eseguire i test.
-     * 
+     *
      * @see it.uniba.app.sistema.Parser
      */
     private Parser parser = new Parser();
@@ -20,7 +20,7 @@ public class ParserTest {
      * Costante intera su cui i test per il parsing di input verranno eseguiti.
      * Simula la lunghezza massima impostata in un gioco.
      */
-    private static final int lunghezzaInputConst = 5;
+    private static final int LUNGHEZZAINPUT = 5;
 
     /**
      * Test del metodo wrapper parseInput.
@@ -115,7 +115,7 @@ public class ParserTest {
      */
     @Test
     public void testParseParola() {
-        int lunghezza = ParserTest.lunghezzaInputConst;
+        int lunghezza = ParserTest.LUNGHEZZAINPUT;
 
         assertEquals(
             IDsParole.ACCETTABILE.getId(),
