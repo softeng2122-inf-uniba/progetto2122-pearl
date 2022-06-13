@@ -47,4 +47,13 @@ public class TestGioco {
         assertEquals(Matrice.RIGHE, giocoCostr.getTentativiMassimi(),
             "Controllo tentativi massimi");
     }
+
+    /**
+     * Metodo che testa la restituizione della lunghezza.
+     */
+    @Test
+    @DisplayName("Restituisce lunghezza")
+    public void testGetLunghezza() {
+        assertEquals(Matrice.COLONNE, gioco.getLunghezza());
+    }
 }
