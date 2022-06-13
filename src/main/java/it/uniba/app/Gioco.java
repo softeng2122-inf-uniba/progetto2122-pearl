@@ -5,6 +5,7 @@ import it.uniba.app.matrice.Cella;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import it.uniba.app.enumerativi.IDsColori;
 
@@ -253,5 +254,48 @@ public class Gioco {
             }
         }
         return array;
+    }
+
+    /**
+     * Override del metodo hashCode() della classe Object che viene utilizzato
+     * dal metodo equals(Object) di Gioco.
+     *
+     * @return il codice hash della gioco
+     */
+    @Override
+    public int hashCode() {
+        final int n = 67;
+        int hash = 7;
+        hash = n * hash + Objects.hashCode(this.parolaSegreta);
+        hash = n * hash + this.tentativiMassimi;
+        hash = n * hash + this.lunghezza;
+        hash = n * hash + this.tentativoAttuale;
+        hash = n * hash + (this.esecuzione ? 1 : 0);
+        hash = n * hash + Objects.hashCode(this.matrice);
+        return hash;
+    }
+
+    /**
+     * Override del metodo equals(Object) della classe Object in modo da poter
+     * essere eseguito, nello specifico, per il gioco.
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        boolean risultato = false;
+
+        if (obj instanceof Gioco) {
+            Gioco tempGioco = (Gioco) obj;
+
+            if (tempGioco.parolaSegreta.equals(this.parolaSegreta)
+                && tempGioco.lunghezza == this.lunghezza
+                && tempGioco.tentativiMassimi == this.tentativiMassimi
+                && tempGioco.tentativoAttuale == this.tentativoAttuale
+                && tempGioco.esecuzione == this.esecuzione
+                && tempGioco.matrice.equals(this.matrice)) {
+
+                risultato = true;
+            }
+        }
+        return risultato;
     }
 }
