@@ -67,4 +67,18 @@ public class TestGioco {
 
         assertEquals(2, gioco.getTentativo());
     }
+
+    /**
+     * Metodo che testa la restituzione dell'esecuzione del gioco.
+     */
+    @Test
+    @DisplayName("Restituisce l'esecuzione del gioco")
+    public void testGetEsecuzione() {
+        assertFalse(gioco.getEsecuzione(),
+            "Controllo gioco non in esecuzione");
+
+        gioco.setEsecuzione(true);
+        assertTrue(gioco.getEsecuzione(),
+            "Controllo gioco in esecuzione");
+    }
 }
