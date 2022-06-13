@@ -10,9 +10,23 @@ import it.uniba.app.enumerativi.IDsComandi;
 import it.uniba.app.enumerativi.IDsParole;
 
 public class ParserTest {
+    /**
+     * Oggetto Parser su cui eseguire i test.
+     * 
+     * @see it.uniba.app.sistema.Parser
+     */
     private Parser parser = new Parser();
+    /**
+     * Costante intera su cui i test per il parsing di input verranno eseguiti.
+     * Simula la lunghezza massima impostata in un gioco.
+     */
     private final int lunghezzaInputConst = 5;
 
+    /**
+     * Test del metodo wrapper parseInput.
+     * Vengono testati solo i componenti che non le fanno richiamare gli altri
+     * componenti di Parser.
+     */
     @Test
     public void testParseInput() {
         assertEquals(
@@ -29,6 +43,9 @@ public class ParserTest {
             parser.parseInput("input", new Gioco()));
     }
 
+    /**
+     * Test del metodo di selezione comando, basato su input utente.
+     */
     @Test
     public void testParseComando() {
         assertEquals(
@@ -93,6 +110,9 @@ public class ParserTest {
 
     }
 
+    /**
+     * Test del metodo di controllo validità parole, basato su input utente.
+     */
     @Test
     public void testParseParola() {
         int lunghezza = lunghezzaInputConst;
