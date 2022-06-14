@@ -1,36 +1,37 @@
 # Report
 # 1. Introduzione
-In questo gioco per poter vincere dovrai indovinare la parola segreta. Il gioco ti aiutera' ad indovinare la parola grazie all'uso dei colori, dove
-- Grigio --> la lettera non fa parte della parola;
-- Giallo --> la lettera fa parte della parola ma è in una posizione errata;
-- Verde --> la lettera fa parte della parola ed è nella poszione giusta
----
-Di seguito la lista dei comandi:
-- /nuova < parola segreta > 
-    - Per impostare una parola segreta
-- /mostra 
-    - Per mostrare la parola segreta
-- /gioca 
-    - Per iniziare una nuova partita
-- /help o --help o -h 
-    - Per vedere la lista dei comandi
-- /abbandona 
-    - Per abbandonare la partita in corso
-- /esci 
-    - Per uscire dall'applicazione.
+Questo programma è una simulazione del gioco **Wordle**, gioco basato sull'indovinare una parola segreta in tentativi limitati, posizionando le parole inserite in una matrice. Il programma si occuperà di:
+- Riconoscere comandi:
+    - Nuova (parola): comando per l'inserimento di una nuova parola segreta;
+    - Mostra: comando che recupera la parola segreta impostata e la mostra all'utente;
+    - Gioca: comando che permette all'utente di iniziare una nuova partita;
+    - Help: comando che mostra un introduzione del programma e l'elenco dei comandi disponibili;
+    - Abbandona: comando che permette all'utente di abbandonare una partita in corso;
+    - Esci: comando che permette all'utente di uscire dal programma.
+- Riconoscere i tentativi: guida l'utente con dei messaggi nell'inserimento di tentativi compatibili con la parola segreta:
+    - Parola troppo lunga: se la parola inserita come tentativo non rispetta la lunghezza della parola segreta;
+    - Parola troppo corta: analogo al messaggio precedente, ma se la parola è più corta della lunghezza della parola segreta;
+    - Parola non valida: se la parola inserita come tentativo contiene caratteri speciali o numeri.
+
+Inoltre, il programma aiuterà l'utente colorando le lettere della parola inserita nella matrice, in base alla posizione/presenza delle lettere confrontandole con la parola segreta. I colori saranno:
+- Grigio: se la lettera della parola inserita, non è presenta nella parola segreta;
+- Giallo: se la lettera della parola inserita, è presente nella parola segreta, ma nella posizione errata;
+- Verde: se la lettera della parola inserita, è presenta nella parola segreta ed è nella posizione corretta.
+
+![Esempio gioco](./img/wordle_end.png)
 
 # 2. Modello di dominio
 ```mermaid
 classDiagram 
 class IDsComandi {
     <<enum>>
-    NONVALIDO = 0
-    NUOVA = 1
-    MOSTRA = 2
-    GIOCA = 3
-    HELP = 4
-    ABBANDONA = 5
-    ESCI = 6
+    NONVALIDO = 1
+    NUOVA = 2
+    MOSTRA = 3
+    GIOCA = 4
+    HELP = 5
+    ABBANDONA = 6
+    ESCI = 7
     +getId() int
 }
 
@@ -43,23 +44,38 @@ class IDsParole {
     +getId() int
 }
 
+class IDsColori {
+    <<enum>>
+    CARATTERENERO = -1, "\u001b[38;2;0;0;0m"
+    VUOTO = 0, "\u001b[0m"
+    GRIGIO = 1, "\u001b[48;2;128;128;128m"
+    GIALLO = 2, "\u001b[48;2;204;204;0m"
+    VERDE = 3, "\u001b[48;2;0;204;0m"
+    CARATTEREROSSO = 4, "\u001b[38;2;255;0;0m"
+    CARATTEREVERDE = 5, "\u001b[38;2;0;204;0m"
+    +getId() int
+    +getUTFString() String
+}
+
 class Comando {
-    +nuova(String, Gioco) void
-    +mostra(Gioco) void
-    +gioca(Gioco) 
+    <<Control>>
+    +nuova(String, Gioco) int
+    +mostra(Gioco) String
+    +gioca(Gioco, Matrice) void 
     +help() void
-    +abbandona(Gioco) int
-    +esci(String) boolean 
+    +abbandona(Gioco, Matrice, String) boolean
+    +esci(String) boolean
 }
 
 class Parser {
-    +parseInput(String) int
+    <<Control>>
+    +parseInput(String, Gioco) int
     +parseComando(String) int
-    +parseParola(String) int 
-    +parseTentatvi(int, Gioco, String) Cella[]
+    +parseParola(String, int) int 
 }
 
 class Cella {
+    <<Entity>>
     -String coloreUTF
     -int colore
     -char lettera
@@ -71,50 +87,62 @@ class Cella {
 }
 
 class Matrice {
+    <<Entity>>
     +int RIGHE
     +int COLONNE
     -Cella[][] mat
     +Matrice()
+    +getMat() Cella[][]
     +stampaMatrice() void
     +setCella(int, int, int, char) void
-    +setRiga(Cella[], int) boolean
     +resetMatrice() void
 }
 
 class Gioco {
-    -String partolaSegreta
+    <<Control>>
+    -String parolaSegreta
     -int lunghezza
     -int tentativiMassimi
     -int tentativoAttuale
     -boolean esecuzione
+    -Matrice matrice
+    +Gioco()
     +Gioco(int, int)
     +getLunghezza() int
     +getTentativiMassimi() int
-    +setTentaiviMassimi(int) void
     +getTenativo() int
     +setTentativo(int) void
     +getParolaSegreta() String
     +setParolaSegreta(String) void
-    +getEzecuzione() boolean
+    +getEsecuzione() boolean
     +setEsecuzione(boolean) void
+    +getMatrice() Matrice
+    +setRigaMatrice(Cella[], int) boolean
+    +controlloTentativi(int, Gioco, String) Cella[]
 }
 
-class App  {
+class App {
+    <<Boundary>>
     +Parser parser
     +Gioco gioco
     +Comando comando
-    +start() void
+    +start(Parser, Comando, Gioco, String) void
 }
 
 IDsComandi --* Parser : Senza enum comandi non esiste parser
 IDsParole --* Parser : Senza enum parole non esiste parser
+IDsParole --* Comando
+IDsColori --* Gioco
+IDsColori --* App
+IDsColori --* Cella : Senza enum colori non esiste Cella colorata
 Cella ..> Matrice
+Cella ..> Gioco
 Parser -- App : Comunica con
 Comando -- App : Chiama
-Matrice --o Parser
-App *-- Gioco : Senza gioco non esiste app
-Gioco ..> Parser
-Gioco ..> Comando
+Comando ..> Gioco
+App -- Gioco : Comunica con
+Matrice ..> Gioco
+Matrice -- Comando
 
 
 direction RL
@@ -145,7 +173,7 @@ Mac OS
 Windows
 - Powershell
 - Git Bash (in questo caso il comando Docker ha come prefisso winpty; es: winpty docker -it ....)
----
+
 ### Comando per l’esecuzione del container
 Dopo aver eseguito il comando docker pull copiandolo da GitHub Packages, il comando Docker da usare per eseguire il container contenente l’applicazione è:
 ```
@@ -164,11 +192,7 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         participant Comando
         participant Gioco
 
-        Giocatore->>+App: /nuova
-        App-)+Giocatore: Richiesta input
-        deactivate App
-        Giocatore-)+App: input
-        deactivate Giocatore
+        Giocatore->>+App: /nuova input
         App->>+Parser: parseInput(input, gioco)
         deactivate App
         Parser-->>+App: IDsComandi.NUOVA.id
@@ -203,13 +227,13 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         deactivate App
         Comando->>+Gioco: getParolaSegreta()
         deactivate Comando
-        Gioco-->>+Comando: secret
+        Gioco-->>+Comando: parolaSegreta
         deactivate Gioco
-        alt secret != ""
-            Comando-->>+App: secret
-            App--)Giocatore: Stampa secret
+        alt parolaSegreta != ""
+            Comando-->>+App: parolaSegreta
+            App--)Giocatore: Stampa parolaSegreta
             deactivate App
-        else secret == ""
+        else parolaSegreta == ""
             Comando--)Giocatore: Stampa errore
         end
         deactivate Comando
@@ -282,50 +306,42 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
     participant Parser
     participant Gioco
     participant Matrice
-    participant Cella
 
-    loop input != IDsComandi.ESCI.id
+    loop input != IDsComandi.ESCI.id or input != IDsComandi.ABBANDONA.id
         Giocatore->>+App: input
         App->>+Parser: parseInput(input, gioco)
         deactivate App
-        Parser->>+Gioco: getEsecuzione()
+        Parser -->>+App: IDsParole.ACCETTABILE.id
         deactivate Parser
+        App->>+Gioco: getEsecuzione()
+        deactivate App
         Gioco-->>+App: esecuzione
         deactivate Gioco
         alt esecuzione == true
-            App->>Matrice: stampaMatrice()
-            App ->>Gioco: setEsecuzione(false)
-            App->>Gioco: setTentativo(tentativo+1)
-            App->>+Parser: parseTentativi(tentativo, gioco, input)
+            App->>+Gioco: controlloTentativi(tentativo, gioco, input)
+            deactivate App
+            Gioco-->>+App: Array di celle (riga)
+            deactivate Gioco
+            App->>+Gioco: setRigaMatrice(riga, tentativo)
+            deactivate App
+            Gioco-->>+App: corretto
+            deactivate Gioco
+            App->>+Matrice: stampaMatrice()
+            Matrice-->>Giocatore: Stampa matrice
+            deactivate Matrice
+            alt risolto == true
+                App->>Giocatore: Stampa successo
+            else risolto == false
+                App->>Gioco: setTentativo(tentativo+1)
+            end
+            opt tentativiMassimi < tentativo
+                App->>Giocatore: Stampa sconfitta
+                App->>Giocatore: Stampa parola segreta
+            end
         else esecuzione == false
             App->>Giocatore: Stampa errore
             deactivate App
         end
-        Parser->>+Gioco: getTentativiMassimi()
-        deactivate Parser
-        Gioco-->>+Parser: tentativiMassimi
-        deactivate Gioco
-        opt tentativiMassimi >= tentativi
-            Parser->>+Gioco: getParolaSegreta()
-            deactivate Parser
-            Gioco-->>+Parser: parolaSegreta
-            deactivate Gioco
-            Parser->>Cella: setColore(int)
-            Parser->>Cella: setLettera(char_input[i])
-        end
-        Parser-->>+App: array //riga
-        deactivate Parser
-        App->>+Matrice: setRiga(array, tentativo-1)
-        deactivate App
-        Matrice->>+Matrice: setCella(tentativo, i, colore, lettera)
-        deactivate Matrice
-        Matrice-->>+App: corretto
-        deactivate Matrice
-        opt corretto == true
-            App->>Giocatore: Stampa successo
-            App->>Gioco: setEsecuzione(false)
-        end
-        deactivate App
     end
 ```
 
@@ -400,6 +416,67 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         end
 ```
 
-# 6 Analisi retrospettiva
-## 6.1 Sprint 1
+# 6 Riepilogo del test
+![CheckStyle Test](./img/CheckStyleTest.png)
+![SpotBugs Test](./img/SpotBugsTest.png)
+![Jacoco Test](./img/JacocoTest.png)
+Per scrivere i casi di test sono stati adottati i criteri della suddivisione in classi di equivalenza.
+
+# 7 Manuale utente
+In questo gioco per poter vincere è necessario indovinare la parola segreta. Il programma aiutera' ad indovinare la parola con l'uso dei colori:
+- Grigio --> la lettera non fa parte della parola;
+- Giallo --> la lettera fa parte della parola ma è in una posizione errata;
+- Verde --> la lettera fa parte della parola ed è nella posizione giusta.
+## Di seguito la lista dei comandi:
+- /nuova < parola segreta > 
+    - Per impostare una parola segreta
+- /mostra 
+    - Per mostrare la parola segreta
+- /gioca 
+    - Per iniziare una nuova partita
+- /help o --help o -h 
+    - Per vedere la lista dei comandi
+- /abbandona 
+    - Per abbandonare la partita in corso
+- /esci 
+    - Per uscire dall'applicazione.
+
+```
+Per visualizzare la scheda di help a inizio programma, è necessario avviarlo con la flag -h o --help.
+```
+
+## Per iniziare una partita:
+- La parola segreta deve essere stata impostata correttamente;
+    - `/nuova pizza`
+- Deve essere chiamato il comando /gioca.
+
+## Per abbandonare una partita:
+- La partita deve essere in esecuzione;
+- Deve essere chiamato il comando /abbandona:
+    - Il comando chiederà una conferma.
+- L'utente deve confermare o negare.
+
+# 8 Processo di sviluppo e organizzazione del lavoro
+L'organizzazione del lavoro è stata decisa tramite meeting organizzati da tutti i componenti del team.
+
+In questi meeting abbiamo deciso:
+- Quando effettuare i meeting di pianificazione;
+- Ogni quanto effettuare un meeting di aggiornamento;
+
+I meeting di pianificazione sono stati effettuati ogni inizio sprint, per la durata minima di 30 minuti.
+
+I meeting di aggiornamento sono stati effettuati ogni settimana, a parte dei casi di estrema urgenza, per la durata media di 30/40 minuti.
+
+Nei meeting di pianificazione:
+- Abbiamo ragionato in gruppo su come approcciarci alle varie issue, per avere una visione generale del lavoro da svolgere;
+- Ci siamo suddivisi le issue in base a due principali criteri: difficoltà e tempo stimato di sviluppo;
+
+Nei meeting di aggiornamento:
+- Abbiamo esposto uno alla volta le modifiche apportate la settimana precedente;
+- Abbiamo esposto uno alla volta le modifiche ancora non apportate;
+- Abbiamo esposto le nostre opinioni su relative modifiche da effettuare/effettuate;
+- Abbiamo realizzato le bozze dei diagrammi UML.
+
+# 9 Analisi retrospettiva
+## 9.1 Sprint 1
 ![retrospettiva](./img/retrospettiva.png)
