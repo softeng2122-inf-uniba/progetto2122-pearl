@@ -1,23 +1,24 @@
 # Report
 # 1. Introduzione
-In questo gioco per poter vincere dovrai indovinare la parola segreta. Il gioco ti aiutera' ad indovinare la parola grazie all'uso dei colori, dove
-- Grigio --> la lettera non fa parte della parola;
-- Giallo --> la lettera fa parte della parola ma è in una posizione errata;
-- Verde --> la lettera fa parte della parola ed è nella poszione giusta
----
-Di seguito la lista dei comandi:
-- /nuova < parola segreta > 
-    - Per impostare una parola segreta
-- /mostra 
-    - Per mostrare la parola segreta
-- /gioca 
-    - Per iniziare una nuova partita
-- /help o --help o -h 
-    - Per vedere la lista dei comandi
-- /abbandona 
-    - Per abbandonare la partita in corso
-- /esci 
-    - Per uscire dall'applicazione.
+Questo programma è una simulazione del gioco **Wordle**, gioco basato sull'indovinare una parola segreta in tentativi limitati, posizionando le parole inserite in una matrice. Il programma si occuperà di:
+- Riconoscere comandi:
+    - Nuova (parola): comando per l'inserimento di una nuova parola segreta;
+    - Mostra: comando che recupera la parola segreta impostata e la mostra all'utente;
+    - Gioca: comando che permette all'utente di iniziare una nuova partita;
+    - Help: comando che mostra un introduzione del programma e l'elenco dei comandi disponibili;
+    - Abbandona: comando che permette all'utente di abbandonare una partita in corso;
+    - Esci: comando che permette all'utente di uscire dal programma.
+- Riconoscere i tentativi: guida l'utente con dei messaggi nell'inserimento di tentativi compatibili con la parola segreta:
+    - Parola troppo lunga: se la parola inserita come tentativo non rispetta la lunghezza della parola segreta;
+    - Parola troppo corta: analogo al messaggio precedente, ma se la parola è più corta della lunghezza della parola segreta;
+    - Parola non valida: se la parola inserita come tentativo contiene caratteri speciali o numeri.
+
+Inoltre, il programma aiuterà l'utente colorando le lettere della parola inserita nella matrice, in base alla posizione/presenza delle lettere confrontandole con la parola segreta. I colori saranno:
+- Grigio: se la lettera della parola inserita, non è presenta nella parola segreta;
+- Giallo: se la lettera della parola inserita, è presente nella parola segreta, ma nella posizione errata;
+- Verde: se la lettera della parola inserita, è presenta nella parola segreta ed è nella posizione corretta.
+
+![Esempio gioco](./img/wordle_end.png)
 
 # 2. Modello di dominio
 ```mermaid
@@ -415,6 +416,12 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
         end
 ```
 
+# 6 Riepilogo del test
+![CheckStyle Test](./img/CheckStyleTest.png)
+![SpotBugs Test](./img/SpotBugsTest.png)
+![Jacoco Test](./img/JacocoTest.png)
+Per scrivere i casi di test sono stati adottati i criteri della suddivisione in classi di equivalenza.
+
 # 7 Manuale utente
 In questo gioco per poter vincere dovrai indovinare la parola segreta. Il gioco ti aiutera' ad indovinare la parola grazie all'uso dei colori, dove
 - Grigio --> la lettera non fa parte della parola;
@@ -434,6 +441,9 @@ Di seguito la lista dei comandi:
     - Per abbandonare la partita in corso
 - /esci 
     - Per uscire dall'applicazione.
+
+# 8 Processo di sviluppo e organizzazione del lavoro
+
 
 # 9 Analisi retrospettiva
 ## 9.1 Sprint 1
