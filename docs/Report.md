@@ -443,7 +443,25 @@ Di seguito la lista dei comandi:
     - Per uscire dall'applicazione.
 
 # 8 Processo di sviluppo e organizzazione del lavoro
+L'organizzazione del lavoro è stata decisa tramite meeting organizzati da tutti i componenti del team.
 
+In questi meeting abbiamo deciso:
+- Quando effettuare i meeting di pianificazione;
+- Ogni quanto effettuare un meeting di aggiornamento;
+
+I meeting di pianificazione sono stati effettuati ogni inizio sprint, per la durata minima di 30 minuti.
+
+I meeting di aggiornamento sono stati effettuati ogni settimana, a parte dei casi di estrema urgenza, per la durata media di 30/40 minuti.
+
+Nei meeting di pianificazione:
+- Abbiamo ragionato in gruppo su come approcciarci alle varie issue, per avere una visione generale del lavoro da svolgere;
+- Ci siamo suddivisi le issue in base a due principali criteri: difficoltà e tempo stimato di sviluppo;
+
+Nei meeting di aggiornamento:
+- Abbiamo esposto uno alla volta le modifiche apportate la settimana precedente;
+- Abbiamo esposto uno alla volta le modifiche ancora non apportate;
+- Abbiamo esposto le nostre opinioni su relative modifiche da effettuare/effettuate;
+- Abbiamo realizzato le bozze dei diagrammi UML.
 
 # 9 Analisi retrospettiva
 ## 9.1 Sprint 1
