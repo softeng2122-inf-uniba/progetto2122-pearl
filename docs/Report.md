@@ -423,12 +423,11 @@ Per semplicità assumiamo che il Giocatore e il Paroliere siano lo stesso attore
 Per scrivere i casi di test sono stati adottati i criteri della suddivisione in classi di equivalenza.
 
 # 7 Manuale utente
-In questo gioco per poter vincere dovrai indovinare la parola segreta. Il gioco ti aiutera' ad indovinare la parola grazie all'uso dei colori, dove
+In questo gioco per poter vincere è necessario indovinare la parola segreta. Il programma aiutera' ad indovinare la parola con l'uso dei colori:
 - Grigio --> la lettera non fa parte della parola;
 - Giallo --> la lettera fa parte della parola ma è in una posizione errata;
-- Verde --> la lettera fa parte della parola ed è nella poszione giusta
----
-Di seguito la lista dei comandi:
+- Verde --> la lettera fa parte della parola ed è nella posizione giusta.
+## Di seguito la lista dei comandi:
 - /nuova < parola segreta > 
     - Per impostare una parola segreta
 - /mostra 
@@ -441,6 +440,21 @@ Di seguito la lista dei comandi:
     - Per abbandonare la partita in corso
 - /esci 
     - Per uscire dall'applicazione.
+
+```
+Per visualizzare la scheda di help a inizio programma, è necessario avviarlo con la flag -h o --help.
+```
+
+## Per iniziare una partita:
+- La parola segreta deve essere stata impostata correttamente;
+    - `/nuova pizza`
+- Deve essere chiamato il comando /gioca.
+
+## Per abbandonare una partita:
+- La partita deve essere in esecuzione;
+- Deve essere chiamato il comando /abbandona:
+    - Il comando chiederà una conferma.
+- L'utente deve confermare o negare.
 
 # 8 Processo di sviluppo e organizzazione del lavoro
 L'organizzazione del lavoro è stata decisa tramite meeting organizzati da tutti i componenti del team.
