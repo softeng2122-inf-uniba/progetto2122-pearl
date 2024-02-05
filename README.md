@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/softeng2122-inf-uniba/progetto2122-pearl/badge.svg?branch=master&t=TcM72q)](https://coveralls.io/github/softeng2122-inf-uniba/progetto2122-pearl?branch=master)
 # Wordle
 
-
+ 
 La struttura della repository si presenta nel seguente modo:
 ```
 |-- .github
